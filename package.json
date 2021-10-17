@@ -11,6 +11,7 @@
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
     "@babel/register": "^7.0.0",
+    "@babel/plugin-transform-runtime": "^7.0.0",
     "awesome-typescript-loader": "^5.2.1",
     "babel-loader": "^8.0.2",
     "copy-webpack-plugin": "^9.0.1",
@@ -28,6 +29,6 @@
     "react-dom": "^17.0.2"
   },
   "scripts": {
-    "build": "webpack --mode production --config webpack.config.js"
+    "build": "webpack --mode development --config webpack.config.js"
   }
 }
