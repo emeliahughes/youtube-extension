@@ -56,10 +56,10 @@ function AddNewCitation (props) {
         event.preventDefault();
 
         let newYite = new Yite(inputStartTimeValue, inputEndTimeValue, inputTitleValue, inputSourceValue, "author", "link");
-        if(!videoCitations.has(newYite.startTime)) {
-            videoCitations.set(newYite.startTime, []);
+        if(!videoCitations.has(inputStartTimeValue,)) {
+            videoCitations.set(inputStartTimeValue, []);
         }
-        videoCitations.get(newYite.startTime).push(newYite);
+        videoCitations.get(inputStartTimeValue,).push(newYite);
         pushData(videoCitations, videoID);
         
         //ADD NEW CITATION TO DATABASE HERE

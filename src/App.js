@@ -15,13 +15,21 @@ function App(){
 //    console.log(videoID);
 
     // We make a GET call to the getUrl to get the citation data for this particular video.
-    let responseData = getData(videoID, getUrl);
+    let responseDataPromise = getData(videoID, getUrl)
+    .then(resp => {
+        let responseData = JSON.parse(resp);
+        /*if (responseData.length > 0) {
+            console.log(responseData);
+        }*/
+        console.log(responseData);
+    })
 
     // If the video doesn't exist in the database, we make a new map.
     // videoCitations is organized by start time, such that key: starttime(int) -> value: citations(array of citations)
-    if (responseData.length > 0) {
+    /*if (responseData.length > 0) {
+        videoCitations = JSON.parse(responseData);
         console.log(videoCitations);
-    }
+    }*/
 
     return (
         <div className="citation-box">
@@ -39,17 +47,18 @@ function App(){
 /**
  * Makes a GET request to get the data for a particular video.
  * @param {string} videoID unique ID of the video
- * @returns all data for a video
+ * @returns a Promise for all video data
  */
 function getData(videoID) {
-    let data = [];
     let requestUrl = getUrl + videoID;
-    let promise = fetch(requestUrl);
-    promise
-    .then((resp) => (resp.json()))
-    .then(result => {data = result;})
+    return fetch(requestUrl, {
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => {return response.json();})
     .catch(err => console.log(err));
-    return data;
 }
 
 export default App;
