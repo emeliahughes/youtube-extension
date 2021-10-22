@@ -31,13 +31,8 @@ async function addDivBeforeDescription () {
         }
         contents = container.getElementsByClassName("style-scope ytd-video-secondary-info-renderer");
         container = contents[0];
-        console.log(container);
-        console.log(typeof(container));
-        console.log(container.children[0]);
         if (container.children[0] !== null) {
             container.insertBefore(div, container.children[0]);
-        } else {
-            console.log('yite');
         }
     }
 

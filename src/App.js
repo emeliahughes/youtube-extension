@@ -7,21 +7,13 @@ const postUrl = baseUrl + "insertVideoData";
 const getUrl = baseUrl + "getTimeStamps?id=";
 
 function App(){
-    let maxLength = document.getElementsByClassName("ytp-bound-time-right").innerHTML;
-
     // Each YouTube video has a unique ID, videoID.
     const videoID = document.querySelector("#watch7-content > meta:nth-child(6)").content;
 
-//    console.log(videoID);
-
     // We make a GET call to the getUrl to get the citation data for this particular video.
-    let responseDataPromise = getData(videoID, getUrl)
+    let responseDataPromise = getData(videoID)
     .then(resp => {
         let responseData = JSON.parse(resp);
-        /*if (responseData.length > 0) {
-            console.log(responseData);
-        }*/
-        console.log(responseData);
     })
 
     // If the video doesn't exist in the database, we make a new map.

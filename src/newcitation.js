@@ -1,17 +1,20 @@
 import React, {useState } from 'react';
 import Yite from './Yite';
 
-//TODO: error handling for times out of bounds, update to add citation to database
 const baseUrl = "https://youtubeextdata.azurewebsites.net/";
 const postUrl = baseUrl + "insertVideoData";
 const getUrl = baseUrl + "getTimeStamps?id=";
 
 const videoID = document.querySelector("#watch7-content > meta:nth-child(6)").content;
-let responseData = getData(videoID, getUrl);
-let videoCitations = new Map();
-if (responseData.length > 0) {
-    videoCitations = JSON.parse(responseData);
-}
+const maxLength = document.getElementsByClassName("ytp-bound-time-right").innerHTML;
+let videoCitations;
+
+let responseDataPromise = getData(videoID)
+    .then(resp => {
+        let responseData = JSON.parse(resp);
+        videoCitations = JSON.parse(responseData['citations']);
+        console.log(typeof(videoCitations));
+    })
 
 function AddNewCitation (props) {
 
@@ -36,14 +39,21 @@ function AddNewCitation (props) {
         setLinkValue(newValue);
     }
 
-    const [inputStartTimeValue, setStartTimeValue] = useState('0:00');
+    const [inputAuthorValue, setAuthorValue] = useState('');
+
+    const handleAuthor = (event) => {
+        let newValue = event.target.value
+        setAuthorValue(newValue);
+    }
+
+    const [inputStartTimeValue, setStartTimeValue] = useState('');
 
     const handleStartTime = (event) => {
         let newValue = event.target.value
         setStartTimeValue(newValue);
     }
 
-    const [inputEndTimeValue, setEndTimeValue] = useState('0:00');
+    const [inputEndTimeValue, setEndTimeValue] = useState('');
 
     const handleEndTime = (event) => {
         let newValue = event.target.value
@@ -54,12 +64,12 @@ function AddNewCitation (props) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-
-        let newYite = new Yite(inputStartTimeValue, inputEndTimeValue, inputTitleValue, inputSourceValue, "author", "link");
-        if(!videoCitations.has(inputStartTimeValue,)) {
-            videoCitations.set(inputStartTimeValue, []);
+        let newYite = new Yite(inputStartTimeValue, inputEndTimeValue, inputTitleValue, inputSourceValue, inputAuthorValue, inputLinkValue);
+        let startKey = newYite.startTime;
+        if(!videoCitations.hasOwnProperty(startKey)) {
+            videoCitations[startKey] = [];
         }
-        videoCitations.get(inputStartTimeValue,).push(newYite);
+        videoCitations[startKey].push(newYite);
         pushData(videoCitations, videoID);
         
         //ADD NEW CITATION TO DATABASE HERE
@@ -70,8 +80,8 @@ function AddNewCitation (props) {
         setTitleValue("");
         setSourceValue("");
         setLinkValue("");
-        setStartTimeValue('0:00');
-        setEndTimeValue('0:00');
+        setStartTimeValue("");
+        setEndTimeValue("");
 
     }
 
@@ -100,6 +110,13 @@ function AddNewCitation (props) {
                             onChange={handleLink} 
                             value={inputLinkValue} 
                             className="form-control" id="link_field" name="link" required/>
+                    </div>
+                    <div>
+                        <label htmlFor="author_field" className="main-labels"><h3 className="small">Author:</h3></label>
+                        <input type="text" 
+                            onChange={handleAuthor} 
+                            value={inputAuthorValue} 
+                            className="form-control" id="author_field" name="author" required/>
                     </div>
                     <div className="row">
                         <div>
@@ -131,17 +148,18 @@ function AddNewCitation (props) {
 /**
  * Makes a GET request to get the data for a particular video.
  * @param {string} videoID unique ID of the video
- * @returns all data for a video
+ * @returns a Promise for all video data
  */
  function getData(videoID) {
-    let data = [];
     let requestUrl = getUrl + videoID;
-    let promise = fetch(requestUrl);
-    promise
-    .then((resp) => (resp.json()))
-    .then(result => {data = result;})
+    return fetch(requestUrl, {
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => {return response.json();})
     .catch(err => console.log(err));
-    return data;
 }
 
 /**
@@ -150,8 +168,7 @@ function AddNewCitation (props) {
  * @param {*} videoID unique ID of the video
  */
 function pushData(citations, videoID) {
-    let insertCitation = {"id": videoID, "citations": JSON.stringify(Object.fromEntries(citations))};
-    console.log(insertCitation);
+    let insertCitation = {"id": videoID, "citations": JSON.stringify(citations)};
     console.log(JSON.stringify(insertCitation));
     let promise = fetch(postUrl, {
         method: "POST",
