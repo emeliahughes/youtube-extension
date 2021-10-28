@@ -25,7 +25,6 @@ function App(){
         videoCitations = JSON.parse(responseData);
         console.log(videoCitations);
     }*/
-
     return (
         <div className="citation-box">
             <div className="header">
