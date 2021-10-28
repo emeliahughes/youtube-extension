@@ -8,7 +8,6 @@ const getUrl = baseUrl + "getTimeStamps?id=";
 const videoID = document.querySelector("#watch7-content > meta:nth-child(6)").content;
 const maxLength = document.getElementsByClassName("ytp-bound-time-right").innerHTML;
 let videoCitations;
-let displayCitations;
 
 let responseDataPromise = getData(videoID)
     .then(resp => {
@@ -17,14 +16,6 @@ let responseDataPromise = getData(videoID)
             let responseData = JSON.parse(resp);
             videoCitations = JSON.parse(responseData['citations']);
             console.log(videoCitations);
-            displayCitations = "";
-            for (let i = 0 ; i < videoCitations.length; i++) {
-                displayCitations += "source number " + (i + 1);
-                displayCitations += "title: " + videoCitations[i]['title'] + "\n";
-                displayCitations += "start: " + videoCitations[i]['startTime'] + "\n";
-                displayCitations += "end: " + videoCitations[i]['endTime'] + "\n";
-                displayCitations += "\n";
-            }
         } else {
             videoCitations = new Map();
         }
@@ -101,9 +92,6 @@ function AddNewCitation (props) {
     }
     return (
         <div className="new-citation">
-            <div>
-                {displayCitations}
-            </div>
             <form onSubmit={handleSubmit}>
                 <div className="form-around">
                     <h2>Add a new citation:</h2>
