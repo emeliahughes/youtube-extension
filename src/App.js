@@ -13,8 +13,11 @@ function App(){
     // We make a GET call to the getUrl to get the citation data for this particular video.
     let responseDataPromise = getData(videoID)
     .then(resp => {
-        let responseData = JSON.parse(resp);
+        if (resp.length > 0) {
+            let responseData = JSON.parse(resp);
+        }
     })
+    .catch(err => console.log(err));
 
     // If the video doesn't exist in the database, we make a new map.
     // videoCitations is organized by start time, such that key: starttime(int) -> value: citations(array of citations)

@@ -11,10 +11,17 @@ let videoCitations;
 
 let responseDataPromise = getData(videoID)
     .then(resp => {
-        let responseData = JSON.parse(resp);
-        videoCitations = JSON.parse(responseData['citations']);
-        console.log(typeof(videoCitations));
+        console.log(resp);
+        if (resp.length > 0) {
+            let responseData = JSON.parse(resp);
+            if (responseData.length > 0) {
+                videoCitations = JSON.parse(responseData['citations']);
+            }
+        } else {
+            videoCitations = new Map();
+        }
     })
+    .catch(err => console.log(err));
 
 function AddNewCitation (props) {
 
