@@ -7,8 +7,6 @@ class Yite {
         // all except added is a string
         this.startTime = "" + this.getTimeAsSeconds(startTime);
         this.endTime = "" + this.getTimeAsSeconds(endTime);
-        this.startTime = startTime;
-        this.endTime = endTime;
         this.title = title;
         this.source = source;
         this.author = author;
