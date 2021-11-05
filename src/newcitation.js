@@ -2,23 +2,23 @@ import React, {useState } from 'react';
 import Yite from './Yite';
 
 const baseUrl = "https://youtubeextdata.azurewebsites.net/";
-const postUrl = baseUrl + "insertVideoData";
-const getUrl = baseUrl + "getTimeStamps?id=";
+const postUrl = baseUrl + "createCitation";
+const getUrl = baseUrl + "getCitations?videoID=";
 
 const videoID = document.querySelector("#watch7-content > meta:nth-child(6)").content;
 const maxLength = document.getElementsByClassName("ytp-bound-time-right").innerHTML;
-let videoCitations;
+let videoCitations = new Map();
 
 let responseDataPromise = getData(videoID)
     .then(resp => {
         console.log(resp);
-        if (resp.length > 0) {
-            let responseData = JSON.parse(resp);
-            if (responseData.length > 0) {
-                videoCitations = JSON.parse(responseData['citations']);
+        for (let i = 0; i < resp.length; i++) {
+            let currCitation = JSON.parse(resp[i]);
+            let currStart = currCitation['start'];
+            if(!videoCitations.hasOwnProperty(currStart)) {
+                videoCitations[currStart] = [];
             }
-        } else {
-            videoCitations = new Map();
+            videoCitations[currStart].push(currCitation);
         }
     })
     .catch(err => console.log(err));
@@ -71,13 +71,8 @@ function AddNewCitation (props) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        let newYite = new Yite(inputStartTimeValue, inputEndTimeValue, inputTitleValue, inputSourceValue, inputAuthorValue, inputLinkValue);
-        let startKey = newYite.startTime;
-        if(!videoCitations.hasOwnProperty(startKey)) {
-            videoCitations[startKey] = [];
-        }
-        videoCitations[startKey].push(newYite);
-        pushData(videoCitations, videoID);
+        let newYite = new Yite(videoID, inputStartTimeValue, inputEndTimeValue, inputTitleValue, inputSourceValue, inputAuthorValue, inputLinkValue);
+        pushData(newYite);
         
         //ADD NEW CITATION TO DATABASE HERE
         //this is how I did it in firebase, it should be pretty similar
@@ -172,14 +167,13 @@ function AddNewCitation (props) {
 /**
  * Makes a POST request to update data for a particular video.
  * @param {*} citations citations to be inserted
- * @param {*} videoID unique ID of the video
  */
-function pushData(citations, videoID) {
-    let insertCitation = {"id": videoID, "citations": JSON.stringify(citations)};
-    console.log(JSON.stringify(insertCitation));
+function pushData(citation) {
+    let insertCitation = JSON.stringify(citation);
+    console.log(insertCitation);
     let promise = fetch(postUrl, {
         method: "POST",
-        body: JSON.stringify(insertCitation),
+        body: insertCitation,
         headers: {
             'Content-Type': 'application/json'
         }

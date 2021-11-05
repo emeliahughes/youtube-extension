@@ -3,17 +3,17 @@
  */
 
 class Yite {
-    constructor(startTime, endTime, title, source, author, link) {
+    constructor(videoID, startTime, endTime, title, source, author, link) {
         // all except added is a string
-        this.startTime = "" + this.getTimeAsSeconds(startTime);
-        this.endTime = "" + this.getTimeAsSeconds(endTime);
-        this.startTime = startTime;
-        this.endTime = endTime;
+        //this.startTime = "" + this.getTimeAsSeconds(startTime);
+        //this.endTime = "" + this.getTimeAsSeconds(endTime);
+        this.videoID = videoID;
+        this.start = "" + startTime;
+        this.end = "" + endTime;
         this.title = title;
         this.source = source;
         this.author = author;
         this.link = link;
-        this.added = false;
     }
 
     /**
