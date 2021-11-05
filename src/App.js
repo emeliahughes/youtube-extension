@@ -1,7 +1,7 @@
 'use strict';
 import React from 'react';
 //import AddNewCitation from './newcitation';
-//import ViewCitations from './viewCitation';
+import ViewCitations from './viewCitation';
 import Yite from './Yite';
 
 //const baseUrl = "https://youtubeextdata.azurewebsites.net/";
@@ -47,8 +47,11 @@ function App(){
         videoCitations = JSON.parse(responseData);
         console.log(videoCitations);
     }*/
-    let testCitation = new Yite(15, 25, "test title", "test source", "test author", "www.google.com")
+    let testCitation1 = new Yite(15, 25, "test title", "test source", "test author", "www.google.com");
+    let testCitation2 = new Yite(30, 37, "title 2", "source 2", "author 2", "www.google.com")
+    let testCitation3 = new Yite(40, 45, "title 3", "source 3", "author 3", "google.com")
 
+    let videoCitations = [testCitation1, testCitation2, testCitation3];
     return (
         <div className="citation-box">
             <div className="header">
@@ -56,9 +59,9 @@ function App(){
             </div>
             <div className="citation-viewer">
                 {/* add slider here and citation viewer */}
-                {/* <ViewCitations videoCitations={videoCitations}/>
-                <AddNewCitation videoCitations={videoCitations}/> */}
-                <Citation citation={testCitation}/>
+                <ViewCitations videoCitations={videoCitations}/>
+                {/* <AddNewCitation videoCitations={videoCitations}/> */}
+                {/* <Citation citation={testCitation}/> */}
             </div>
         </div>
     )

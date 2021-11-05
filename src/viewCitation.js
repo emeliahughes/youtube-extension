@@ -15,12 +15,17 @@ function SelectCitation(props) {
     let videoCitations = props.videoCitations;
     let citations = [];
     let citationButtons = [];
-    videoCitations.forEach((key) => {
-            for (let i = 0; i < props.videoCitations[key].length; i++) {
-            let yite = props.videoCitation[key][i];
-            citations.push(<Citation citation={yite} />);
-            citationButtons.push(<CitationButton citation={yite} />)
-        }});
+    // videoCitations.forEach((key) => {
+    //         for (let i = 0; i < props.videoCitations[key].length; i++) {
+    //         let yite = props.videoCitation[key][i];
+    //         citations.push(<Citation citation={yite} />);
+    //         citationButtons.push(<CitationButton citation={yite} />)
+    //     }});
+    for (let i = 0; i < videoCitations.length; i++) {
+        let yite = videoCitations[i];
+        citations.push(<Citation citation={yite} />);
+        citationButtons.push(<CitationButton citation={yite} />)
+    };
     
     let listViewContents = (
         <div class="list-view-block">
