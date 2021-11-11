@@ -8,18 +8,21 @@ function ViewCitations(props) {
 
     const[currentButton, setButton] = useState(0);
 
+    // const allYites = [];
     let overallIndex = 1;
     videoCitations.forEach((yiteList) => {
             for (let i = 0; i < yiteList.length; i++) {
                 let yite = yiteList[i];
-                citations.push(<Citation citation={yite} />);
+                // allYites.push(yite);
+                citations.push(<Citation citation={yite} key={"citation " + (overallIndex - 1)}/>);
 
+                const foo = overallIndex;
                 const setClick = () => {
-                    setButton(overallIndex)
+                    setButton(foo)
                 };
 
                 let isActive = (currentButton == overallIndex);
-                citationButtons.push(<CitationButton citation={yite} setClick={setClick} isActive={isActive}/>);
+                citationButtons.push(<CitationButton citation={yite} setClick={setClick} isActive={isActive} key={"citation button " + (overallIndex - 1)}/>);
                 overallIndex++;
             }
         });
@@ -48,16 +51,16 @@ function ViewCitations(props) {
     let listViewContents = (
         <div className="list-view-block">
             <ul>
-                {citations}
+                {citations.filter((_, i) => currentButton == 0 || i == currentButton - 1)}
             </ul>
         </div>
     );
 
-    if (currentButton == 0) {
+    // if (currentButton == 0) {
         currentView = listViewContents;
-    } else {
-        currentView = citations[currentButton - 1];
-    }
+    // } else {
+    //     currentView = citations[currentButton - 1];
+    // }
 
     return (
         <div className="citation-view">
