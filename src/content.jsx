@@ -10,13 +10,36 @@ console.log('hellooooo');
 // const app = document.createElement('div');
 // app.id = 'root';
 // document.body.append(app);
+const videoID = document.querySelector("#watch7-content > meta:nth-child(6)").content;
+const baseUrl = "https://youtubeextdata.azurewebsites.net/";
+const getUrl = baseUrl + "getCitations?videoID=";
 
-addDivBeforeDescription().then(container => {
-    ReactDOM.render(
-      <App />,
-      container,//document.getElementById('citation-box')
-    );
-})
+let responseDataPromise = getData(videoID)
+    .then(resp => {
+        let videoYites = new Map();
+        console.log(resp);
+            for (let i = 0; i < resp.length; i++) {
+                let currCitation = JSON.parse(resp[i]);
+                let currStart = currCitation["startTime"];
+                if(!videoYites.has(currStart)) {
+                    videoYites.set(currStart, []);
+                }
+                videoYites.get(currStart).push(currCitation);
+            }
+        return(videoYites);
+    })
+    .then((videoYites) => {
+        return addDivBeforeDescription().then((container) => {return [videoYites, container]});
+    })
+    .then(([videoYites, container]) => {
+        ReactDOM.render(
+          <App videoCitations={videoYites}/>,
+          container, //document.getElementById('citation-box')
+        )
+    })
+    .catch(err => console.log(err));
+
+
 
 async function addDivBeforeDescription () {
     let div = document.createElement("div");
@@ -66,4 +89,21 @@ function loadHTML(contents, container, ms) {
           }
       }, ms);
   });
+}
+
+/**
+ * Makes a GET request to get the data for a particular video.
+ * @param {string} videoID unique ID of the video
+ * @returns a Promise for all video data
+ */
+ function getData(videoID) {
+    let requestUrl = getUrl + videoID;
+    return fetch(requestUrl, {
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => {return response.json();})
+    .catch(err => console.log(err));
 }

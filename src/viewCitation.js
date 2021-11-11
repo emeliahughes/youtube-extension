@@ -1,77 +1,71 @@
 import React, { useState } from 'react';
 
 function ViewCitations(props) {
-   let videoCitations = props.videoCitations;
-
-    return (
-        <div class="citation-view">
-            <SelectCitation videoCitations={videoCitations} />
-        </div>
-    )
-}
-
-
-function SelectCitation(props) {
     let videoCitations = props.videoCitations;
     let citations = [];
     let citationButtons = [];
-    // videoCitations.forEach((key) => {
-    //         for (let i = 0; i < props.videoCitations[key].length; i++) {
-    //         let yite = props.videoCitation[key][i];
-    //         citations.push(<Citation citation={yite} />);
-    //         citationButtons.push(<CitationButton citation={yite} />)
-    //     }});
-    for (let i = 0; i < videoCitations.length; i++) {
-        let yite = videoCitations[i];
-        citations.push(<Citation citation={yite} />);
-        citationButtons.push(<CitationButton citation={yite} />)
-    };
-    
+    let currentView;
+
+    const[currentButton, setButton] = useState(0);
+
+    let overallIndex = 1;
+    videoCitations.forEach((yiteList) => {
+            for (let i = 0; i < yiteList.length; i++) {
+                let yite = yiteList[i];
+                citations.push(<Citation citation={yite} />);
+
+                const setClick = () => {
+                    setButton(overallIndex)
+                };
+
+                let isActive = (currentButton == overallIndex);
+                citationButtons.push(<CitationButton citation={yite} setClick={setClick} isActive={isActive}/>);
+                overallIndex++;
+            }
+        });
+
+    // for (let i = 0; i < citations.length; i++) {
+    //     let yite = videoCitations[i];
+    //     citations.push(<Citation citation={yite} />);
+    //     citationButtons.push(<CitationButton citation={yite} setClick={handleClick(i + 1)}/>);
+    // }
+
+    let listClasses;
+
+    if(currentButton == 0) {
+        listClasses = "button list-view-button active-button"
+    } else {
+        listClasses = "button list-view-button"
+    }
+
+    let listViewButton = (
+        <div className= {listClasses}>
+            <button onClick={() => setButton(0)}>
+                <h2 className="list-view-button-text">List View</h2>
+            </button>
+        </div>);
+
     let listViewContents = (
-        <div class="list-view-block">
+        <div className="list-view-block">
             <ul>
                 {citations}
             </ul>
         </div>
     );
 
-    let currentView = citations[0];
-
-    const[listView, setListView] = useState(false);
-
-    const handleListView = (event) => {
-        event.preventDefault();
-        setListView(!listView);
-
-        if(listView){
-            for (button in citationButtons) {
-                button.setClick(false);
-                currentView = listViewContents;
-            }
-        }
-
-    }
-
-    let listViewButton = (
-        <div class="list-view-button">
-            <button onClick={handleListView}>
-                <h2 class="list-view-button-text">List View</h2>
-            </button>
-        </div>);
-
-    
-
-    for (button in citationButtons) {
-
+    if (currentButton == 0) {
+        currentView = listViewContents;
+    } else {
+        currentView = citations[currentButton - 1];
     }
 
     return (
-        <div>
-            <div class="view-buttons">
-                {/* {listViewButton}
-                {citationButtons} */}
+        <div className="citation-view">
+            <div className="view-buttons">
+                {listViewButton}
+                {citationButtons}
             </div>
-            <div class="citation-viewer">
+            <div className="citation-viewer">
                 {currentView}
             </div>
         </div>
@@ -88,35 +82,37 @@ function Citation(props) {
     let endTime = citation.endTime;
 
     return(
-        <div class="citation-block">
-            <h2 class="citation-title">{title}</h2>
-            <a href={link} class="citation-source">{source}</a>
-            <p class="citation-time-text">from {startTime} to {endTime} </p>
+        <div className="citation-block">
+            <h2 className="citation-title">{title}</h2>
+            <a href={link} className="citation-source">{source}</a>
+            <p className="citation-time-text">from {startTime} to {endTime} </p>
         </div>
     )
 }
 
 function CitationButton(props) {
     let citation = props.citation;
+    let setClick = props.setClick;
+    let isActive = props.isActive;
     let title = citation.title;
     let titleLength = title.length;
+    let classes;
 
-     if(titleLength > 15) {
-        title = title.substring(0, 15);
+    if(titleLength > 15) {
+        title = title.substring(0, 12);
         title += "...";
     }
 
-    const[clicked, setClick] = useState(false);
-
-    const handleClick = (event) => {
-        event.preventDefault();
-        setClick(!clicked);
+    if(isActive){
+        classes = "citation-button button active-button";
+    } else {
+        classes = "citation-button button";
     }
 
     return (
-        <div class="citation-button">
-            <button onClick={handleClick}>
-                <h2 class="citation-title">{title}</h2>
+        <div className={classes}>
+            <button onClick={setClick}>
+                <h2 className="citation-button-title">{title}</h2>
             </button>
         </div>
     )

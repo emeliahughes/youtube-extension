@@ -1,6 +1,8 @@
 import React, {useState } from 'react';
 import Yite from './Yite';
 
+const baseUrl = "https://youtubeextdata.azurewebsites.net/";
+const postUrl = baseUrl + "createCitation";
 
 function AddNewCitation (props) {
 
@@ -57,10 +59,6 @@ function AddNewCitation (props) {
         }
         videoCitations[startKey].push(newYite);
         pushData(videoCitations, videoID);
-        
-        //ADD NEW CITATION TO DATABASE HERE
-        //this is how I did it in firebase, it should be pretty similar
-        //firebase.database().ref('users').child(props.currentUserID).push(newEntryObj);
 
         //reset box values (I think this should also close the box when we get here)
         setTitleValue("");
@@ -131,33 +129,15 @@ function AddNewCitation (props) {
 }
 
 /**
- * Makes a GET request to get the data for a particular video.
- * @param {string} videoID unique ID of the video
- * @returns a Promise for all video data
- */
- function getData(videoID) {
-    let requestUrl = getUrl + videoID;
-    return fetch(requestUrl, {
-        method: "GET",
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-    .then(response => {return response.json();})
-    .catch(err => console.log(err));
-}
-
-/**
  * Makes a POST request to update data for a particular video.
  * @param {*} citations citations to be inserted
- * @param {*} videoID unique ID of the video
  */
-function pushData(citations, videoID) {
-    let insertCitation = {"id": videoID, "citations": JSON.stringify(citations)};
-    console.log(JSON.stringify(insertCitation));
+ function pushData(citation) {
+    let insertCitation = JSON.stringify(citation);
+    console.log(insertCitation);
     let promise = fetch(postUrl, {
         method: "POST",
-        body: JSON.stringify(insertCitation),
+        body: insertCitation,
         headers: {
             'Content-Type': 'application/json'
         }
