@@ -5,6 +5,8 @@ const baseUrl = "https://youtubeextdata.azurewebsites.net/";
 const postUrl = baseUrl + "createCitation";
 
 function AddNewCitation (props) {
+    let videoCitations = props.videoCitations;
+    let videoID = props.videoID;
 
     const [inputTitleValue, setTitleValue] = useState('');
 
@@ -54,10 +56,12 @@ function AddNewCitation (props) {
         event.preventDefault();
         let newYite = new Yite(videoID, inputStartTimeValue, inputEndTimeValue, inputTitleValue, inputSourceValue, inputAuthorValue, inputLinkValue);
         
-        //TODO: add to videoCitations as well
-        
         pushData(newYite);
-        
+        let newStart = newYite.start;
+        if(!videoCitations.has(newStart)) {
+            videoCitations.set(newStart, []);
+        }
+        videoCitations.get(newStart).push(newYite);
 
         //reset box values (I think this should also close the box when we get here)
         setTitleValue("");
@@ -142,6 +146,12 @@ function pushData(citation) {
         }
     })
     promise
+    .then(
+        resp => {
+            let p = resp.text()
+            p.then(res => {citation.id = res;})
+        }
+    )
     .catch(err => console.log(err));
 }
 

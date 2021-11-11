@@ -33,7 +33,7 @@ let responseDataPromise = getData(videoID)
     })
     .then(([videoYites, container]) => {
         ReactDOM.render(
-          <App videoCitations={videoYites}/>,
+          <App videoCitations={videoYites} videoID={videoID}/>,
           container, //document.getElementById('citation-box')
         )
     })

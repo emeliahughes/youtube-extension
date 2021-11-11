@@ -14,6 +14,7 @@ class Yite {
         this.source = source;
         this.author = author;
         this.link = link;
+        this.id = "";
     }
 
     /**
