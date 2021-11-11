@@ -1,30 +1,23 @@
 'use strict';
-import React from 'react';
-import AddNewCitation from './newcitation';
+import React, { useState } from 'react';
+//import AddNewCitation from './newcitation';
+import ViewCitations from './viewCitation';
+import Yite from './Yite';
 
-const baseUrl = "https://youtubeextdata.azurewebsites.net/";
-const postUrl = baseUrl + "createCitation";
-const getUrl = baseUrl + "getCitations?videoID=";
-
-function App(){
-    // Each YouTube video has a unique ID, videoID.
-    const videoID = document.querySelector("#watch7-content > meta:nth-child(6)").content;
-
-    // If the video doesn't exist in the database, we make a new map.
-    // videoCitations is organized by start time, such that key: starttime(int) -> value: citations(array of citations)
-    /*if (responseData.length > 0) {
-        videoCitations = JSON.parse(responseData);
-        console.log(videoCitations);
-    }*/
-
+function App(props){
+    //const maxLength = document.getElementsByClassName("ytp-bound-time-right").innerHTML;
+    let videoCitations = props.videoCitations;
+    
     return (
         <div className="citation-box">
             <div className="header">
-                <h1>"Citations"</h1>
+                <h1>Citations</h1>
             </div>
-            <div className="citation-viewer">
+            <div className="main-view-box">
                 {/* add slider here and citation viewer */}
-                <AddNewCitation />
+                <ViewCitations videoCitations={videoCitations}/>
+                {/* <AddNewCitation videoCitations={videoCitations}/> */}
+                {/* <Citation citation={testCitation}/> */}
             </div>
         </div>
     )

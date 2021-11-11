@@ -3,25 +3,6 @@ import Yite from './Yite';
 
 const baseUrl = "https://youtubeextdata.azurewebsites.net/";
 const postUrl = baseUrl + "createCitation";
-const getUrl = baseUrl + "getCitations?videoID=";
-
-const videoID = document.querySelector("#watch7-content > meta:nth-child(6)").content;
-const maxLength = document.getElementsByClassName("ytp-bound-time-right").innerHTML;
-let videoCitations = new Map();
-
-let responseDataPromise = getData(videoID)
-    .then(resp => {
-        console.log(resp);
-        for (let i = 0; i < resp.length; i++) {
-            let currCitation = JSON.parse(resp[i]);
-            let currStart = currCitation['start'];
-            if(!videoCitations.hasOwnProperty(currStart)) {
-                videoCitations[currStart] = [];
-            }
-            videoCitations[currStart].push(currCitation);
-        }
-    })
-    .catch(err => console.log(err));
 
 function AddNewCitation (props) {
 
@@ -72,11 +53,11 @@ function AddNewCitation (props) {
     const handleSubmit = (event) => {
         event.preventDefault();
         let newYite = new Yite(videoID, inputStartTimeValue, inputEndTimeValue, inputTitleValue, inputSourceValue, inputAuthorValue, inputLinkValue);
+        
+        //TODO: add to videoCitations as well
+        
         pushData(newYite);
         
-        //ADD NEW CITATION TO DATABASE HERE
-        //this is how I did it in firebase, it should be pretty similar
-        //firebase.database().ref('users').child(props.currentUserID).push(newEntryObj);
 
         //reset box values (I think this should also close the box when we get here)
         setTitleValue("");
@@ -86,7 +67,6 @@ function AddNewCitation (props) {
         setEndTimeValue("");
 
     }
-
     return (
         <div className="new-citation">
             <form onSubmit={handleSubmit}>
@@ -145,23 +125,6 @@ function AddNewCitation (props) {
             </form>
         </div>
     )
-}
-
-/**
- * Makes a GET request to get the data for a particular video.
- * @param {string} videoID unique ID of the video
- * @returns a Promise for all video data
- */
- function getData(videoID) {
-    let requestUrl = getUrl + videoID;
-    return fetch(requestUrl, {
-        method: "GET",
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-    .then(response => {return response.json();})
-    .catch(err => console.log(err));
 }
 
 /**
