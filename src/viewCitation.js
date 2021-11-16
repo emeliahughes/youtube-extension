@@ -81,8 +81,13 @@ function Citation(props) {
     let title = citation.title;
     let source = citation.source;
     let link = citation.link;
-    let startTime = citation.start;
-    let endTime = citation.end;
+    if (link.substring(0, 5) !== 'http') {
+        link = 'http://' + link;
+    }
+    
+    console.log(link);
+    let startTime = citation.startTime;
+    let endTime = citation.endTime;
 
     return(
         <div className="citation-block">
