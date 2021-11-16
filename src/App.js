@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 import AddNewCitation from './newcitation';
 import ViewCitations from './viewCitation';
-import Yite from './Yite';
 
 function App(props){
     //const maxLength = document.getElementsByClassName("ytp-bound-time-right").innerHTML;
