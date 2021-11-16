@@ -15,7 +15,7 @@
   \***************************/
 /***/ (() => {
 
-eval("console.log('Running background.js');\n\n//# sourceURL=webpack://youtube-extension/./src/background.js?");
+eval("\n\n//# sourceURL=webpack://youtube-extension/./src/background.js?");
 
 /***/ })
 

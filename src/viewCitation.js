@@ -85,7 +85,6 @@ function Citation(props) {
         link = 'http://' + link;
     }
     
-    console.log(link);
     let startTime = citation.startTime;
     let endTime = citation.endTime;
 

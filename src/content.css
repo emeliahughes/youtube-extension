@@ -1,3 +1,10 @@
 body {
-  color: green;
+  color: darkred;
+}
+.citation-block {
+  background-color: white;
+  color: black;
+}
+.citation-button-title {
+  color: crimson;
 }
