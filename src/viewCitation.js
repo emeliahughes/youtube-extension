@@ -42,11 +42,9 @@ function ViewCitations(props) {
     }
 
     let listViewButton = (
-        <div className= {listClasses}>
-            <button onClick={() => setButton(0)}>
-                <h2 className="list-view-button-text">List View</h2>
-            </button>
-        </div>);
+        <button onClick={() => setButton(0)} className= {listClasses}>
+            <h2 className="list-view-button-text">List View</h2>
+        </button>);
 
     let listViewContents = (
         <div className="list-view-block">
@@ -117,11 +115,9 @@ function CitationButton(props) {
     }
 
     return (
-        <div className={classes}>
-            <button onClick={setClick}>
-                <h2 className="citation-button-title">{title}</h2>
-            </button>
-        </div>
+        <button onClick={setClick} className={classes}>
+            <h2 className="citation-button-title">{title}</h2>
+        </button>
     )
 }
 

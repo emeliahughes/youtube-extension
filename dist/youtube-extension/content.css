@@ -4,7 +4,7 @@
 body {
   color: darkred;
 }
-.citation-block {
+.citation-view {
   background-color: white;
   color: black;
 }
@@ -12,6 +12,22 @@ body {
   color: crimson;
 }
 
+.view-buttons {
+  padding: 10px;
+}
+
+.button {
+  border-radius: 20px;
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-left: 10px;
+}
+
+.active-button {
+  background-color: gray;
+  color: white;
+}
 /*!*****************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/bootstrap/dist/css/bootstrap.min.css ***!
   \*****************************************************************************************************/

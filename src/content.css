@@ -1,10 +1,27 @@
 body {
   color: darkred;
 }
-.citation-block {
+.citation-view {
   background-color: white;
   color: black;
 }
 .citation-button-title {
   color: crimson;
+}
+
+.view-buttons {
+  padding: 10px;
+}
+
+.button {
+  border-radius: 20px;
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-left: 10px;
+}
+
+.active-button {
+  background-color: black;
+  color: white;
 }
