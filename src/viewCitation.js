@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import { start } from '@popperjs/core';
+import React, { useState, useEffect } from 'react';
+// import ReactPlayer from "react-player";
 
 function ViewCitations(props) {
     let videoCitations = props.videoCitations;
@@ -8,12 +10,23 @@ function ViewCitations(props) {
 
     const[currentButton, setButton] = useState(0);
 
-    // const allYites = [];
+    // activeButton is the highlighted/active button shown
+    // this is determined by either the user pressing a button or the current 
+    // timestamp matches the start timestamp of a citation
+    function getCurrentTimeStamp(video) {
+        return Math.floor(video.currentTime);
+    }
+
+    let video = document.querySelector("video");
+    console.log(getCurrentTimeStamp(video));
+
+    const allYites = [];
+
     let overallIndex = 1;
     videoCitations.forEach((yiteList) => {
             for (let i = 0; i < yiteList.length; i++) {
                 let yite = yiteList[i];
-                // allYites.push(yite);
+                allYites.push(yite);
                 citations.push(<Citation citation={yite} key={"citation " + (overallIndex - 1)}/>);
 
                 const foo = overallIndex;
@@ -25,13 +38,29 @@ function ViewCitations(props) {
                 citationButtons.push(<CitationButton citation={yite} setClick={setClick} isActive={isActive} key={"citation button " + (overallIndex - 1)}/>);
                 overallIndex++;
             }
-        });
+    });
+    
+    // Can optimize by sorting citations list -> O(n) -> O(1)
+    // When time updates, update citation
+    video.ontimeupdate = () => {
+        for (let i = 0; i < citations.length; i++) {
+            let startTime = citations[i].props.citation.startTime;
+            if (startTime == getCurrentTimeStamp(video)) {
+
+                // i + 1 bc line 98 is currentButton - 1
+                setButton(i + 1);
+            }
+        }
+    };
+    
 
     // for (let i = 0; i < citations.length; i++) {
     //     let yite = videoCitations[i];
     //     citations.push(<Citation citation={yite} />);
     //     citationButtons.push(<CitationButton citation={yite} setClick={handleClick(i + 1)}/>);
     // }
+
+    // console.log(citations[0].props.citation.startTime);
 
     let listClasses;
 
@@ -54,11 +83,12 @@ function ViewCitations(props) {
         </div>
     );
 
-    // if (currentButton == 0) {
+    if (currentButton == 0) {
         currentView = listViewContents;
-    // } else {
-    //     currentView = citations[currentButton - 1];
-    // }
+    } else {
+        // why currentButton - 1 here?
+        currentView = citations[currentButton - 1];
+    }
 
     return (
         <div className="citation-view">
