@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import AddNewCitation from './newcitation';
 import ViewCitations from './viewCitation';
-import CitationViewer from './CitationViewer';
+import AddCitationViewer from './AddCitationViewer';
 
 function App(props){
 
@@ -16,17 +16,15 @@ function App(props){
         <div className="citation-box">
             <div className="header">
                 <h1>Citations</h1>
-            </div>
-            <div className="main-view-box">
-                {/* add slider here and citation viewer */}
-                <CitationViewer
+                <AddCitationViewer
                     color={showAddCitations ? "red" : "green"}
                     text={showAddCitations ? "Cancel" : "Add New Citation"}
                     onClick={() => {setShowAddCitations(!showAddCitations);}}
                 />
+            </div>
+            <div className="main-view-box">
                 <ViewCitations videoCitations={videoCitations}/>
                 {showAddCitations ? <AddNewCitation videoCitations={videoCitations} videoID={videoID}/> : ""}
-                {/* <Citation citation={testCitation}/> */}
             </div>
         </div>
     )

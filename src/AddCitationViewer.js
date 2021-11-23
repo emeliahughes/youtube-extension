@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const CitationViewer = ({ color, text, onClick}) => {
+export const AddCitationViewer = ({ color, text, onClick}) => {
     return (
         <button
             onClick={onClick}
@@ -12,4 +12,4 @@ export const CitationViewer = ({ color, text, onClick}) => {
     )
 }
 
-export default CitationViewer;
+export default AddCitationViewer;
