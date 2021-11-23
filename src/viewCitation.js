@@ -18,7 +18,6 @@ function ViewCitations(props) {
     }
 
     let video = document.querySelector("video");
-    console.log(getCurrentTimeStamp(video));
 
     const allYites = [];
 
@@ -39,14 +38,19 @@ function ViewCitations(props) {
                 overallIndex++;
             }
     });
+
+    // Sorts citations by time, need to do the same for citation buttons
+    // citationButtons.sort((a, b) => {return a.props.citation.startTime - b.props.citation.startTime});
+    // citations.sort((a, b) => {return a.props.citation.startTime - b.props.citation.startTime});
+    
     
     // Can optimize by sorting citations list -> O(n) -> O(1)
     // When time updates, update citation
     video.ontimeupdate = () => {
-        console.log(getCurrentTimeStamp(video));
         for (let i = 0; i < citations.length; i++) {
             let startTime = citations[i].props.citation.startTime;
             startTime = convertTimeToSeconds(startTime);
+
             if (startTime == getCurrentTimeStamp(video)) {
 
                 // i + 1 bc line 98 is currentButton - 1
@@ -133,15 +137,15 @@ function Citation(props) {
         link = 'http://' + link;
     }
     
-    let startTime = citation.startTime;
-    let endTime = citation.endTime;
+    let startTime = convertTimeToSeconds(citation.startTime);
+    let endTime = convertTimeToSeconds(citation.endTime);
 
     // Line 124, figure out how to go to a certain time without reloading the page
     return(
         <div className="citation-block">
             <h2 className="citation-title">{title}</h2>
             <a href={link} className="citation-source">{source}</a>
-            <a href={`${window.location.href.split("&")[0]}&t=${convertTimeToSeconds(startTime)}s`}>
+            <a href={`${window.location.href.split("&")[0]}&t=${startTime}s`}>
                 {<p className="citation-time-text">from {startTime} to {endTime}</p>}
             </a>
         </div>
