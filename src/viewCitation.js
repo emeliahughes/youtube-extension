@@ -104,6 +104,24 @@ function ViewCitations(props) {
 
 }
 
+// CONVERT TIME TO SECONDS
+function convertTimeToSeconds(time) {
+    let hourMinuteSecond = time.split(":").reverse();
+    let timeInSeconds = 0;
+
+    if (hourMinuteSecond[2] !== undefined) {
+        timeInSeconds += parseInt(hourMinuteSecond[2]) * 3600;
+    }
+    
+    if (hourMinuteSecond[1] !== undefined) {
+        timeInSeconds += parseInt(hourMinuteSecond[1]) * 60;
+    }
+
+    timeInSeconds += parseInt(hourMinuteSecond[0]);
+
+    return timeInSeconds;
+}
+
 function Citation(props) {
     let citation = props.citation;
     let title = citation.title;
@@ -116,11 +134,14 @@ function Citation(props) {
     let startTime = citation.startTime;
     let endTime = citation.endTime;
 
+    // Line 124, figure out how to go to a certain time without reloading the page
     return(
         <div className="citation-block">
             <h2 className="citation-title">{title}</h2>
             <a href={link} className="citation-source">{source}</a>
-            <p className="citation-time-text">from {startTime} to {endTime} </p>
+            <a href={`${window.location.href.split("&")[0]}&t=${convertTimeToSeconds(startTime)}s`}>
+                {<p className="citation-time-text">from {startTime} to {endTime}</p>}
+            </a>
         </div>
     )
 }
