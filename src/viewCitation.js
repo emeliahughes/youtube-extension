@@ -43,8 +43,10 @@ function ViewCitations(props) {
     // Can optimize by sorting citations list -> O(n) -> O(1)
     // When time updates, update citation
     video.ontimeupdate = () => {
+        console.log(getCurrentTimeStamp(video));
         for (let i = 0; i < citations.length; i++) {
             let startTime = citations[i].props.citation.startTime;
+            startTime = convertTimeToSeconds(startTime);
             if (startTime == getCurrentTimeStamp(video)) {
 
                 // i + 1 bc line 98 is currentButton - 1
