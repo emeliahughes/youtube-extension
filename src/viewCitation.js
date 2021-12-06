@@ -112,6 +112,9 @@ function ViewCitations(props) {
 
 // CONVERT TIME TO SECONDS
 function convertTimeToSeconds(time) {
+    if (isNaN(time)) {
+        return 0;
+    }
     let hourMinuteSecond = time.split(":").reverse();
     let timeInSeconds = 0;
 
@@ -150,6 +153,11 @@ function Citation(props) {
             </a>
         </div>
     )
+}
+
+function jumpTime(time) {
+    let video = document.getElementsByTagName("video")[0];
+    video.currentTime = time;
 }
 
 function CitationButton(props) {
