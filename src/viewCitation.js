@@ -112,21 +112,23 @@ function ViewCitations(props) {
 
 // CONVERT TIME TO SECONDS
 function convertTimeToSeconds(time) {
-    if (isNaN(time)) {
-        return 0;
-    }
     let hourMinuteSecond = time.split(":").reverse();
     let timeInSeconds = 0;
 
-    if (hourMinuteSecond[2] !== undefined) {
+    if (hourMinuteSecond.length == 3) {
         timeInSeconds += parseInt(hourMinuteSecond[2]) * 3600;
     }
     
-    if (hourMinuteSecond[1] !== undefined) {
+    if (hourMinuteSecond.length >= 2) {
         timeInSeconds += parseInt(hourMinuteSecond[1]) * 60;
     }
 
-    timeInSeconds += parseInt(hourMinuteSecond[0]);
+    let seconds = parseInt(hourMinuteSecond[0]);
+
+    if (isNaN(seconds)) {
+        return 0;
+    }
+    timeInSeconds += seconds;
 
     return timeInSeconds;
 }
@@ -148,9 +150,10 @@ function Citation(props) {
         <div className="citation-block">
             <h2 className="citation-title">{title}</h2>
             <a href={link} className="citation-source">{source}</a>
-            <a href={`${window.location.href.split("&")[0]}&t=${startTime}s`}>
-                {<p className="citation-time-text">from {startTime} to {endTime}</p>}
-            </a>
+            <br></br>
+            <button onClick={jumpTime.bind(this, startTime)}>
+                <p>Jump to {citation.startTime}</p>
+            </button>
         </div>
     )
 }
