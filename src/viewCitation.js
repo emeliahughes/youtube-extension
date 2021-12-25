@@ -3,16 +3,10 @@ import React, { useState, useEffect } from 'react';
 // import ReactPlayer from "react-player";
 
 function ViewCitations(props) {
-    let videoCitations = props.videoCitations
+    let videoCitations = props.videoCitations;
     let citations = [];
     let citationButtons = [];
     let currentView;
-
-    // Sort each citation by start time
-    videoCitations = new Map([...videoCitations.entries()].sort((a, b) => {
-        return convertTimeToSeconds(a[0]) - convertTimeToSeconds(b[0])
-    }))
-
 
     const[currentButton, setButton] = useState(0);
 
@@ -44,6 +38,10 @@ function ViewCitations(props) {
                 overallIndex++;
             }
     });
+
+    // Sorts citations by time, need to do the same for citation buttons
+    // citationButtons.sort((a, b) => {return a.props.citation.startTime - b.props.citation.startTime});
+    // citations.sort((a, b) => {return a.props.citation.startTime - b.props.citation.startTime});
     
     
     // Can optimize by sorting citations list -> O(n) -> O(1)
@@ -54,6 +52,7 @@ function ViewCitations(props) {
             startTime = convertTimeToSeconds(startTime);
 
             if (startTime == getCurrentTimeStamp(video)) {
+
                 // i + 1 bc line 98 is currentButton - 1
                 setButton(i + 1);
             }
@@ -85,8 +84,7 @@ function ViewCitations(props) {
     let listViewContents = (
         <div className="list-view-block">
             <ul>
-                {/* {citations.filter((_, i) => currentButton == 0 || i == currentButton - 1)} */}
-                {citations}
+                {citations.filter((_, i) => currentButton == 0 || i == currentButton - 1)}
             </ul>
         </div>
     );
@@ -95,8 +93,6 @@ function ViewCitations(props) {
         currentView = listViewContents;
     } else {
         // why currentButton - 1 here?
-        console.log(citations)
-        console.log(currentButton-1)
         currentView = citations[currentButton - 1];
     }
 
@@ -149,6 +145,7 @@ function Citation(props) {
     let startTime = convertTimeToSeconds(citation.startTime);
     let endTime = convertTimeToSeconds(citation.endTime);
 
+    // Line 124, figure out how to go to a certain time without reloading the page
     return(
         <div className="citation-block">
             <h2 className="citation-title">{title}</h2>
