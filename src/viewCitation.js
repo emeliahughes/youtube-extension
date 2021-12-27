@@ -138,7 +138,7 @@ function Citation(props) {
     let title = citation.title;
     let source = citation.source;
     let link = citation.link;
-    if (link.substring(0, 5) !== 'http') {
+    if (link.substring(0, 4) !== 'http') {
         link = 'http://' + link;
     }
     
