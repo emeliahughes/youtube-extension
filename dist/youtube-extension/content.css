@@ -14,6 +14,9 @@ body {
 
 .view-buttons {
   padding: 10px;
+  height: 70px;
+  white-space: nowrap;
+  overflow-x: scroll;
 }
 
 .button {
@@ -27,6 +30,11 @@ body {
 .active-button {
   background-color: black;
   color: white;
+}
+
+.list-view-block {
+  overflow-y: scroll;
+  max-height: 200px;
 }
 /*!*****************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/bootstrap/dist/css/bootstrap.min.css ***!
