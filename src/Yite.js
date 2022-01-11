@@ -3,7 +3,7 @@
  */
 
 class Yite {
-    constructor(videoID, startTime, endTime, title, source, author, link) {
+    constructor(videoID, startTime, endTime, title, source, author, link, citeType="affirm") {
         // all except added is a string
         //this.startTime = "" + this.getTimeAsSeconds(startTime);
         //this.endTime = "" + this.getTimeAsSeconds(endTime);
@@ -15,6 +15,7 @@ class Yite {
         this.author = author;
         this.link = link;
         this.id = "";
+        this.citeType = citeType;
     }
 
     /**

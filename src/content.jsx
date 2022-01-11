@@ -10,9 +10,7 @@ import 'bootstrap/dist/js/bootstrap.min.js';
 
 
 console.log('hellooooo');
-// const app = document.createElement('div');
-// app.id = 'root';
-// document.body.append(app);
+
 const videoID = document.querySelector("#watch7-content > meta:nth-child(6)").content;
 const baseUrl = "https://youtubeextdata.azurewebsites.net/";
 const getUrl = baseUrl + "getCitations?videoID=";
