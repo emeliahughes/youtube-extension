@@ -7,6 +7,26 @@ const postUrl = baseUrl + "createCitation";
 function AddNewCitation (props) {
     let videoCitations = props.videoCitations;
     let videoID = props.videoID;
+    let currentTime = 0;
+
+    React.useEffect(() => {
+        let video = document.querySelector("#movie_player > div.html5-video-container > video");
+        const videoLength = Math.floor(video.duration);
+        video.addEventListener('timeupdate', function() {
+            currentTime = Math.floor(video.currentTime);
+            if (videoLength - 10 >= currentTime) {
+                setStartTimeValue(currentTime);
+                setEndTimeValue(currentTime + 10);
+            } else if (videoLength >= currentTime) {
+                setStartTimeValue(currentTime);
+                setEndTimeValue(videoLength);
+            } else {
+                setStartTimeValue(videoLength);
+                setEndTimeValue(videoLength);
+            }
+        }), []
+        // TODO: unhook?
+      });
 
     const [inputTitleValue, setTitleValue] = useState('');
 
@@ -36,7 +56,7 @@ function AddNewCitation (props) {
         setAuthorValue(newValue);
     }
 
-    const [inputStartTimeValue, setStartTimeValue] = useState('');
+    const [inputStartTimeValue, setStartTimeValue] = useState(currentTime);
 
     const handleStartTime = (event) => {
         let newValue = event.target.value
@@ -114,7 +134,7 @@ function AddNewCitation (props) {
                                     className="form-control" id="start_time_field" name="start_time" required/>
                             </div>
                             <div>
-                                <label htmlFor="end_time_field" className="main-labels"><h3 className="small"> to </h3></label>
+                                <label htmlFor="end_time_field" className="main-labels"><h3 className="small"> To: </h3></label>
                                 <input type="text" 
                                     onChange={handleEndTime} 
                                     value={inputEndTimeValue} 
