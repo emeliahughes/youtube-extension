@@ -14,9 +14,12 @@ let video = document.querySelector("#movie_player > div.html5-video-container > 
 
 video.addEventListener('canplay', function load() {
     console.log(video.readyState);
-    console.log(document.querySelector("#page-manager > ytd-watch-flexy"));
-    const videoID = document.querySelector("#watch7-content > meta:nth-child(6)").content;
-    let responseDataPromise = getData(videoID)
+    //let videoID = document.querySelector("#watch7-content > meta:nth-child(6)").content;
+    let videoID = 'na';
+    let p = getID().then((result) => {
+        videoID = result;
+        console.log(videoID);
+        let responseDataPromise = getData(videoID)
         .then(resp => {
             let videoYites = new Map();
             console.log(resp);
@@ -40,6 +43,7 @@ video.addEventListener('canplay', function load() {
             )
         })
         .catch(err => console.log(err));
+    });
     video.removeEventListener('loadeddata', load);
 })
 
@@ -60,12 +64,36 @@ async function addDivBeforeDescription () {
         contents = container.getElementsByClassName("style-scope ytd-video-secondary-info-renderer");
         container = contents[0];
         if (container.children[0] !== null) {
+            if (container.children[0].id === "citation-box") {
+                container.removeChild(container.children[0]);
+            }
             container.insertBefore(div, container.children[0]);
         }
     }
-
     return div;
 }
+
+function loadID(id, ms) {
+    return new Promise((resolve) => {
+        let interval = setInterval(() => {
+            id = document.querySelector("#page-manager > ytd-watch-flexy");
+            if (id !== null && id !== undefined) {
+                resolve(id);
+                clearInterval(interval);
+            } else {
+                resolve(loadID);
+            }
+        }, ms);
+    });
+}
+
+async function getID() {
+    let id = document.querySelector("#page-manager > ytd-watch-flexy");
+    id = await loadID(id, 500);
+    return id.getAttribute('video-id');
+}
+
+
 
 function loadMetacontents(contents, ms) {
   return new Promise((resolve) => {
