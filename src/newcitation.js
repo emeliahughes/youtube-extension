@@ -152,9 +152,9 @@ function AddNewCitation (props) {
                             <label htmlFor="type_field" className="main-labels"><h3 className="small">Citation Type: </h3></label>
                             <br></br>
                             <input type="radio" id="affirm" name="citeType" value="affirm" onChange={handleCiteType}/>
-                            <label for="affirm">Affirm  </label>
+                            <label htmlFor="affirm">Affirm  </label>
                             <input type="radio" id="refute" name="citeType" value="refute" onChange={handleCiteType}/>
-                            <label for="refute">Refute</label>
+                            <label htmlFor="refute">Refute</label>
                         </div>
                         <div className="flex-container holdcenter">
                             <button type="submit" className="button" id="submit-button"><em aria-label="save entry"><strong>Add</strong></em></button>
