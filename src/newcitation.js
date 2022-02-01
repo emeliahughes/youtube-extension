@@ -151,6 +151,8 @@ function AddNewCitation (props) {
                         <div>
                             <label htmlFor="type_field" className="main-labels"><h3 className="small">Citation Type: </h3></label>
                             <br></br>
+                            <input type="radio" id="neither" name="citeType" value="neither" onChange={handleCiteType}/>
+                            <label htmlFor="neither">Neither  </label>
                             <input type="radio" id="affirm" name="citeType" value="affirm" onChange={handleCiteType}/>
                             <label htmlFor="affirm">Affirm  </label>
                             <input type="radio" id="refute" name="citeType" value="refute" onChange={handleCiteType}/>
