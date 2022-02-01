@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import './content.css';
 import { render } from 'react-dom'; //this isn't used, does it need to be here?
-//import 'bootstrap/dist/css/bootstrap.min.css';
 import 'jquery/dist/jquery.min.js';
 //import 'bootstrap/dist/js/bootstrap.min.js';
 
