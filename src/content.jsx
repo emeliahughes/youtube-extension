@@ -79,19 +79,16 @@ function loadID(id, ms) {
     return new Promise((resolve) => {
         let interval = setInterval(() => {
             id = document.querySelector("#page-manager > ytd-watch-flexy");
-            if (id !== null && id !== undefined) {
-                resolve(id);
+            if (id) {
                 clearInterval(interval);
-            } else {
-                resolve(loadID);
+                resolve(id);
             }
         }, ms);
     });
 }
 
 async function getID() {
-    let id = document.querySelector("#page-manager > ytd-watch-flexy");
-    id = await loadID(id, 500);
+    const id = await loadID(100);
     return id.getAttribute('video-id');
 }
 

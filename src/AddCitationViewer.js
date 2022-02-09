@@ -1,10 +1,10 @@
-import React from 'react'
+import React from 'react';
 
 export const AddCitationViewer = ({ color, text, onClick}) => {
     return (
         <button
             onClick={onClick}
-            style={{ backgroundColor: color }}
+            background-color= {color}
             className='btn'
             >
                 {text}
