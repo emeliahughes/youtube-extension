@@ -6,6 +6,7 @@ import ViewCitations from './viewCitation';
 
 function App(props){
 
+    console.log("in the app thing");
     //const maxLength = document.getElementsByClassName("ytp-bound-time-right").innerHTML;
     let videoCitations = props.videoCitations;
     let videoID = props.videoID;

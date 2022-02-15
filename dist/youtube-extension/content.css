@@ -26,6 +26,7 @@
 .citation-box {
   border: 2px solid grey;
   border-radius: 20px;
+  align-items: stretch;
 }
 
 .header {

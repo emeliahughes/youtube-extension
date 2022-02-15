@@ -13,16 +13,16 @@ import 'jquery/dist/jquery.min.js';
 
 console.log('hellooooo');
 let video = document.querySelector("#movie_player > div.html5-video-container > video");
+let iter = 0;
+
 
 video.addEventListener('canplay', function load() {
-    console.log(video.readyState);
-    //let videoID = document.querySelector("#watch7-content > meta:nth-child(6)").content;
-    let videoID = 'na';
-    let p = getID().then((result) => {
-        videoID = result;
-        console.log(videoID);
-        let responseDataPromise = getData(videoID)
-        .then(resp => {
+    //let videoID = await getID();
+
+    //console.log(videoID);
+    let responseDataPromise = getID().then(videoID => {
+        getData(videoID)
+        .then((resp) => {
             let videoYites = new Map();
             console.log(resp);
                 for (let i = 0; i < resp.length; i++) {
@@ -33,21 +33,56 @@ video.addEventListener('canplay', function load() {
                     }
                     videoYites.get(currStart).push(currCitation);
                 }
+                console.log(videoYites);
             return(videoYites);
         })
         .then((videoYites) => {
-            return addDivBeforeDescription().then((container) => {return [videoYites, container]});
+                return addDivBeforeDescription().then((container) => {return [videoYites, container]});
         })
         .then(([videoYites, container]) => {
+            console.log("just before render. " + videoID, container, videoYites)
             ReactDOM.render(
-            <App videoCitations={videoYites} videoID={videoID}/>,
-            container, //document.getElementById('citation-box')
-            )
-        })
-        .catch(err => console.log(err));
+                <App videoCitations={videoYites} videoID={videoID}/>,
+                container,);
+        });
     });
-    video.removeEventListener('loadeddata', load);
-})
+});
+
+// video.addEventListener('canplay', function load() {
+//     console.log(video.readyState);
+//     let videoID = document.querySelector("#watch7-content > meta:nth-child(6)").content;
+    
+//     let p = getID().then((result) => {
+//         videoID = result;
+//         console.log(videoID);
+//         let responseDataPromise = getData(videoID)
+//         .then(resp => {
+//             let videoYites = new Map();
+//             console.log(resp);
+//                 for (let i = 0; i < resp.length; i++) {
+//                     let currCitation = JSON.parse(resp[i]);
+//                     let currStart = currCitation["startTime"];
+//                     if(!videoYites.has(currStart)) {
+//                         videoYites.set(currStart, []);
+//                     }
+//                     videoYites.get(currStart).push(currCitation);
+//                 }
+//             return(videoYites);
+//         })
+//         .then((videoYites) => {
+//             return addDivBeforeDescription().then((container) => {return [videoYites, container]});
+//         })
+//         .then(([videoYites, container]) => {
+//             ReactDOM.render(
+//             <App videoCitations={videoYites} videoID={videoID}/>,
+//             container, //document.getElementById('citation-box')
+//             )
+//         })
+//         .catch(err => console.log(err));
+//     });
+//     video.removeEventListener('loadeddata', load);
+//     video.removeEventListener('canplay', load);
+// })
 
 const baseUrl = "https://youtubeextdata.azurewebsites.net/";
 const getUrl = baseUrl + "getCitations?videoID=";
@@ -56,29 +91,44 @@ async function addDivBeforeDescription () {
     let div = document.createElement("div");
     div.id = "citation-box";
     // <div id="citation-box"></div>;
-    let contents = document.getElementById("meta-contents");
-    await loadMetacontents(contents, 500);
-    if (contents !== null) {
-        let container = contents.getElementsByClassName("style-scope ytd-watch-flexy")[0];
-        while (container === null || container === undefined) {
-            container = await loadHTML(contents, container, 700);
+    //let contents = document.getElementById("meta-contents");
+    await loadMetacontents(500);
+
+    let container = document.getElementsByClassName("style-scope ytd-video-secondary-info-renderer")[0];
+    console.log(container);
+
+    if (container.children[0] !== null) {
+        if (container.children[0].id === "citation-box") {
+            return div;
         }
-        contents = container.getElementsByClassName("style-scope ytd-video-secondary-info-renderer");
-        container = contents[0];
-        if (container.children[0] !== null) {
-            if (container.children[0].id === "citation-box") {
-                container.removeChild(container.children[0]);
-            }
-            container.insertBefore(div, container.children[0]);
-        }
+        container.insertBefore(div, container.children[0]);
     }
+
     return div;
+
+    // await loadMetacontents(contents, 500);
+
+
+    // if (contents !== null) {
+    //     let container = contents.getElementsByClassName("style-scope ytd-watch-flexy")[0];
+    //     while (container === null || container === undefined) {
+    //         container = await loadHTML(contents, container, 700);
+    //     }
+    //     contents = container.getElementsByClassName("style-scope ytd-video-secondary-info-renderer");
+    //     container = contents[0];
+    //     if (container.children[0] !== null) {
+    //         if (container.children[0].id === "citation-box") {
+    //             return div;
+    //         }
+    //         container.insertBefore(div, container.children[0]);
+    //     }
+    // }
 }
 
-function loadID(id, ms) {
+function loadID(ms) {
     return new Promise((resolve) => {
         let interval = setInterval(() => {
-            id = document.querySelector("#page-manager > ytd-watch-flexy");
+            let id = document.querySelector("#page-manager > ytd-watch-flexy");
             if (id) {
                 clearInterval(interval);
                 resolve(id);
@@ -89,21 +139,20 @@ function loadID(id, ms) {
 
 async function getID() {
     const id = await loadID(100);
+    console.log("get ID vid ID: " + id.getAttribute('video-id'));
     return id.getAttribute('video-id');
 }
 
 
 
-function loadMetacontents(contents, ms) {
+function loadMetacontents(ms) {
   return new Promise((resolve) => {
       let interval = setInterval(() => {
-          contents = document.getElementById("meta-contents");
+          const contents = document.getElementById("meta-contents");
           console.log(contents);
-          if (contents !== null && contents !== undefined) {
+          if (contents) {
               resolve(contents);
               clearInterval(interval);
-          } else {
-              resolve(loadMetacontents);
           }
       }, ms);
   });
@@ -113,11 +162,9 @@ function loadHTML(contents, container, ms) {
   return new Promise((resolve) => {
       let interval = setInterval(() => {
           container = contents.getElementsByClassName("style-scope ytd-watch-flexy")[0];
-          if (container !== null && container !== undefined) {
+          if (container) {
               resolve(container);
               clearInterval(interval);
-          } else {
-              resolve(loadHTML);
           }
       }, ms);
   });
@@ -130,12 +177,8 @@ function loadHTML(contents, container, ms) {
  */
  function getData(videoID) {
     let requestUrl = getUrl + videoID;
-    return fetch(requestUrl, {
-        method: "GET",
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-    .then(response => {return response.json();})
+    return fetch(requestUrl)
+    .then(response => response.json())
+    .then(data => {console.log(data); return data;})
     .catch(err => console.log(err));
 }
