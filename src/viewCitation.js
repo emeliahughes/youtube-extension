@@ -1,17 +1,11 @@
 import { start } from '@popperjs/core';
 import React, { useState, useEffect } from 'react';
-// import ReactPlayer from "react-player";
 
 function ViewCitations(props) {
     let videoCitations = props.videoCitations;
     let citations = [];
     let citationButtons = [];
     let currentView;
-
-    //     // Sort each citation by start time
-    // videoCitations = new Map([...videoCitations.entries()].sort((a, b) => {
-    //     return convertTimeToSeconds(a[0]) - convertTimeToSeconds(b[0])
-    // }))
 
     const[currentButton, setButton] = useState(0);
 
