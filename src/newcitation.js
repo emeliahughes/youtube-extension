@@ -12,7 +12,11 @@ function AddNewCitation (props) {
     React.useEffect(() => {
         let video = document.querySelector("#movie_player > div.html5-video-container > video");
         const videoLength = Math.floor(video.duration);
-        video.addEventListener('timeupdate', function() {
+        video.addEventListener('onloadedmetadata', function() {
+            if (isNan(video.duration)) {
+                // Duration is NaN before metadata is loaded.
+                return;
+            }
             currentTime = Math.floor(video.currentTime);
             if (videoLength - 10 >= currentTime) {
                 setStartTimeValue(currentTime);

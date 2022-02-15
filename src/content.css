@@ -1,16 +1,53 @@
+
+
+@media (prefers-color-scheme: light) {
+  .citation-box.light-scheme {background: white; color: black;}
+  .header{
+    background: lightgray;
+  }
+  .main-view-box{
+    background: white;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  .citation-box.dark-scheme {background: black; color: white;}
+  .header{
+    background: rgb(33, 33, 33);
+    color: white;
+  }
+  .main-view-box{
+    background: rgb(65, 65, 65);
+  }
+}
+
+.citation-box {
+  border: 2px solid grey;
+  border-radius: 20px;
+  align-items: stretch;
+}
+
+.header {
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  padding: 10px;
+}
+
+.main-view-box {
+  padding: 10px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+h1 {
+  font-size: large;
+}
+
 body {
   color: darkred;
 }
 
 .citation-button-title {
   color: crimson;
-}
-
-@media (prefers-color-scheme: light) {
-  .citation-view.light-scheme {background: white; color: black;}
-}
-@media (prefers-color-scheme: dark) {
-  .citation-view.dark-scheme {background: black; color: white;}
 }
 
 .view-buttons {
@@ -35,4 +72,34 @@ body {
 .list-view-block {
   overflow-y: scroll;
   max-height: 200px;
+}
+
+.main-col{
+  display: inline-block;
+}
+
+.add-col {
+  display: inline-block;
+}
+
+.main-col.add-citation-inactive{
+  width: 100%;
+  border: 2px solid blue;
+}
+
+.main-col.add-citation-active{
+  width: 75%;
+  float:inline-start;
+  border: 2px solid black;
+}
+
+.add-col.add-citation-active{
+  display: inline;
+  width: 25%;
+  float:inline-end;
+  border: 2px solid red;
+}
+
+.add-col.add-citation-inactive{
+  display: none;
 }
