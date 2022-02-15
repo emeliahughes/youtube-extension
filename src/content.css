@@ -1,12 +1,16 @@
 body {
   color: darkred;
 }
-.citation-view {
-  background-color: white;
-  color: black;
-}
+
 .citation-button-title {
   color: crimson;
+}
+
+@media (prefers-color-scheme: light) {
+  .citation-view.light-scheme {background: white; color: black;}
+}
+@media (prefers-color-scheme: dark) {
+  .citation-view.dark-scheme {background: black; color: white;}
 }
 
 .view-buttons {

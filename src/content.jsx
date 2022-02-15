@@ -3,44 +3,54 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import './content.css';
 import { render } from 'react-dom'; //this isn't used, does it need to be here?
-import 'bootstrap/dist/css/bootstrap.min.css';
+//import 'bootstrap/dist/css/bootstrap.min.css';
 import 'jquery/dist/jquery.min.js';
-import 'bootstrap/dist/js/bootstrap.min.js';
+//import 'bootstrap/dist/js/bootstrap.min.js';
+
+
 
 
 
 console.log('hellooooo');
+let video = document.querySelector("#movie_player > div.html5-video-container > video");
 
-const videoID = document.querySelector("#watch7-content > meta:nth-child(6)").content;
+video.addEventListener('canplay', function load() {
+    console.log(video.readyState);
+    //let videoID = document.querySelector("#watch7-content > meta:nth-child(6)").content;
+    let videoID = 'na';
+    let p = getID().then((result) => {
+        videoID = result;
+        console.log(videoID);
+        let responseDataPromise = getData(videoID)
+        .then(resp => {
+            let videoYites = new Map();
+            console.log(resp);
+                for (let i = 0; i < resp.length; i++) {
+                    let currCitation = JSON.parse(resp[i]);
+                    let currStart = currCitation["startTime"];
+                    if(!videoYites.has(currStart)) {
+                        videoYites.set(currStart, []);
+                    }
+                    videoYites.get(currStart).push(currCitation);
+                }
+            return(videoYites);
+        })
+        .then((videoYites) => {
+            return addDivBeforeDescription().then((container) => {return [videoYites, container]});
+        })
+        .then(([videoYites, container]) => {
+            ReactDOM.render(
+            <App videoCitations={videoYites} videoID={videoID}/>,
+            container, //document.getElementById('citation-box')
+            )
+        })
+        .catch(err => console.log(err));
+    });
+    video.removeEventListener('loadeddata', load);
+})
+
 const baseUrl = "https://youtubeextdata.azurewebsites.net/";
 const getUrl = baseUrl + "getCitations?videoID=";
-
-let responseDataPromise = getData(videoID)
-    .then(resp => {
-        let videoYites = new Map();
-        console.log(resp);
-            for (let i = 0; i < resp.length; i++) {
-                let currCitation = JSON.parse(resp[i]);
-                let currStart = currCitation["startTime"];
-                if(!videoYites.has(currStart)) {
-                    videoYites.set(currStart, []);
-                }
-                videoYites.get(currStart).push(currCitation);
-            }
-        return(videoYites);
-    })
-    .then((videoYites) => {
-        return addDivBeforeDescription().then((container) => {return [videoYites, container]});
-    })
-    .then(([videoYites, container]) => {
-        ReactDOM.render(
-          <App videoCitations={videoYites} videoID={videoID}/>,
-          container, //document.getElementById('citation-box')
-        )
-    })
-    .catch(err => console.log(err));
-
-
 
 async function addDivBeforeDescription () {
     let div = document.createElement("div");
@@ -56,12 +66,36 @@ async function addDivBeforeDescription () {
         contents = container.getElementsByClassName("style-scope ytd-video-secondary-info-renderer");
         container = contents[0];
         if (container.children[0] !== null) {
+            if (container.children[0].id === "citation-box") {
+                container.removeChild(container.children[0]);
+            }
             container.insertBefore(div, container.children[0]);
         }
     }
-
     return div;
 }
+
+function loadID(id, ms) {
+    return new Promise((resolve) => {
+        let interval = setInterval(() => {
+            id = document.querySelector("#page-manager > ytd-watch-flexy");
+            if (id !== null && id !== undefined) {
+                resolve(id);
+                clearInterval(interval);
+            } else {
+                resolve(loadID);
+            }
+        }, ms);
+    });
+}
+
+async function getID() {
+    let id = document.querySelector("#page-manager > ytd-watch-flexy");
+    id = await loadID(id, 500);
+    return id.getAttribute('video-id');
+}
+
+
 
 function loadMetacontents(contents, ms) {
   return new Promise((resolve) => {
