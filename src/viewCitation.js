@@ -106,7 +106,6 @@ function ViewCitations(props) {
             </div>
         </div>
     );
-
 }
 
 // CONVERT TIME TO SECONDS

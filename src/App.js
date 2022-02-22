@@ -1,31 +1,42 @@
-'use strict';
-import React, { useState } from 'react';
-import AddCitationViewer from './AddCitationViewer';
-import AddNewCitation from './newcitation';
-import ViewCitations from './viewCitation';
-import { Timeline } from "./Timeline";
+"use strict";
+import React, { useState } from "react";
+import AddCitationViewer from "./AddCitationViewer";
+import AddNewCitation from "./newcitation";
+import ViewCitations from "./viewCitation";
+import Timeline from "./Timeline";
 
-function App(props){
+function App(props) {
+  console.log("in the app thing");
+  //const maxLength = document.getElementsByClassName("ytp-bound-time-right").innerHTML;
+  let videoCitations = props.videoCitations;
+  let videoID = props.videoID;
+  let mainColClasses = "main-col add-citation-inactive";
+  let addColClasses = "add-col add-citation-inactive";
 
-    console.log("in the app thing");
-    //const maxLength = document.getElementsByClassName("ytp-bound-time-right").innerHTML;
-    let videoCitations = props.videoCitations;
-    let videoID = props.videoID;
-    let mainColClasses = "main-col add-citation-inactive";
-    let addColClasses = "add-col add-citation-inactive";
+  const [showAddCitations, setShowAddCitations] = useState(true);
 
-    const [showAddCitations, setShowAddCitations] = useState(true);
+  const handleAddCitations = (event) => {
+    setShowAddCitations(!showAddCitations);
+  };
 
-    const handleAddCitations = (event) => {
-        setShowAddCitations(!showAddCitations);
-    }
-
-      // Sort each citation by start time
+  // Sort each citation by start time
   videoCitations = new Map(
     [...videoCitations.entries()].sort((a, b) => {
       return convertTimeToSeconds(a[0]) - convertTimeToSeconds(b[0]);
     })
   );
+
+  const getOrderedCitationsArray = Array.from(videoCitations.values()).flat();
+  const testData = getOrderedCitationsArray.map((c) => ({
+    title: c.title,
+    cardTitle: c.title,
+    cardSubtitle: c.source,
+    url: c.link
+  }));
+
+  const testTime = getOrderedCitationsArray.map((c) => (
+    convertTimeToSeconds(c.startTime)
+  ));
 
   // CONVERT TIME TO SECONDS
   function convertTimeToSeconds(time) {
@@ -49,37 +60,36 @@ function App(props){
 
     return timeInSeconds;
   }
-    
-    if(showAddCitations) {
-        mainColClasses = "main-col add-citation-active";
-        addColClasses = "add-col add-citation-active";
-    } else {
-        mainColClasses = "main-col add-citation-inactive";
-        addColClasses = "add-col add-citation-inactive";
-    }
-    
 
-    return (
-        <div className="citation-box">
-            <div className="header">
-                <h1>Citations</h1>
-                <AddCitationViewer
-                    color={showAddCitations ? "red" : "green"}
-                    text={showAddCitations ? "Cancel" : "Add New Citation"}
-                    onClick={handleAddCitations}
-                />
-            </div>
-            <div className="main-view-box">
-                <div className={mainColClasses}>
-                    <Timeline />
-                    <ViewCitations videoCitations={videoCitations}/>
-                </div>
-                <div className={addColClasses}>
-                    <AddNewCitation videoCitations={videoCitations} videoID={videoID}/>
-                </div>
-            </div>
+  if (showAddCitations) {
+    mainColClasses = "main-col add-citation-active";
+    addColClasses = "add-col add-citation-active";
+  } else {
+    mainColClasses = "main-col add-citation-inactive";
+    addColClasses = "add-col add-citation-inactive";
+  }
+
+  return (
+    <div className="citation-box">
+      <div className="header">
+        <h1>Citations</h1>
+        <AddCitationViewer
+          color={showAddCitations ? "red" : "green"}
+          text={showAddCitations ? "Cancel" : "Add New Citation"}
+          onClick={handleAddCitations}
+        />
+      </div>
+      <div className="main-view-box">
+        <Timeline videoCitations={videoCitations} data={testData} time={testTime} />
+        {/* <div className={mainColClasses}>
+          <ViewCitations videoCitations={videoCitations} />
+        </div> */}
+        <div className={addColClasses}>
+          <AddNewCitation videoCitations={videoCitations} videoID={videoID} />
         </div>
-    )
+      </div>
+    </div>
+  );
 }
 
 export default App;
