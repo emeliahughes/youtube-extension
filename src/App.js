@@ -26,40 +26,18 @@ function App(props) {
     })
   );
 
-  const getOrderedCitationsArray = Array.from(videoCitations.values()).flat();
-  const testData = getOrderedCitationsArray.map((c) => ({
-    title: c.title,
-    cardTitle: c.title,
-    cardSubtitle: c.source,
-    url: c.link
-  }));
-
-  const testTime = getOrderedCitationsArray.map((c) => (
-    convertTimeToSeconds(c.startTime)
-  ));
-
   // CONVERT TIME TO SECONDS
   function convertTimeToSeconds(time) {
-    let hourMinuteSecond = time.split(":").reverse();
-    let timeInSeconds = 0;
+    var p = time.split(':'),
+        s = 0, m = 1;
 
-    if (hourMinuteSecond.length == 3) {
-      timeInSeconds += parseInt(hourMinuteSecond[2]) * 3600;
+    while (p.length > 0) {
+        s += m * parseInt(p.pop(), 10);
+        m *= 60;
     }
 
-    if (hourMinuteSecond.length >= 2) {
-      timeInSeconds += parseInt(hourMinuteSecond[1]) * 60;
-    }
-
-    let seconds = parseInt(hourMinuteSecond[0]);
-
-    if (isNaN(seconds)) {
-      return 0;
-    }
-    timeInSeconds += seconds;
-
-    return timeInSeconds;
-  }
+    return s;
+}
 
   if (showAddCitations) {
     mainColClasses = "main-col add-citation-active";
@@ -80,7 +58,7 @@ function App(props) {
         />
       </div>
       <div className="main-view-box">
-        <Timeline videoCitations={videoCitations} data={testData} time={testTime} />
+        <Timeline videoCitations={videoCitations}/>
         {/* <div className={mainColClasses}>
           <ViewCitations videoCitations={videoCitations} />
         </div> */}

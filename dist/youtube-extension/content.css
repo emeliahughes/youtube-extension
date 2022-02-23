@@ -46,7 +46,8 @@ h1 {
 }
 
 body {
-  color: darkred;
+  /* color: darkred; */
+  color: white;
 }
 
 .citation-button-title {
@@ -106,4 +107,3 @@ body {
 .add-col.add-citation-inactive{
   display: none;
 }
-
