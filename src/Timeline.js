@@ -17,13 +17,13 @@ function Timeline(props) {
       console.log(currentItemIndex);
     }
   };
-  
+
   function jumpToCitation() {
-    const timestamps = time.map((timestamp) => 
-        <button onClick={jumpTime.bind(this, timestamp)}>
-          <p>Jump to Citation</p>
-        </button>
-    )
+    const timestamps = time.map((timestamp) => (
+      <button onClick={jumpTime.bind(this, timestamp)}>
+        <p>Jump to Citation</p>
+      </button>
+    ));
     return timestamps;
   }
   function jumpTime(time) {
@@ -42,11 +42,10 @@ function Timeline(props) {
           primary: "#FF0000",
           secondary: "black",
         }}
-        disableNavOnKey={false}
-        enableOutline={true}
+        disableNavOnKey={true}
         hideControls={true}
       >
-       {jumpToCitation()}
+        {jumpToCitation()}
       </Chrono>
     </div>
   );
