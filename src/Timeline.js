@@ -2,21 +2,26 @@ import React, { useState } from "react";
 import { Chrono } from "react-chrono"; // yarn add react-chrono // npm i react-chrono
 
 function Timeline(props) {
-  const getOrderedCitationsArray = Array.from(
+  const orderedCitationsArray = Array.from(
     props.videoCitations.values()
   ).flat();
-  const data = getOrderedCitationsArray.map((c) => ({
+  const data = orderedCitationsArray.map((c) => ({
     title: c.title,
     cardTitle: c.title,
     cardSubtitle: c.source,
     url: c.link,
   }));
 
-  const time = getOrderedCitationsArray.map((c) =>
+  /**
+   * Orders the citations for the current video by its start time
+   */
+  const time = orderedCitationsArray.map((c) =>
     convertTimeToSeconds(c.startTime)
   );
 
-  // CONVERT TIME TO SECONDS
+  /**
+   * Converts YouTube video time (HH:MM:SS) into seconds
+   */
   function convertTimeToSeconds(time) {
     var p = time.split(":"),
       s = 0,
@@ -34,15 +39,25 @@ function Timeline(props) {
 
   let video = document.querySelector("video");
 
+  /**
+   * Event listener tracks the current timestamp of the video
+   */
   video.ontimeupdate = () => {
     const currentTime = Math.floor(video.currentTime);
     console.log("time has updated " + currentTime);
     if (time.includes(currentTime)) {
-      setItemIndex(time.indexOf(currentTime));
-      console.log(currentItemIndex);
+      var lis = document.getElementById("timeline-main-wrapper").getElementsByTagName("li");
+      lis[time.indexOf(currentTime)].getElementsByClassName("timeline-circle horizontal in-active css-1bz88me-Circle e5foh872")[0].click();
     }
   };
 
+  /**
+   * Maps each of the citations' timestamps to a clickable button tag that allows the client to jump to the specified
+   * time in seconds in the video.
+   * 
+   * @returns An array of button tags allowing the user to jump to the specified timestamp.
+   *          Timestamp is in seconds
+   */
   function jumpToCitation() {
     const timestamps = time.map((timestamp) => (
       <button onClick={jumpTime.bind(this, timestamp)}>
@@ -52,26 +67,39 @@ function Timeline(props) {
     return timestamps;
   }
 
+  /**
+   * Jumps to the given timestamp in the video
+   * 
+   * @param {string} time - The timestamp of the video
+   */
   function jumpTime(time) {
     let video = document.getElementsByTagName("video")[0];
     video.currentTime = time;
   }
 
-  /*
-  * Returns the width of the YouTube timeline bar
-  */
+  /**
+   * Gets the the width of the timeline bar in the YouTube video so our timeline could match the width
+   * 
+   * @returns width of the YouTube timeline bar
+   */
   function getTimelineWidth() {
     let width = document.querySelector(".ytp-timed-markers-container").clientWidth;
     console.log(width);
     return width;
   }
 
+  /**
+   * @returns the width of each item such that our timeline matches the width of the video timeline
+   */
+  function getItemWidth() {
+    return getTimelineWidth()/orderedCitationsArray.length;
+  }
+
   return (
     <div style={{ width: "100%", height: "110%", marginBottom: "10px", marginTop: "10px" }}>
       <Chrono
         items={data}
-        cardHeight={"100%"}
-        cardWidth={"100%"}
+        itemWidth={getItemWidth()}
         theme={{
           primary: "#ffeeee",
           cardForeColor: "black",
@@ -80,11 +108,9 @@ function Timeline(props) {
           textColor: "white",
           cardBgColor: "#212121"
         }}
-        allowDynamicUpdate={true}
-        setItemIndex={currentItemIndex}
         disableNavOnKey={true}
         hideControls={true}
-        mode="HORIZONTAL"
+        mode={"HORIZONTAL"}
       >
         {jumpToCitation()}
       </Chrono>
