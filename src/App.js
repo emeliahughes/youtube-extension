@@ -28,16 +28,17 @@ function App(props) {
 
   // CONVERT TIME TO SECONDS
   function convertTimeToSeconds(time) {
-    var p = time.split(':'),
-        s = 0, m = 1;
+    var p = time.split(":"),
+      s = 0,
+      m = 1;
 
     while (p.length > 0) {
-        s += m * parseInt(p.pop(), 10);
-        m *= 60;
+      s += m * parseInt(p.pop(), 10);
+      m *= 60;
     }
 
     return s;
-}
+  }
 
   if (showAddCitations) {
     mainColClasses = "main-col add-citation-active";
@@ -58,7 +59,7 @@ function App(props) {
         />
       </div>
       <div className="main-view-box">
-        <Timeline videoCitations={videoCitations}/>
+        <Timeline videoCitations={videoCitations} />
         {/* <div className={mainColClasses}>
           <ViewCitations videoCitations={videoCitations} />
         </div> */}

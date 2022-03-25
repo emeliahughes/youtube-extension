@@ -3663,10 +3663,10 @@ randombytes@^2.1.0:
   dependencies:
     safe-buffer "^5.1.0"
 
-react-chrono@^1.13.3:
-  version "1.13.3"
-  resolved "https://registry.yarnpkg.com/react-chrono/-/react-chrono-1.13.3.tgz#e198359e4efc4d92014111d04291ab59653b404b"
-  integrity sha512-yC4NRd/tSanO2DeDrACWhH5VOGiVUR8xZ2gBVo5YWkNkOHQbdGQLQJsYmVpD1orP8JfEL6NQKWe1midWf9Xazg==
+react-chrono@^1.14.0:
+  version "1.14.0"
+  resolved "https://registry.yarnpkg.com/react-chrono/-/react-chrono-1.14.0.tgz#2463fe09b95a5f48bf8efb44f2dd599719bbc37d"
+  integrity sha512-CqRi3sAIrbi5sMl56vQkkAOXQx6p01meD8byvzLvmhnlXncu44i8p9MyzmyHiiUOWU5XZ+uGK4tYOiIer5tQoQ==
   dependencies:
     "@emotion/core" "^11.0.0-next.10"
     "@emotion/react" "^11.7.1"

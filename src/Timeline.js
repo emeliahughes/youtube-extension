@@ -57,6 +57,15 @@ function Timeline(props) {
     video.currentTime = time;
   }
 
+  /*
+  * Returns the width of the YouTube timeline bar
+  */
+  function getTimelineWidth() {
+    let width = document.querySelector(".ytp-timed-markers-container").clientWidth;
+    console.log(width);
+    return width;
+  }
+
   return (
     <div style={{ width: "100%", height: "110%", marginBottom: "10px", marginTop: "10px" }}>
       <Chrono
@@ -75,6 +84,7 @@ function Timeline(props) {
         setItemIndex={currentItemIndex}
         disableNavOnKey={true}
         hideControls={true}
+        mode="HORIZONTAL"
       >
         {jumpToCitation()}
       </Chrono>
