@@ -29,13 +29,16 @@
     "bootstrap": "^5.1.3",
     "d3": "^7.3.0",
     "jquery": "^3.6.0",
-    "react": "^17.0.2",
     "react-chrono": "^1.14.0",
-    "react-dom": "^17.0.2",
-    "react-horizontal-infinite-scroll": "^1.0.2",
-    "react-scroll-horizontal": "^1.6.6"
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "peerDependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   },
   "scripts": {
-    "build": "webpack --mode development --config webpack.config.js"
+    "build": "webpack --mode development --config webpack.config.js",
+    "build_chrono": "cd src/react-chrono-master && yarn rollup && cd ../.. && webpack --mode development --config webpack.config.js"
   }
 }

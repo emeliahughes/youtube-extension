@@ -19,8 +19,8 @@ const packageName = String(require('./package.json').name)
 
 module.exports = {
   entry: {
-    content: './src/content.jsx',
-    background: './src/background.js',
+    content: "./src/content.jsx",
+    background: "./src/background.js",
   },
   output: {
     path: path.resolve(__dirname, 'dist', packageName),
@@ -31,35 +31,35 @@ module.exports = {
         test: /\.(js|jsx|mjs)$/,
         exclude: /(node_modules|bower_components)/,
         use: {
-          loader: 'babel-loader',
+          loader: "babel-loader",
           options: {
-            presets: ['@babel/preset-env']
-          }
-        }
+            presets: ["@babel/preset-env"],
+          },
+        },
       },
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+        use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
     ],
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: '[name].css',
-      chunkFilename: '[id].css',
+      filename: "[name].css",
+      chunkFilename: "[id].css",
     }),
     new CopyPlugin({
       patterns: [
         {
-          from: './src/manifest.json',
-          to: 'manifest.json',
+          from: "./src/manifest.json",
+          to: "manifest.json",
           transform: (content, _) => {
             return modifyManifest(content);
           },
         },
         {
-          from: './icons/*',
-          to: ''
+          from: "./icons/*",
+          to: "",
         },
       ],
     }),

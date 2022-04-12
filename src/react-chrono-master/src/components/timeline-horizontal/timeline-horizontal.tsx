@@ -1,0 +1,75 @@
+import cls from 'classnames';
+import React, { ReactNode, useContext, useMemo } from 'react';
+import { TimelineHorizontalModel } from '../../models/TimelineHorizontalModel';
+import { GlobalContext } from '../GlobalContext';
+import TimelineCard from '../timeline-elements/timeline-card/timeline-horizontal-card';
+import {
+  TimelineHorizontalWrapper,
+  TimelineItemWrapper,
+} from './timeline-horizontal.styles';
+
+const TimelineHorizontal: React.FunctionComponent<TimelineHorizontalModel> = ({
+  items,
+  handleItemClick,
+  autoScroll,
+  wrapperId,
+  theme,
+  slideShowRunning,
+  onElapsed,
+  contentDetailsChildren: children,
+  hasFocus,
+  iconChildren,
+}: TimelineHorizontalModel) => {
+  const {
+    mode = 'HORIZONTAL',
+    itemWidth = 200,
+    cardHeight,
+    flipLayout,
+  } = useContext(GlobalContext);
+
+  const wrapperClass = useMemo(
+    () => cls(mode.toLowerCase(), 'timeline-horizontal-container'),
+    [mode],
+  );
+
+  const iconChildColln = React.Children.toArray(iconChildren);
+
+  // need to make width (itemWidth) dynamic somehow, should probably involve the use of the start time of the citation
+  // but what if multiple items have the same start time? --> show multiple cards for the same timestamp?
+  // Could add another prop for start time?
+  return (
+    <TimelineHorizontalWrapper
+      className={wrapperClass}
+      flipLayout={flipLayout}
+      data-testid="timeline-collection"
+    >
+      {items.map((item, index) => (
+        <TimelineItemWrapper
+          key={item.id}
+          width={parseInt(item.startTime)}
+          className={cls(
+            item.visible ? 'visible' : '',
+            'timeline-horz-item-container',
+          )}
+        >
+          <TimelineCard
+            {...item}
+            onClick={handleItemClick}
+            autoScroll={autoScroll}
+            mode={mode}
+            wrapperId={wrapperId}
+            theme={theme}
+            slideShowRunning={slideShowRunning}
+            cardHeight={cardHeight}
+            onElapsed={onElapsed}
+            customContent={children ? (children as ReactNode[])[index] : null}
+            hasFocus={hasFocus}
+            iconChild={iconChildColln[index]}
+          />
+        </TimelineItemWrapper>
+      ))}
+    </TimelineHorizontalWrapper>
+  );
+};
+
+export default TimelineHorizontal;
