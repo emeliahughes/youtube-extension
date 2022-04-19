@@ -11,6 +11,7 @@ function Timeline(props) {
   const orderedCitationsArray = Array.from(
     props.videoCitations.values()
   ).flat();
+  
   var data_0 = orderedCitationsArray.map((c) => ({
     title: c.title,
     cardTitle: c.title,
@@ -34,23 +35,7 @@ function Timeline(props) {
     convertTimeToSeconds(c.startTime)
   );
 
-  /**
-   * Converts YouTube video time (HH:MM:SS) into seconds
-   */
-  function convertTimeToSeconds(time) {
-    var p = time.split(":"),
-      s = 0,
-      m = 1;
-
-    while (p.length > 0) {
-      s += m * parseInt(p.pop(), 10);
-      m *= 60;
-    }
-
-    return s;
-  }
-
-  const [currentItemIndex, setItemIndex] = useState(0);
+  //const [currentItemIndex, setItemIndex] = useState(0);
 
   /**
    * Event listener tracks the current timestamp of the video
@@ -69,52 +54,6 @@ function Timeline(props) {
         .click();
     }
   };
-
-  /**
-   * Maps each of the citations' timestamps to a clickable button tag that allows the client to jump to the specified
-   * time in seconds in the video.
-   *
-   * @returns An array of button tags allowing the user to jump to the specified timestamp.
-   *          Timestamp is in seconds
-   */
-  function jumpToCitation() {
-    const timestamps = time.map((timestamp) => (
-      <button onClick={jumpTime.bind(this, timestamp)}>
-        <p>Jump to Citation {timestamp}</p>
-      </button>
-    ));
-    return timestamps;
-  }
-
-  /**
-   * Jumps to the given timestamp in the video
-   *
-   * @param {string} time - The timestamp of the video
-   */
-  function jumpTime(time) {
-    let video = document.getElementsByTagName("video")[0];
-    video.currentTime = time;
-  }
-
-  /**
-   * Gets the the width of the timeline bar in the YouTube video so our timeline could match the width
-   *
-   * @returns width of the YouTube timeline bar
-   */
-  function getTimelineWidth() {
-    let width = document.querySelector(
-      ".ytp-timed-markers-container"
-    ).clientWidth;
-    console.log(width);
-    return width;
-  }
-
-  /**
-   * @returns the width of each item such that our timeline matches the width of the video timeline
-   */
-  function getItemWidth() {
-    return getTimelineWidth() / orderedCitationsArray.length;
-  }
 
   return (
     <div
@@ -145,6 +84,68 @@ function Timeline(props) {
       </Chrono>
     </div>
   );
+}
+
+/**
+   * Converts YouTube video time (HH:MM:SS) into seconds
+   */
+ function convertTimeToSeconds(time) {
+  var p = time.split(":"),
+    s = 0,
+    m = 1;
+
+  while (p.length > 0) {
+    s += m * parseInt(p.pop(), 10);
+    m *= 60;
+  }
+
+  return s;
+}
+
+/**
+ * Maps each of the citations' timestamps to a clickable button tag that allows the client to jump to the specified
+ * time in seconds in the video.
+ *
+ * @returns An array of button tags allowing the user to jump to the specified timestamp.
+ *          Timestamp is in seconds
+ */
+function jumpToCitation() {
+  const timestamps = time.map((timestamp) => (
+    <button onClick={jumpTime.bind(this, timestamp)}>
+      <p>Jump to Citation {timestamp}</p>
+    </button>
+  ));
+  return timestamps;
+}
+
+/**
+ * Gets the the width of the timeline bar in the YouTube video so our timeline could match the width
+ *
+ * @returns width of the YouTube timeline bar
+ */
+  function getTimelineWidth() {
+  let width = document.querySelector(
+    ".ytp-timed-markers-container"
+  ).clientWidth;
+  console.log(width);
+  return width;
+}
+
+/**
+ * @returns the width of each item such that our timeline matches the width of the video timeline
+ */
+function getItemWidth() {
+  return getTimelineWidth() / orderedCitationsArray.length;
+}
+
+/**
+ * Jumps to the given timestamp in the video
+ *
+ * @param {string} time - The timestamp of the video
+ */
+function jumpTime(time) {
+  let video = document.getElementsByTagName("video")[0];
+  video.currentTime = time;
 }
 
 export default Timeline;

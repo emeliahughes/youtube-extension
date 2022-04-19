@@ -13,7 +13,7 @@ function App(props) {
   let mainColClasses = "main-col add-citation-inactive";
   let addColClasses = "add-col add-citation-inactive";
 
-  const [showAddCitations, setShowAddCitations] = useState(true);
+  const [showAddCitations, setShowAddCitations] = useState(false);
 
   const handleAddCitations = (event) => {
     setShowAddCitations(!showAddCitations);
