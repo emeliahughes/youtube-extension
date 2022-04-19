@@ -16,16 +16,24 @@ function Timeline(props) {
     cardTitle: c.title,
     cardSubtitle: c.source,
     url: c.link,
-    startTime: convertTimeToSeconds(c.startTime) / video.duration * getTimelineWidth() + (circleDimension / 2)
+    startTime:
+      (convertTimeToSeconds(c.startTime) / video.duration) *
+        getTimelineWidth() +
+      circleDimension / 2,
   }));
 
   function diff(data) {
-    return data.slice(1).map((n, i) => ({ ...n, startTime: Math.floor(n.startTime - data[i].startTime) }));
+    return data
+      .slice(1)
+      .map((n, i) => ({
+        ...n,
+        startTime: Math.floor(n.startTime - data[i].startTime),
+      }));
   }
 
-  var data = diff(data_0)
-  data.splice(0, 0, data_0[0])
-  console.log(data)
+  var data = diff(data_0);
+  data.splice(0, 0, data_0[0]);
+  console.log(data);
 
   /**
    * Orders the citations for the current video by its start time
@@ -50,7 +58,28 @@ function Timeline(props) {
     return s;
   }
 
-  const [currentItemIndex, setItemIndex] = useState(0);
+  function convertSecondsToTime(totalSeconds) {
+    var hours = Math.floor(totalSeconds / 3600);
+    totalSeconds %= 3600;
+    var minutes = Math.floor(totalSeconds / 60);
+    var seconds = totalSeconds % 60;
+
+    if (minutes < 10) {
+      minutes = "0" + minutes;
+    }
+
+    if (seconds < 10) {
+      seconds = "0" + seconds;
+    }
+
+    var time = minutes + ":" + seconds;
+
+    if (hours != 0) {
+      return hours + ":" + time;
+    }
+
+    return time;
+  }
 
   /**
    * Event listener tracks the current timestamp of the video
@@ -80,7 +109,7 @@ function Timeline(props) {
   function jumpToCitation() {
     const timestamps = time.map((timestamp) => (
       <button onClick={jumpTime.bind(this, timestamp)}>
-        <p>Jump to Citation {timestamp}</p>
+        <p>Jump to Citation {convertSecondsToTime(timestamp)}</p>
       </button>
     ));
     return timestamps;

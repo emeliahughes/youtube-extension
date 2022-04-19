@@ -57,6 +57,7 @@ export const Circle = styled.div<CircleModel>`
   height: ${(p) => p.dimension}px;
   width: ${(p) => p.dimension}px;
 
+
   &.active {
     &.using-icon {
       /* transform: scale(1.75); */
