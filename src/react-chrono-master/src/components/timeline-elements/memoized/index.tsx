@@ -21,6 +21,27 @@ interface Content {
   theme?: Theme;
 }
 
+function handleClick(url: any) {
+  let userClick = {'userID': 'renee'};
+  try {
+    const response = fetch("https://youtubeextdata.azurewebsites.net/userClick", {
+      body: JSON.stringify(userClick),
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      method: "POST"
+    })
+
+    response.then(function (a) {
+      alert(`${url} clicked\n json: ${a.json()}`);
+
+    })
+    console.log(response);
+  } catch (err) {
+    alert(err);
+  }
+}
+
 const MemoTitle = React.memo(
   ({ title, url, theme, color, dir, active }: Title) =>
     title && theme ? (
@@ -30,7 +51,7 @@ const MemoTitle = React.memo(
         style={{ color }}
         dir={dir}
       >
-        <a href={url} target="_blank" rel="noreferrer">
+        <a href={url} target="_blank" rel="noreferrer" onClick={() => handleClick(url)}>
           {title}
         </a>
       </TimelineCardTitle>

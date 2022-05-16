@@ -23,7 +23,7 @@ function Timeline(props) {
     title: c.title,
     cardTitle: c.title,
     cardSubtitle: c.source,
-    url: c.link,
+    url: fixLink(c.link),
     startTime:
       (convertTimeToSeconds(c.startTime) / video.duration) *
         getTimelineWidth() +
@@ -32,6 +32,13 @@ function Timeline(props) {
 
   var data = diff(data_0);
   data.splice(0, 0, data_0[0]); // adds the first citation back to the data
+  for (let i = 0; i < data.length-1; i++) {
+    if (data[i+1].startTime == 0) {
+      data[i+1].startTime+=circleDimension/2;
+    }
+  }
+
+  console.log(data);
 
   /**
    * Orders the citations for the current video by its start time
@@ -49,12 +56,8 @@ function Timeline(props) {
       var lis = document
         .getElementById("timeline-main-wrapper")
         .getElementsByTagName("li");
-      // I think this next section throws an error because "in-active" becomes active,
-      // in which case this class would no longer exist and cause an error
       lis[time.indexOf(currentTime)]
-        .getElementsByClassName(
-          "timeline-circle horizontal in-active css-1bz88me-Circle e5foh872"
-        )[0]
+        .querySelectorAll('[data-testid="timeline-circle"]')[0]
         .click();
     }
   };
@@ -84,7 +87,7 @@ function Timeline(props) {
         hideControls={true}
         mode={"HORIZONTAL"}
       >
-        {jumpToCitation(time)}
+        {getCardElements(orderedCitationsArray, time)}
       </Chrono>
     </div>
   );
@@ -145,21 +148,28 @@ function jumpTime(time) {
   video.currentTime = time;
 }
 
-/**
- * Maps each of the citations' timestamps to a clickable button tag that allows the client to jump to the specified
- * time in seconds in the video.
- *
- * @returns An array of button tags allowing the user to jump to the specified timestamp.
- *          Timestamp is in seconds
- */
-function jumpToCitation(time) {
-  const timestamps = time.map((timestamp) => (
-    <button onClick={jumpTime.bind(this, timestamp)}>
-      <p>Jump to Citation {convertSecondsToTime(timestamp)}</p>
-    </button>
-  ));
-  return timestamps;
+function getCardElements(data, time) {
+  var elements = []
+  for (let i = 0; i < data.length; i++) {
+    const url = fixLink(data[i].link);
+    elements.push(
+      <div>
+        {/* <a href={url} target="_blank" rel="noreferrer" onClick={handleClick(url)}>
+          <p>Go to Source</p>
+        </a> */}
+        <button onClick={jumpTime.bind(this, time[i])}>
+          <p>Jump to Citation {convertSecondsToTime(time[i])}</p>
+        </button>
+      </div>
+    )
+  }
+  return elements;
 }
+
+function handleClick(url) {
+  console.log(url, "clicked");
+}
+
 
 /**
  * Gets the difference in start time between each consecutive citation. Used to determine the spacing
@@ -187,6 +197,15 @@ function getTimelineWidth() {
     ".ytp-timed-markers-container"
   ).clientWidth;
   return width;
+}
+
+function fixLink(link) {
+  if (link.substring(0, 5) !== 'http') {
+    if (link.substring(0, 4) !== 'http') {
+        link = 'http://' + link;
+    }
+  }
+  return link;
 }
 
 export default Timeline;

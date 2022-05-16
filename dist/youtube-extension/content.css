@@ -110,3 +110,12 @@
   .add-col.add-citation-inactive{
     display: none;
   }
+
+  /** TIMELINE **/
+  .card-sub-title.css-1qtyox9-TimelineContentSubTitle.emk90bu8{
+    font-size: 12px;
+  }
+
+  .card-title.css-1we1xbl-TimelineCardTitle.emk90bu7 {
+    font-size: 16px;
+  }
