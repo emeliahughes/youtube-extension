@@ -19,7 +19,7 @@ function Timeline(props) {
   // Maps each citation (ordered by start time) into "item" format as required for
   // Chrono, checkout their github page for details of this format!
   // Added a "startTime" field which helps in the placement of the citation on the timeline
-  var data_0 = orderedCitationsArray.map((c) => ({
+  var data_0 = orderedCitationsArray.map((c, index) => ({
     title: c.title,
     cardTitle: c.title,
     cardSubtitle: c.source,
@@ -28,6 +28,7 @@ function Timeline(props) {
       (convertTimeToSeconds(c.startTime) / video.duration) *
         getTimelineWidth() +
       circleDimension / 2,
+    key: index
   }));
 
   var data = diff(data_0);
@@ -154,9 +155,6 @@ function getCardElements(data, time) {
     const url = fixLink(data[i].link);
     elements.push(
       <div>
-        {/* <a href={url} target="_blank" rel="noreferrer" onClick={handleClick(url)}>
-          <p>Go to Source</p>
-        </a> */}
         <button onClick={jumpTime.bind(this, time[i])}>
           <p>Jump to Citation {convertSecondsToTime(time[i])}</p>
         </button>
@@ -164,10 +162,6 @@ function getCardElements(data, time) {
     )
   }
   return elements;
-}
-
-function handleClick(url) {
-  console.log(url, "clicked");
 }
 
 

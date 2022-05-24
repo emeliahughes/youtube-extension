@@ -22,24 +22,16 @@ interface Content {
 }
 
 function handleClick(url: any) {
-  let userClick = {'userID': 'renee'};
-  try {
-    const response = fetch("https://youtubeextdata.azurewebsites.net/userClick", {
-      body: JSON.stringify(userClick),
-      headers: {
-          'Content-Type': 'application/json'
-      },
-      method: "POST"
-    })
-
-    response.then(function (a) {
-      alert(`${url} clicked\n json: ${a.json()}`);
-
-    })
-    console.log(response);
-  } catch (err) {
-    alert(err);
-  }
+  let userClick = JSON.stringify('{"userID": "renee"}');
+  const response = fetch("https://youtubeextdata.azurewebsites.net/userClick", {
+    body: userClick,
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    method: "POST"
+  })
+  console.log(url + " clicked");
+  console.log(response);
 }
 
 const MemoTitle = React.memo(
