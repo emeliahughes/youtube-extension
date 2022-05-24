@@ -30,8 +30,6 @@ function handleClick(url: any) {
     },
     method: "POST"
   })
-  console.log(url + " clicked");
-  console.log(response);
 }
 
 const MemoTitle = React.memo(
