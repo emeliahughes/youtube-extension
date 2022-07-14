@@ -1,5 +1,6 @@
 import React, {useState } from 'react';
 import Yite from './Yite';
+import Button from 'react-bootstrap/Button';
 
 const baseUrl = "https://youtubeextdata.azurewebsites.net/";
 const postUrl = baseUrl + "createCitation";
@@ -30,7 +31,7 @@ function AddNewCitation (props) {
             }
         }), []
         // TODO: unhook?
-      });
+    });
 
     const [inputTitleValue, setTitleValue] = useState('');
 
@@ -103,64 +104,69 @@ function AddNewCitation (props) {
 
     }
     return (
-        <div className="new-citation">
+        <span className="new-citation">
             <form onSubmit={handleSubmit}>
                 <div className="form-around">
-                    <h2>Add a new citation:</h2>
+                    <h2 className='justify-content-center'>Add a New Citation</h2>
                     <div>
-                        <label htmlFor="title_field" className="main-labels"><h3 className="small">Source Title:</h3></label>
+                        <label htmlFor="title_field" className="main-labels"><h4>Source Title:</h4></label>
                         <input type="text" 
                             onChange={handleTitle} 
                             value={inputTitleValue} 
                             className="form-control" id="title_field" name="title" required/>
                     </div>
                     <div>
-                        <label htmlFor="source_field" className="main-labels"><h3 className="small">Source:</h3></label>
+                        <label htmlFor="source_field" className="main-labels"><h4>Source:</h4></label>
                         <input type="text" 
                             onChange={handleSource} 
                             value={inputSourceValue} 
                             className="form-control" id="source_field" name="source" required/>
                     </div>
                     <div>
-                        <label htmlFor="link_field" className="main-labels"><h3 className="small">Link:</h3></label>
+                        <label htmlFor="link_field" className="main-labels"><h4>Link:</h4></label>
                         <input type="text" 
                             onChange={handleLink} 
                             value={inputLinkValue} 
                             className="form-control" id="link_field" name="link" required/>
                     </div>
                     <div>
-                        <label htmlFor="author_field" className="main-labels"><h3 className="small">Author:</h3></label>
+                        <label htmlFor="author_field" className="main-labels"><h4>Author:</h4></label>
                         <input type="text" 
                             onChange={handleAuthor} 
                             value={inputAuthorValue} 
                             className="form-control" id="author_field" name="author" required/>
                     </div>
-                    <div className="row">
-                        <div>
-                            <div>
-                                <label htmlFor="start_time_field" className="main-labels"><h3 className="small">From: </h3></label>
+                    <div>
+                        <div className="row">
+                            <div className='col-6'>
+                                <label htmlFor="start_time_field" className="main-labels"><h4>From: </h4></label>
                                 <input type="text" 
                                     onChange={handleStartTime} 
                                     value={inputStartTimeValue} 
                                     className="form-control" id="start_time_field" name="start_time" required/>
                             </div>
-                            <div>
-                                <label htmlFor="end_time_field" className="main-labels"><h3 className="small"> To: </h3></label>
+                            <div className='col-6'>
+                                <label htmlFor="end_time_field" className="main-labels"><h4> To: </h4></label>
                                 <input type="text" 
                                     onChange={handleEndTime} 
                                     value={inputEndTimeValue} 
                                     className="form-control" id="end_time_field" name="end_time" required/>
                             </div>
                         </div>
-                        <div>
-                            <label htmlFor="type_field" className="main-labels"><h3 className="small">Citation Type: </h3></label>
-                            <br></br>
-                            <input type="radio" id="neither" name="citeType" value="neither" onChange={handleCiteType}/>
-                            <label htmlFor="neither">Neither  </label>
-                            <input type="radio" id="affirm" name="citeType" value="affirm" onChange={handleCiteType}/>
-                            <label htmlFor="affirm">Affirm  </label>
-                            <input type="radio" id="refute" name="citeType" value="refute" onChange={handleCiteType}/>
-                            <label htmlFor="refute">Refute</label>
+                        <div className='form-group row p-3'>
+                            <label htmlFor="type_field" className="main-labels col-4 col-form-label p-2"><h4>Citation Type:</h4></label>
+                            <div className='col'>
+                                <input type="radio" id="neither" name="citeType" value="neither" onChange={handleCiteType}/>
+                                <label htmlFor="neither" className='p-2 justify-content-center'>Neither</label>
+                            </div>
+                            <div className='col'>
+                                <input type="radio" id="affirm" name="citeType" value="affirm" onChange={handleCiteType}/>
+                                <label htmlFor="affirm" className='p-2 justify-content-center'>Affirm</label>
+                            </div>
+                            <div className='col'>
+                                <input type="radio" id="refute" name="citeType" value="refute" onChange={handleCiteType}/>
+                                <label htmlFor="refute" className='p-2 justify-content-center'>Refute</label>
+                            </div>
                         </div>
                         <div className="flex-container holdcenter">
                             <button type="submit" className="button" id="submit-button"><em aria-label="save entry"><strong>Add</strong></em></button>
@@ -168,7 +174,7 @@ function AddNewCitation (props) {
                     </div>
                 </div>
             </form>
-        </div>
+        </span>
     )
 }
 

@@ -6,7 +6,7 @@
     background: lightgray;
   }
   .main-view-box{
-    background: white;
+    background: lightpink;
   }
 }
 @media (prefers-color-scheme: dark) {
@@ -21,85 +21,39 @@
 }
 
 .citation-box {
-  border: 2px solid grey;
   border-radius: 20px;
   align-items: stretch;
+  height: 350px;
 }
 
 .header {
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
-  padding: 10px;
 }
 
 .main-view-box {
   padding: 10px;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
+  height: 300px;
 }
 
-h1 {
-  font-size: large;
+.citation-button-block {
+  max-height: 225px;
+  overflow-y: scroll;
+  background-color: bisque;
+  border-bottom-left-radius: 20px;
 }
 
 body {
   color: darkred;
 }
 
-.citation-button-title {
-  color: crimson;
-}
-
 .view-buttons {
-  padding: 10px;
-  white-space: nowrap;
-  overflow-x: scroll;
-}
-
-.button {
-  border-radius: 20px;
-  padding: 5px;
-  padding-left: 10px;
-  padding-right: 10px;
-  margin-left: 10px;
-}
-
-.active-button {
-  background-color: black;
-  color: white;
+  border-bottom-left-radius: 20px;
 }
 
 .list-view-block {
   overflow-y: scroll;
-  max-height: 200px;
-}
-
-.main-col{
-  display: inline-block;
-}
-
-.add-col {
-  display: inline-block;
-}
-
-.main-col.add-citation-inactive{
-  width: 100%;
-  border: 2px solid blue;
-}
-
-.main-col.add-citation-active{
-  width: 75%;
-  float:inline-start;
-  border: 2px solid black;
-}
-
-.add-col.add-citation-active{
-  display: inline;
-  width: 25%;
-  float:inline-end;
-  border: 2px solid red;
-}
-
-.add-col.add-citation-inactive{
-  display: none;
+  max-height: 275px;
 }
