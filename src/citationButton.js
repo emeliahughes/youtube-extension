@@ -8,21 +8,21 @@ function CitationButton(props) {
     let titleLength = title.length;
     let classes;
 
-    if(titleLength > 15) {
-        title = title.substring(0, 12);
+    if(titleLength > 20) {
+        title = title.substring(0, 17);
         title += "...";
     }
 
     if(isActive){
-        classes = "mt-2 mb-2 btn btn-dark w-100 rounded-pill";
+        classes = "mt-2 mb-2 btn btn-dark w-100 rounded-pill text-center";
     } else {
-        classes = "mt-2 mb-2 btn btn-light w-100 rounded-pill";
+        classes = "mt-2 mb-2 btn btn-secondary text-white w-100 rounded-pill text-center";
     }
 
     return (
         <div className='row-3 w-100'>
             <button onClick={setClick} className={classes}>
-                <h2 className="citation-button-title">{title}</h2>
+                <h3 className="citation-button-title w-100">{title}</h3>
             </button>
         </div>
     )

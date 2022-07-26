@@ -8530,7 +8530,7 @@ a.bootstrap-inside .badge-dark:focus, a.bootstrap-inside .badge-dark.focus {
     background: lightgray;
   }
   .main-view-box {
-    background: lightpink;
+    background: white;
   }
 }
 @media (prefers-color-scheme: dark) {
@@ -8548,6 +8548,7 @@ a.bootstrap-inside .badge-dark:focus, a.bootstrap-inside .badge-dark.focus {
 }
 .citation-box {
   border-radius: 20px;
+  border-color: rgb(65, 65, 65);
   align-items: stretch;
   height: 350px;
 }
@@ -8567,12 +8568,7 @@ a.bootstrap-inside .badge-dark:focus, a.bootstrap-inside .badge-dark.focus {
 .citation-button-block {
   max-height: 225px;
   overflow-y: scroll;
-  background-color: bisque;
   border-bottom-left-radius: 20px;
-}
-
-body {
-  color: darkred;
 }
 
 .view-buttons {

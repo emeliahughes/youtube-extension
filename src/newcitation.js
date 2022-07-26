@@ -108,49 +108,53 @@ function AddNewCitation (props) {
             <form onSubmit={handleSubmit}>
                 <div className="form-around">
                     <h2 className='justify-content-center'>Add a New Citation</h2>
-                    <div>
-                        <label htmlFor="title_field" className="main-labels"><h4>Source Title:</h4></label>
+                    <div className='row'>
+                        <label htmlFor="title_field" className="main-labels col-3"><h4>Source Title:</h4></label>
                         <input type="text" 
                             onChange={handleTitle} 
                             value={inputTitleValue} 
-                            className="form-control" id="title_field" name="title" required/>
+                            className="form-control col" id="title_field" name="title" required/>
                     </div>
-                    <div>
-                        <label htmlFor="source_field" className="main-labels"><h4>Source:</h4></label>
+                    <div className='row'>
+                        <label htmlFor="source_field" className="main-labels col-3"><h4>Source:</h4></label>
                         <input type="text" 
                             onChange={handleSource} 
                             value={inputSourceValue} 
-                            className="form-control" id="source_field" name="source" required/>
+                            className="form-control col" id="source_field" name="source" required/>
                     </div>
-                    <div>
-                        <label htmlFor="link_field" className="main-labels"><h4>Link:</h4></label>
+                    <div className='row'>
+                        <label htmlFor="link_field" className="main-labels col-3"><h4>Link:</h4></label>
                         <input type="text" 
                             onChange={handleLink} 
                             value={inputLinkValue} 
-                            className="form-control" id="link_field" name="link" required/>
+                            className="form-control col" id="link_field" name="link" required/>
                     </div>
-                    <div>
-                        <label htmlFor="author_field" className="main-labels"><h4>Author:</h4></label>
+                    <div className='row'>
+                        <label htmlFor="author_field" className="main-labels col-3"><h4>Author:</h4></label>
                         <input type="text" 
                             onChange={handleAuthor} 
                             value={inputAuthorValue} 
-                            className="form-control" id="author_field" name="author" required/>
+                            className="form-control col" id="author_field" name="author" required/>
                     </div>
-                    <div>
+                    <div className='row'>
                         <div className="row">
                             <div className='col-6'>
-                                <label htmlFor="start_time_field" className="main-labels"><h4>From: </h4></label>
-                                <input type="text" 
-                                    onChange={handleStartTime} 
-                                    value={inputStartTimeValue} 
-                                    className="form-control" id="start_time_field" name="start_time" required/>
+                                <div className='row'>
+                                    <label htmlFor="start_time_field" className="main-labels col-3"><h4>From: </h4></label>
+                                    <input type="text" 
+                                        onChange={handleStartTime} 
+                                        value={inputStartTimeValue} 
+                                        className="form-control col" id="start_time_field" name="start_time" required/>
+                                </div>
                             </div>
                             <div className='col-6'>
-                                <label htmlFor="end_time_field" className="main-labels"><h4> To: </h4></label>
-                                <input type="text" 
-                                    onChange={handleEndTime} 
-                                    value={inputEndTimeValue} 
-                                    className="form-control" id="end_time_field" name="end_time" required/>
+                                <div className='row'>
+                                    <label htmlFor="end_time_field" className="main-labels col-3"><h4> To: </h4></label>
+                                    <input type="text" 
+                                        onChange={handleEndTime} 
+                                        value={inputEndTimeValue} 
+                                        className="form-control col" id="end_time_field" name="end_time" required/>
+                                </div>
                             </div>
                         </div>
                         <div className='form-group row p-3'>

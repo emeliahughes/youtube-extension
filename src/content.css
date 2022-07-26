@@ -6,7 +6,7 @@
     background: lightgray;
   }
   .main-view-box{
-    background: lightpink;
+    background: white;
   }
 }
 @media (prefers-color-scheme: dark) {
@@ -22,6 +22,7 @@
 
 .citation-box {
   border-radius: 20px;
+  border-color: rgb(65, 65, 65);
   align-items: stretch;
   height: 350px;
 }
@@ -41,12 +42,7 @@
 .citation-button-block {
   max-height: 225px;
   overflow-y: scroll;
-  background-color: bisque;
   border-bottom-left-radius: 20px;
-}
-
-body {
-  color: darkred;
 }
 
 .view-buttons {

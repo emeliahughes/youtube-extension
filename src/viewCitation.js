@@ -38,6 +38,10 @@ function ViewCitations(props) {
             }
     });
 
+    //sort citations by time
+    citationButtons.sort((a, b) => {return a.props.citation.startTime - b.props.citation.startTime});
+    citations.sort((a, b) => {return a.props.citation.startTime - b.props.citation.startTime});
+
     // When time updates, update citation
     video.ontimeupdate = () => {
         if(currentButton != 0) {
@@ -58,12 +62,12 @@ function ViewCitations(props) {
     if(currentButton == 0) {
         listClasses = "mt-2 mb-2 w-100 btn btn-dark rounded-pill"
     } else {
-        listClasses = "mt-2 mb-2 w-100 btn btn-light rounded-pill"
+        listClasses = "mt-2 mb-2 w-100 btn btn-secondary text-white rounded-pill"
     }
 
     let listViewButton = (
         <button onClick={() => setButton(0)} className= {listClasses}>
-            <h2 className="list-view-button-text">List View</h2>
+            <h3 className="list-view-button-text align-self-center text-center">View All</h3>
         </button>);
 
     let listViewContents = (
@@ -83,7 +87,7 @@ function ViewCitations(props) {
 
     return (
         <div className="citation-view row">
-            <div className="view-buttons col-3 m-2">
+            <div className="view-buttons w-100 col-3 m-2">
                 <div className='row'>
                     {listViewButton}
                 </div>
