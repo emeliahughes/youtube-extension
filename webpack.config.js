@@ -18,6 +18,7 @@ const packageName = String(require('./package.json').name)
 
 
 module.exports = {
+  devtool: 'cheap-module-source-map',
   entry: {
     content: "./src/content.jsx",
     background: "./src/background.js",
@@ -59,6 +60,18 @@ module.exports = {
         },
         {
           from: "./icons/*",
+          to: "",
+        },
+        {
+          from: "./src/popup.css",
+          to: "",
+        },
+        {
+          from: "./src/popup.js",
+          to: "",
+        },
+        {
+          from: "./src/popup.html",
           to: "",
         },
       ],

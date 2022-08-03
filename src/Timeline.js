@@ -28,7 +28,7 @@ function Timeline(props) {
       (convertTimeToSeconds(c.startTime) / video.duration) *
         getTimelineWidth() +
       circleDimension / 2,
-    key: index
+    id: index
   }));
 
   var data = diff(data_0);

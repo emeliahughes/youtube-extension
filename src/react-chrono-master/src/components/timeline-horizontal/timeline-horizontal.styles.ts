@@ -15,7 +15,7 @@ export const TimelineHorizontalWrapper = styled.ul<{ flipLayout?: boolean }>`
   }
 `;
 
-export const TimelineItemWrapper = styled.li<{ width: number }>`
+export const TimelineItemWrapper = styled.li<{ width: number}>`
   width: ${(p) => p.width}px;
   visibility: hidden;
   display: flex;

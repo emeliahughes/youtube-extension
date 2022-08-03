@@ -1,3 +1,4 @@
+import { createHistogram } from 'perf_hooks';
 import React from 'react';
 import { Theme } from '../../../models/Theme';
 import {
@@ -22,14 +23,16 @@ interface Content {
 }
 
 function handleClick(url: any) {
-  let userClick = JSON.stringify('{"userID": "renee"}');
-  const response = fetch("https://youtubeextdata.azurewebsites.net/userClick", {
-    body: userClick,
-    headers: {
-        'Content-Type': 'application/json'
-    },
-    method: "POST"
-  })
+  chrome.storage.local.get(['userID'], function(result) {
+    let userClick = JSON.stringify(JSON.stringify(result));
+    const response = fetch("https://youtubeextdata.azurewebsites.net/userClick", {
+      body: userClick,
+      headers: {
+          'Content-Type': 'application/json'
+      },
+      method: "POST"
+    })
+  });
 }
 
 const MemoTitle = React.memo(
