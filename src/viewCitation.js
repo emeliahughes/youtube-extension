@@ -43,26 +43,26 @@ function ViewCitations(props) {
     citations.sort((a, b) => {return a.props.citation.startTime - b.props.citation.startTime});
 
     // When time updates, update citation
-    video.ontimeupdate = () => {
-        if(currentButton != 0) {
-            for (let i = 0; i < citations.length; i++) {
-                let startTime = citations[i].props.citation.startTime;
-                startTime = convertTimeToSeconds(startTime);
+    // video.ontimeupdate = () => {
+    //     if(currentButton != 0) {
+    //         for (let i = 0; i < citations.length; i++) {
+    //             let startTime = citations[i].props.citation.startTime;
+    //             startTime = convertTimeToSeconds(startTime);
 
-                if (startTime == getCurrentTimeStamp(video)) {
+    //             if (startTime == getCurrentTimeStamp(video)) {
 
-                    // i + 1 bc line 98 is currentButton - 1
-                    setButton(i + 1);
-                }
-            }
-        }
-    };
+    //                 // i + 1 bc line 98 is currentButton - 1
+    //                 setButton(i + 1);
+    //             }
+    //         }
+    //     }
+    // };
 
     //if the current button is the list view button, set as active
     if(currentButton == 0) {
-        listClasses = "mt-2 mb-2 w-100 btn btn-dark rounded-pill"
+        listClasses = "mt-2 mb-2 w-100 btn btn-dark rounded-lg"
     } else {
-        listClasses = "mt-2 mb-2 w-100 btn btn-secondary text-white rounded-pill"
+        listClasses = "mt-2 mb-2 w-100 btn btn-secondary text-white rounded-lg"
     }
 
     let listViewButton = (

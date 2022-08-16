@@ -46,9 +46,9 @@ function App(props){
     }
 
     return (
-        <div className="citation-box container bootstrap-inside m-5 p-3">
-            <div className="header row px-3 pt-3 pb-0 border border-secondary bg-dark text-white">
-                <div className="col">
+        <div className="citation-box container bootstrap-inside m-5 p-3 rounded-lg justify-content-center">
+            <div className="header w-100 row mx-0 px-3 pt-3 pb-0 border border-secondary rounded-top bg-dark text-white">
+                <div className="col-5">
                     <h1>Citations</h1>
                 </div>
                 <div className='col mb-0 pb-0  d-flex align-items-end  justify-content-end'>
@@ -65,8 +65,8 @@ function App(props){
                     </ul>
                 </div>
             </div>
-            <div className="main-view-box row p-3 border border-top-0 border-dark bg-light text-dark">
-                <div className='ml-4 mr-4'>
+            <div className="main-view-box mx-0 row w-100 p-3 border border-top-0 rounded-bottom border-dark bg-light text-dark">
+                <div className='ml-4 mr-4 w-100 h-100'>
                     {currentView}
                 </div>
             </div>

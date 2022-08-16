@@ -137,7 +137,7 @@ function AddNewCitation (props) {
                             className="form-control col" id="author_field" name="author" required/>
                     </div>
                     <div className='row'>
-                        <div className="row">
+                        <div className="row w-100">
                             <div className='col-6'>
                                 <div className='row'>
                                     <label htmlFor="start_time_field" className="main-labels col-3"><h4>From: </h4></label>
@@ -157,23 +157,23 @@ function AddNewCitation (props) {
                                 </div>
                             </div>
                         </div>
-                        <div className='form-group row p-3'>
+                        <div className='form-group row w-100 p-3'>
                             <label htmlFor="type_field" className="main-labels col-4 col-form-label p-2"><h4>Citation Type:</h4></label>
                             <div className='col'>
                                 <input type="radio" id="neither" name="citeType" value="neither" onChange={handleCiteType}/>
-                                <label htmlFor="neither" className='p-2 justify-content-center'>Neither</label>
+                                <label htmlFor="neither" className='p-2 justify-content-center col-form-label'>Neither</label>
                             </div>
                             <div className='col'>
                                 <input type="radio" id="affirm" name="citeType" value="affirm" onChange={handleCiteType}/>
-                                <label htmlFor="affirm" className='p-2 justify-content-center'>Affirm</label>
+                                <label htmlFor="affirm" className='p-2 justify-content-center col-form-label'>Affirm</label>
                             </div>
                             <div className='col'>
                                 <input type="radio" id="refute" name="citeType" value="refute" onChange={handleCiteType}/>
-                                <label htmlFor="refute" className='p-2 justify-content-center'>Refute</label>
+                                <label htmlFor="refute" className='p-2 justify-content-center col-form-label'>Refute</label>
                             </div>
                         </div>
-                        <div className="flex-container holdcenter">
-                            <button type="submit" className="button" id="submit-button"><em aria-label="save entry"><strong>Add</strong></em></button>
+                        <div className="flex-container justify-content-center row w-100">
+                            <button type="submit" className="btn btn-secondary text-white rounded-lg mt-2 mb-2 p-15" id="submit-button"><em aria-label="save entry"><strong>Add</strong></em></button>
                         </div>
                     </div>
                 </div>

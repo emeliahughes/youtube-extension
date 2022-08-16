@@ -8547,35 +8547,35 @@ a.bootstrap-inside .badge-dark:focus, a.bootstrap-inside .badge-dark.focus {
   }
 }
 .citation-box {
-  border-radius: 20px;
   border-color: rgb(65, 65, 65);
   align-items: stretch;
   height: 350px;
 }
 
-.header {
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
-}
-
 .main-view-box {
   padding: 10px;
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
   height: 300px;
 }
 
 .citation-button-block {
   max-height: 225px;
   overflow-y: scroll;
-  border-bottom-left-radius: 20px;
-}
-
-.view-buttons {
-  border-bottom-left-radius: 20px;
 }
 
 .list-view-block {
   overflow-y: scroll;
   max-height: 275px;
+}
+
+/* .timeline-view {
+  display:flex;
+  flex-direction: column;
+  height: 100%;
+} */
+#timeline-row > svg {
+  width: 100%;
+}
+
+#timeline-row {
+  width: 100%;
 }
