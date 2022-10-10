@@ -14,9 +14,9 @@ function CitationButton(props) {
     }
 
     if(isActive){
-        classes = "mt-2 mb-2 btn btn-dark w-100 rounded-lg text-center";
+        classes = "mt-2 mb-2 btn btn-dark text-light w-100 rounded-lg text-center";
     } else {
-        classes = "mt-2 mb-2 btn btn-secondary text-white w-100 rounded-lg text-center";
+        classes = "mt-2 mb-2 btn btn-secondary text-body w-100 rounded-lg text-center";
     }
 
     return (

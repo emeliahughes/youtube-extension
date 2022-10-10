@@ -8,43 +8,31 @@ const postUrl = baseUrl + "createCitation";
 function AddNewCitation (props) {
     let videoCitations = props.videoCitations;
     let videoID = props.videoID;
-    let currentTime = 0;
+    let exitAddView = props.exitAddView;
+    let video = document.querySelector("#movie_player > div.html5-video-container > video");
+    let currentTime = Math.floor(video.currentTime);
+    const videoLength = Math.floor(video.duration);
+    let endTime = Math.floor(video.currentTime + 10);
 
-    React.useEffect(() => {
-        let video = document.querySelector("#movie_player > div.html5-video-container > video");
-        const videoLength = Math.floor(video.duration);
-        video.addEventListener('onloadedmetadata', function() {
-            if (isNan(video.duration)) {
-                // Duration is NaN before metadata is loaded.
-                return;
-            }
-            currentTime = Math.floor(video.currentTime);
-            if (videoLength - 10 >= currentTime) {
-                setStartTimeValue(currentTime);
-                setEndTimeValue(currentTime + 10);
-            } else if (videoLength >= currentTime) {
-                setStartTimeValue(currentTime);
-                setEndTimeValue(videoLength);
-            } else {
-                setStartTimeValue(videoLength);
-                setEndTimeValue(videoLength);
-            }
-        }), []
-        // TODO: unhook?
-    });
+    let currentMinutes = Math.floor(currentTime / 60);
+    let currentSeconds = currentTime % 60;
 
-    const [inputTitleValue, setTitleValue] = useState('');
-
-    const handleTitle = (event) => {
-        let newValue = event.target.value
-        setTitleValue(newValue);
+    if(currentSeconds < 10) {
+        currentSeconds = "0" + currentSeconds;
     }
 
-    const [inputSourceValue, setSourceValue] = useState('');
+    let endMinutes = Math.floor(endTime / 60);
+    let endSeconds = endTime % 60;
 
-    const handleSource = (event) => {
-        let newValue = event.target.value
-        setSourceValue(newValue);
+    if(endSeconds < 10) {
+        endSeconds = "0" + endSeconds;
+    }
+
+    currentTime = currentMinutes + ":" + currentSeconds;
+    endTime = endMinutes + ":" + endSeconds;
+
+    if (videoLength - 10 <= currentTime) {
+        endTime = videoLength;
     }
 
     const [inputLinkValue, setLinkValue] = useState('');
@@ -54,13 +42,6 @@ function AddNewCitation (props) {
         setLinkValue(newValue);
     }
 
-    const [inputAuthorValue, setAuthorValue] = useState('');
-
-    const handleAuthor = (event) => {
-        let newValue = event.target.value
-        setAuthorValue(newValue);
-    }
-
     const [inputStartTimeValue, setStartTimeValue] = useState(currentTime);
 
     const handleStartTime = (event) => {
@@ -68,7 +49,7 @@ function AddNewCitation (props) {
         setStartTimeValue(newValue);
     }
 
-    const [inputEndTimeValue, setEndTimeValue] = useState('');
+    const [inputEndTimeValue, setEndTimeValue] = useState(endTime);
 
     const handleEndTime = (event) => {
         let newValue = event.target.value
@@ -86,55 +67,38 @@ function AddNewCitation (props) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        let newYite = new Yite(videoID, inputStartTimeValue, inputEndTimeValue, inputTitleValue, inputSourceValue, inputAuthorValue, inputLinkValue, inputCiteTypeValue);
+
+        let urlData = getPageMetadata(inputLinkValue).then((result) => {
+            console.log(result);
+            let newYite = new Yite(videoID, inputStartTimeValue, inputEndTimeValue, result.title, result.siteName, result.siteType, result.description, inputLinkValue, inputCiteTypeValue);
         
-        pushData(newYite);
-        let newStart = newYite.start;
-        if(!videoCitations.has(newStart)) {
-            videoCitations.set(newStart, []);
-        }
-        videoCitations.get(newStart).push(newYite);
+            pushData(newYite);
+            let newStart = newYite.start;
+            if(!videoCitations.has(newStart)) {
+                videoCitations.set(newStart, []);
+            }
+            videoCitations.get(newStart).push(newYite);
+        });
 
         //reset box values (I think this should also close the box when we get here)
-        setTitleValue("");
-        setSourceValue("");
         setLinkValue("");
         //setStartTimeValue("");
         //setEndTimeValue("");
-
+        exitAddView();
     }
     return (
         <span className="new-citation">
             <form onSubmit={handleSubmit}>
                 <div className="form-around">
-                    <h2 className='justify-content-center'>Add a New Citation</h2>
+                    <h2 className='row justify-content-center w-100'>Add a New Citation</h2>
                     <div className='row'>
-                        <label htmlFor="title_field" className="main-labels col-3"><h4>Source Title:</h4></label>
-                        <input type="text" 
-                            onChange={handleTitle} 
-                            value={inputTitleValue} 
-                            className="form-control col" id="title_field" name="title" required/>
-                    </div>
-                    <div className='row'>
-                        <label htmlFor="source_field" className="main-labels col-3"><h4>Source:</h4></label>
-                        <input type="text" 
-                            onChange={handleSource} 
-                            value={inputSourceValue} 
-                            className="form-control col" id="source_field" name="source" required/>
-                    </div>
-                    <div className='row'>
-                        <label htmlFor="link_field" className="main-labels col-3"><h4>Link:</h4></label>
-                        <input type="text" 
-                            onChange={handleLink} 
-                            value={inputLinkValue} 
-                            className="form-control col" id="link_field" name="link" required/>
-                    </div>
-                    <div className='row'>
-                        <label htmlFor="author_field" className="main-labels col-3"><h4>Author:</h4></label>
-                        <input type="text" 
-                            onChange={handleAuthor} 
-                            value={inputAuthorValue} 
-                            className="form-control col" id="author_field" name="author" required/>
+                        <div className='row w-100'>
+                            <label htmlFor="link_field" className="main-labels col-3"><h4>Link:</h4></label>
+                            <input type="text" 
+                                onChange={handleLink} 
+                                value={inputLinkValue} 
+                                className="form-control col" id="link_field" name="link" required/>
+                        </div>
                     </div>
                     <div className='row'>
                         <div className="row w-100">
@@ -205,5 +169,14 @@ function pushData(citation) {
     )
     .catch(err => console.log(err));
 }
+
+async function getPageMetadata(url) {
+    const param = encodeURIComponent(url);
+    const res = await fetch("https://youtubeextdata.azurewebsites.net/getSrcInfo?url=" + param);
+    const data = await res.json();
+    return data;
+}
+
+    
 
 export default AddNewCitation;

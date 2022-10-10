@@ -5,6 +5,16 @@
     "48": "icons/48.png",
     "128": "icons/128.png"
   },
+
+  "permissions": [
+    "storage"
+  ],
+
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_title": "Viblio"
+  },
+
   "content_scripts": [
     {
       "matches": ["*://*.youtube.com/watch*"],
@@ -12,6 +22,7 @@
       "js": ["content.js"]
     }
   ],
+  
   "background": {
     "scripts": ["background.js"],
     "persistent": false

@@ -23,16 +23,21 @@
 .citation-box {
   border-color: rgb(65, 65, 65);
   align-items: stretch;
-  height: 350px;
+  max-height: 350px;
 }
 
 .main-view-box {
   padding: 10px;
-  height: 300px;
+  max-height: 300px;
 }
 
 .citation-button-block {
   max-height: 225px;
+  overflow-y: scroll;
+}
+
+.timeline-card {
+  height: 225px;
   overflow-y: scroll;
 }
 

@@ -11,14 +11,12 @@ function Timeline(props) {
     let circleDimension = 16;
     let circleClasses = "";
     let videoLength = video.duration;
+    let fill = "black";
+    let stroke = "black";
 
-    const[currentCircle, setCircle] = useState(0);
+    const[currentLineLength, setLineLength] = useState(video.currentTime/videoLength);
 
-    const[currentLineLength, setLineLength] = useState(Math.floor(video.currentTime));
-
-    const[currentFill, setFill] = useState("Black");
-
-    const[currentStroke, setStroke] = useState("Black");
+    const[currentTime, setCurrentTime] = useState(video.currentTime);
     
     const[currentView, setCurrentView] = useState((
         <div className="citation-block card rounded-lg m-2 justify-content-center">
@@ -26,17 +24,15 @@ function Timeline(props) {
         </div>
     ));
 
-    function getCurrentTimeStamp(video) {
-        return Math.floor(video.currentTime);
-    }
-
     //convert each yite into an html citation card and add its placement along the timeline
     videoCitations.forEach((yiteList) => {
         for (let i = 0; i < yiteList.length; i++) {
             let yite = yiteList[i];
             citations.push(<Citation citation={yite} key={"citation " + (overallIndex - 1)}/>);
 
-            let startPoint = (convertTimeToSeconds(yite.startTime) / video.duration);
+            let startTime = convertTimeToSeconds(yite.startTime);
+            let endTime = convertTimeToSeconds(yite.endTime);
+            let startPoint = (startTime / video.duration);
 
             if((startPoint*100) >= 95) {
                 startPoint = ((startPoint - 5)/100);
@@ -46,12 +42,23 @@ function Timeline(props) {
                 startPoint = ((startPoint + 5)/100);
             }
 
-            const temp = overallIndex;
             const setClick = () => {
-                setCircle(temp)
+                video.currentTime = startTime;
+            }
+
+            if ((startTime <= currentTime) && (currentTime <= endTime)) {
+                fill = "White";
+                stroke = "Red";
+            } else if (currentTime >= endTime){
+                fill = "Black";
+                stroke = "Red";
+
+            } else {
+                fill = "Black";
+                stroke = "Black";
             }
             
-            let circle = <circle cx={`${startPoint*100}%`} cy='15' r={circleDimension/2} className={circleClasses} onClick={setClick} fill={currentFill} stroke={currentStroke} strokeWidth="5px"/>;
+            let circle = <circle key={"circle " + (overallIndex - 1)} cx={`${startPoint*100}%`} cy='15' r={circleDimension/2} className={circleClasses} onClick={setClick} fill={fill} stroke={stroke} strokeWidth="5px"/>;
             circles.push(circle);
             overallIndex++;
         }
@@ -62,8 +69,8 @@ function Timeline(props) {
 
     // When time updates, update citation
     video.ontimeupdate = () => {
+        setCurrentTime(video.currentTime);
         let currentCitations = [];
-        let currentTime = getCurrentTimeStamp(video)
 
         for (let i = 0; i < citations.length; i++) {
             let startTime = citations[i].props.citation.startTime;
@@ -78,21 +85,16 @@ function Timeline(props) {
 
             if ((startTime <= currentTime) && (currentTime <= endTime)) {
                 currentCitations.push(citations[i]);
-                setFill("White");
-                setStroke("Red");
-            } else if (currentTime >= endTime){
-                setFill("Black");
-                setStroke("Red");
-
-            } else {
-                setFill("Black");
-                setStroke("Black");
             }
         }
         if(currentCitations.length == 0) {
             setCurrentView(
-            <div className="citation-block card rounded-lg m-2 justify-content-center">
-                <h3 className="citation-title card-title text-center m-20">No citations currently active</h3>
+            <div className="citation-block card rounded-lg m-2">
+                <div className='card-body row'>
+                    <div className='col-auto align-items-center m-2 mr-4 ml-4'>
+                        <h3 className="citation-title card-title">No citations currently active</h3>
+                    </div>
+                </div>
             </div>);
         } else {
             setCurrentView(currentCitations);
@@ -106,13 +108,13 @@ function Timeline(props) {
             <div className="row w-100 justify-content-center">
                 <div className="timeline-visual col" id="timeline-row">
                     <svg height="30">
-                        <line x1="0" y1="15" x2="100%" y2="15" stroke="black" stroke-width="5px"/>
-                        <line x1='0' y1="15" x2={`${currentLineLength*100}%`} y2="15" stroke="red" stroke-width="5px"/>
+                        <line x1="0" y1="15" x2="100%" y2="15" stroke="black" strokeWidth="5px"/>
+                        <line x1='0' y1="15" x2={`${currentLineLength*100}%`} y2="15" stroke="red" strokeWidth="5px"/>
                         {circles}
                     </svg>
                 </div>
             </div>
-            <div className="row w-100 justify-content-center overflow-auto">
+            <div className="row w-100">
                 <div className="timeline-card col m-2 w-100">
                     {currentView}
                 </div>

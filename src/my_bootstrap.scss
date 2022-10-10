@@ -1,3 +1,9 @@
 .bootstrap-inside {
+
+    $success: #adccad;
+    $danger: #e6a3a3;
+    $secondary: #ababab;
+    $dark: #808080;
+
     @import "~bootstrap-scss/bootstrap.scss";
 }

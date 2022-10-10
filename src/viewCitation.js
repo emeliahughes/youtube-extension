@@ -39,8 +39,8 @@ function ViewCitations(props) {
     });
 
     //sort citations by time
-    citationButtons.sort((a, b) => {return a.props.citation.startTime - b.props.citation.startTime});
-    citations.sort((a, b) => {return a.props.citation.startTime - b.props.citation.startTime});
+    citationButtons.sort((a, b) => {return convertTimeToSeconds(a.props.citation.startTime) - convertTimeToSeconds(b.props.citation.startTime)});
+    citations.sort((a, b) => {return convertTimeToSeconds(a.props.citation.startTime) - convertTimeToSeconds(b.props.citation.startTime)});
 
     // When time updates, update citation
     // video.ontimeupdate = () => {
@@ -60,9 +60,9 @@ function ViewCitations(props) {
 
     //if the current button is the list view button, set as active
     if(currentButton == 0) {
-        listClasses = "mt-2 mb-2 w-100 btn btn-dark rounded-lg"
+        listClasses = "mt-2 mb-2 w-100 btn btn-dark text-light rounded-lg"
     } else {
-        listClasses = "mt-2 mb-2 w-100 btn btn-secondary text-white rounded-lg"
+        listClasses = "mt-2 mb-2 w-100 btn btn-secondary text-body rounded-lg"
     }
 
     let listViewButton = (
