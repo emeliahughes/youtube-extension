@@ -1,6 +1,8 @@
 import React, {useState } from 'react';
 import Yite from './Yite';
 import Button from 'react-bootstrap/Button';
+import timeToSeconds from './timeToSeconds';
+import { start } from '@popperjs/core';
 
 const baseUrl = "https://youtubeextdata.azurewebsites.net/";
 const postUrl = baseUrl + "createCitation";
@@ -67,25 +69,29 @@ function AddNewCitation (props) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        if (validateTimeFormat(inputStartTimeValue, inputEndTimeValue) && validateTimes(inputStartTimeValue, inputEndTimeValue, videoLength)) {
+            let urlData = getPageMetadata(inputLinkValue).then((result) => {
+                console.log(result);
+                let newYite = new Yite(videoID, inputStartTimeValue, inputEndTimeValue, result.title, result.siteName, result.siteType, result.description, inputLinkValue, inputCiteTypeValue);
+            
+                pushData(newYite);
+                let newStart = newYite.start;
+                if(!videoCitations.has(newStart)) {
+                    videoCitations.set(newStart, []);
+                }
+                videoCitations.get(newStart).push(newYite);
+            });
 
-        let urlData = getPageMetadata(inputLinkValue).then((result) => {
-            console.log(result);
-            let newYite = new Yite(videoID, inputStartTimeValue, inputEndTimeValue, result.title, result.siteName, result.siteType, result.description, inputLinkValue, inputCiteTypeValue);
-        
-            pushData(newYite);
-            let newStart = newYite.start;
-            if(!videoCitations.has(newStart)) {
-                videoCitations.set(newStart, []);
-            }
-            videoCitations.get(newStart).push(newYite);
-        });
-
-        //reset box values (I think this should also close the box when we get here)
-        setLinkValue("");
-        //setStartTimeValue("");
-        //setEndTimeValue("");
-        exitAddView();
+            //reset box values (I think this should also close the box when we get here)
+            setLinkValue("");
+            //setStartTimeValue("");
+            //setEndTimeValue("");
+            exitAddView();
+        } else {
+            setTimeout(resetValidity, 3500);
+        }
     }
+
     return (
         <span className="new-citation">
             <form onSubmit={handleSubmit}>
@@ -144,6 +150,85 @@ function AddNewCitation (props) {
             </form>
         </span>
     )
+}
+
+/**
+ * Verifies the time values are within bounds
+ * 
+ * @param {*} startTime new citation start time (HH:MM:SS) or (MM:SS) or (M:SS)
+ * @param {*} endTime new citation end time (HH:MM:SS) or (MM:SS) or (M:SS)
+ * @param {*} videoDuration the length of the video in seconds
+ * @returns true if times are within bounds, false if not
+ */
+function validateTimes(startTime, endTime, videoDuration) {
+    const startInput = document.getElementById("start_time_field");
+    const endInput = document.getElementById("end_time_field");
+
+    let valid = true;
+    startTime = timeToSeconds(startTime);
+    endTime = timeToSeconds(endTime);
+    startTime <= endTime && endTime <= videoDuration;
+    
+    if (startTime < 0) {
+        startInput.setCustomValidity("Start time cannot be less than 0:00!");
+        valid = false;
+    } else if (endTime > videoDuration) {
+        endInput.setCustomValidity("End time cannot be after the video!");
+        valid = false;
+    } else if (startTime > endTime) {
+        startInput.setCustomValidity("Start time cannot be after the end time!");
+        endInput.setCustomValidity("End time cannot be before the start time");
+        valid = false;
+    }
+
+    startInput.reportValidity();
+    endInput.reportValidity();
+
+    return valid;
+}
+
+/**
+ * Verifies the user input valid time values
+ * 
+ * @param {*} startTime new citation start time (HH:MM:SS) or (MM:SS) or (M:SS)
+ * @param {*} endTime new citation end time (HH:MM:SS) or (MM:SS) or (M:SS)
+ * @returns true if time are valid, false if not
+ */
+function validateTimeFormat(startTime, endTime) {
+    // regex for matching start and end time
+    // supports video lengths 0:00 - 19:59:59
+    // valid inputs:
+    //      00:02:30
+    //      09:59
+    //      2:23
+    const regex = /^(?:(?:[0-1])?[0-9]:)?((?:[0-5])?[0-9]:)([0-5][0-9])$/;
+    const startInput = document.getElementById("start_time_field");
+    const endInput = document.getElementById("end_time_field");
+    let valid = true;
+
+    if (!regex.test(startTime)) {
+        startInput.setCustomValidity("Invalid start time");
+        valid = false;
+    }
+
+    if (!regex.test(endTime)) {
+        endInput.setCustomValidity("Invalid end time");
+        valid = false;
+    }
+
+    startInput.reportValidity();
+    endInput.reportValidity();
+
+    return valid;
+}
+
+function resetValidity() {
+    const startInput = document.getElementById("start_time_field");
+    const endInput = document.getElementById("end_time_field");
+    startInput.setCustomValidity("");
+    endInput.setCustomValidity("");
+    startInput.reportValidity();
+    endInput.reportValidity();
 }
 
 /**
