@@ -67,28 +67,32 @@ function AddNewCitation (props) {
 
     //submit event handler 
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        if (validateTimeFormat(inputStartTimeValue, inputEndTimeValue) && validateTimes(inputStartTimeValue, inputEndTimeValue, videoLength)) {
-            let urlData = getPageMetadata(inputLinkValue).then((result) => {
-                console.log(result);
-                let newYite = new Yite(videoID, inputStartTimeValue, inputEndTimeValue, result.title, result.siteName, result.siteType, result.description, inputLinkValue, inputCiteTypeValue);
-            
-                pushData(newYite);
-                let newStart = newYite.start;
-                if(!videoCitations.has(newStart)) {
-                    videoCitations.set(newStart, []);
-                }
-                videoCitations.get(newStart).push(newYite);
-            });
+        if (await validateUserID()) {
+            if (validateTimeFormat(inputStartTimeValue, inputEndTimeValue) && validateTimes(inputStartTimeValue, inputEndTimeValue, videoLength)) {
+                let urlData = getPageMetadata(inputLinkValue).then((result) => {
+                    console.log(result);
+                    let newYite = new Yite(videoID, inputStartTimeValue, inputEndTimeValue, result.title, result.siteName, result.siteType, result.description, inputLinkValue, inputCiteTypeValue);
+                
+                    pushData(newYite);
+                    let newStart = newYite.start;
+                    if(!videoCitations.has(newStart)) {
+                        videoCitations.set(newStart, []);
+                    }
+                    videoCitations.get(newStart).push(newYite);
+                });
 
-            //reset box values (I think this should also close the box when we get here)
-            setLinkValue("");
-            //setStartTimeValue("");
-            //setEndTimeValue("");
-            exitAddView();
+                //reset box values (I think this should also close the box when we get here)
+                setLinkValue("");
+                //setStartTimeValue("");
+                //setEndTimeValue("");
+                exitAddView();
+            } else {
+                setTimeout(resetValidity, 3500);
+            }
         } else {
-            setTimeout(resetValidity, 3500);
+            alert("Please enter your userID");
         }
     }
 
@@ -185,6 +189,27 @@ function validateTimes(startTime, endTime, videoDuration) {
     endInput.reportValidity();
 
     return valid;
+}
+
+/**
+ * Returns whether or not the user input a userID
+ * 
+ * @returns true iff user input a userID
+ */
+async function validateUserID() {
+    return new Promise((resolve, reject) => {
+        try {
+            chrome.storage.sync.get('userID', result => {
+                if (! (result && result['userID'] && result['userID'] !== "") ) {
+                    resolve(false);
+                } else {
+                    resolve(true);
+                }
+            });
+        } catch (ex) {
+            reject(ex);
+        }
+    })
 }
 
 /**
