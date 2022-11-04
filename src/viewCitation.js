@@ -39,6 +39,8 @@ function ViewCitations(props) {
     });
 
     //sort citations by time
+    // citations.sort((a, b) => {return a.props.citation.startTime - b.props.citation.startTime});
+    // citationButtons.sort((a, b) => {return a.props.citation.startTime - b.props.citation.startTime});
     citationButtons.sort((a, b) => {return convertTimeToSeconds(a.props.citation.startTime) - convertTimeToSeconds(b.props.citation.startTime)});
     citations.sort((a, b) => {return convertTimeToSeconds(a.props.citation.startTime) - convertTimeToSeconds(b.props.citation.startTime)});
 

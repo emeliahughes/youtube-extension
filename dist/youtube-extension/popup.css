@@ -75,3 +75,7 @@ button:hover {
     color: red;
     display: block;
 }
+
+#user_id {
+    color: red;
+}
