@@ -90,14 +90,14 @@ async function addDivBeforeDescription () {
     //let contents = document.getElementById("meta-contents");
     await loadMetacontents(500);
 
-    let container = document.getElementsByClassName("style-scope ytd-video-secondary-info-renderer")[0];
+    let container = document.getElementById("above-the-fold");
     console.log(container);
 
-    if (container.children[0] !== null) {
-        if (container.children[0].id === "citation-box") {
+    if (container !== null) {
+        if (container.children[2].id === "citation-box") {
             return div;
         }
-        container.insertBefore(div, container.children[0]);
+        container.insertBefore(div, container.children[2]);
     }
 
     return div;
@@ -142,28 +142,28 @@ async function getID() {
 
 
 function loadMetacontents(ms) {
-  return new Promise((resolve) => {
-      let interval = setInterval(() => {
-          const contents = document.getElementById("meta-contents");
-          console.log(contents);
-          if (contents) {
-              resolve(contents);
-              clearInterval(interval);
-          }
-      }, ms);
-  });
+    return new Promise((resolve) => {
+        let interval = setInterval(() => {
+            const contents = document.getElementById("meta-contents");
+            console.log(contents);
+            if (contents) {
+                resolve(contents);
+                clearInterval(interval);
+            }
+        }, ms);
+    });
 }
 
 function loadHTML(contents, container, ms) {
-  return new Promise((resolve) => {
-      let interval = setInterval(() => {
-          container = contents.getElementsByClassName("style-scope ytd-watch-flexy")[0];
-          if (container) {
-              resolve(container);
-              clearInterval(interval);
-          }
-      }, ms);
-  });
+    return new Promise((resolve) => {
+        let interval = setInterval(() => {
+            container = contents.getElementsByClassName("style-scope ytd-watch-flexy")[0];
+            if (container) {
+                resolve(container);
+                clearInterval(interval);
+            }
+        }, ms);
+    });
 }
 
 /**
@@ -171,7 +171,7 @@ function loadHTML(contents, container, ms) {
  * @param {string} videoID unique ID of the video
  * @returns a Promise for all video data
  */
- function getData(videoID) {
+function getData(videoID) {
     let requestUrl = getUrl + videoID;
     return fetch(requestUrl)
     .then(response => response.json())

@@ -76,7 +76,7 @@ function App(props){
     }
 
     return (
-        <div className="citation-box container bootstrap-inside m-5 p-3 rounded-lg justify-content-center">
+        <div className="citation-box container bootstrap-inside m-5 p-3 mt-5 mr-5 w-100 rounded-lg justify-content-center">
             <div className="header w-100 row mx-0 px-3 pt-3 pb-0 border border-secondary rounded-top bg-secondary">
                 <div className="col-6">
                     <div className="row d-flex align-items-center mb-2">

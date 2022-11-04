@@ -104,19 +104,21 @@ function Timeline(props) {
 
     //TODO: switch line and circle stroke with background colors
     return(
-        <div className="timeline-view row h-100 justify-content-center">
-            <div className="row w-100 justify-content-center">
-                <div className="timeline-visual col" id="timeline-row">
-                    <svg height="30">
-                        <line x1="0" y1="15" x2="100%" y2="15" stroke="black" strokeWidth="5px"/>
-                        <line x1='0' y1="15" x2={`${currentLineLength*100}%`} y2="15" stroke="red" strokeWidth="5px"/>
-                        {circles}
-                    </svg>
+        <div className="timeline-view row-12 w-100 h-100 justify-content-center">
+            <div className="col-12 w-100">
+                <div className="row w-100 justify-content-center">
+                    <div className="timeline-visual col" id="timeline-row">
+                        <svg height="30">
+                            <line x1="0" y1="15" x2="100%" y2="15" stroke="black" strokeWidth="5px"/>
+                            <line x1='0' y1="15" x2={`${currentLineLength*100}%`} y2="15" stroke="red" strokeWidth="5px"/>
+                            {circles}
+                        </svg>
+                    </div>
                 </div>
-            </div>
-            <div className="row w-100">
-                <div className="timeline-card col m-2 w-100">
-                    {currentView}
+                <div className="row w-100">
+                    <div className="timeline-card col m-2 w-100">
+                        {currentView}
+                    </div>
                 </div>
             </div>
         </div>
