@@ -44,9 +44,10 @@ function Timeline(props) {
 
             const setClick = () => {
                 video.currentTime = startTime;
+                setCurrentTime(video.currentTime);
             }
 
-            if ((startTime <= currentTime) && (currentTime <= endTime)) {
+            if ((startTime <= currentTime) && (currentTime < endTime)) {
                 fill = "White";
                 stroke = "Red";
             } else if (currentTime >= endTime){
