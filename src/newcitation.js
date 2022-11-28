@@ -71,9 +71,20 @@ function AddNewCitation (props) {
         event.preventDefault();
         if (await validateUserID()) {
             if (validateTimeFormat(inputStartTimeValue, inputEndTimeValue) && validateTimes(inputStartTimeValue, inputEndTimeValue, videoLength)) {
+
                 let urlData = getPageMetadata(inputLinkValue).then((result) => {
                     console.log(result);
-                    let newYite = new Yite(videoID, inputStartTimeValue, inputEndTimeValue, result.title, result.siteName, result.siteType, result.description, inputLinkValue, inputCiteTypeValue);
+                    let newYite = new Yite(
+                                            videoID,
+                                            formatTime(inputStartTimeValue), 
+                                            formatTime(inputEndTimeValue), 
+                                            result.title, 
+                                            result.siteName, 
+                                            result.siteType, 
+                                            result.description, 
+                                            inputLinkValue, 
+                                            inputCiteTypeValue
+                                        );
                 
                     pushData(newYite);
                     let newStart = newYite.start;
@@ -228,6 +239,31 @@ async function validateUserID() {
             reject(ex);
         }
     })
+}
+
+/**
+ * Formats time to follow a standard format (removes leading 0s) E.g:
+ * 00:02:32 -> 2:32
+ * 
+ * @param {*} time 
+ * @returns 
+ */
+function formatTime(time) {
+    // Trims unnecessary hour time format away
+    if (time.length == 8) {
+        if (time.startsWith("00:")) {
+            time = time.substring(3);
+        } else if (time.startsWith("0")) {
+            time = time.substring(1);
+        }
+    }
+
+    // Trims unnecessary leading 0 for single digit minute
+    if (time.startsWith("0")) {
+        time = time.substring(1);
+    }
+
+    return time;
 }
 
 /**

@@ -65,9 +65,6 @@ function Timeline(props) {
         }
     });
 
-    //sort citations by time
-    citations.sort((a, b) => {return a.props.citation.startTime - b.props.citation.startTime});
-
     // When time updates, update citation
     video.ontimeupdate = () => {
         setCurrentTime(video.currentTime);
