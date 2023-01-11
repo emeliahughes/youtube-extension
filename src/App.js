@@ -12,6 +12,7 @@ function App(props){
     console.log("in the app thing");
     //const maxLength = document.getElementsByClassName("ytp-bound-time-right").innerHTML;
     let videoCitations = props.videoCitations;
+    videoCitations = new Map([...videoCitations.entries()].sort());
     let videoID = props.videoID;
     let chevronUp = (
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-chevron-up" viewBox="0 0 16 16">

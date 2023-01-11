@@ -44,9 +44,10 @@ function Timeline(props) {
 
             const setClick = () => {
                 video.currentTime = startTime;
+                setCurrentTime(video.currentTime);
             }
 
-            if ((startTime <= currentTime) && (currentTime <= endTime)) {
+            if ((startTime <= currentTime) && (currentTime < endTime)) {
                 fill = "White";
                 stroke = "Red";
             } else if (currentTime >= endTime){
@@ -63,9 +64,6 @@ function Timeline(props) {
             overallIndex++;
         }
     });
-
-    //sort citations by time
-    citations.sort((a, b) => {return a.props.citation.startTime - b.props.citation.startTime});
 
     // When time updates, update citation
     video.ontimeupdate = () => {
