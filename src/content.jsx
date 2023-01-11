@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import 'jquery/dist/jquery.min.js';
@@ -11,12 +11,40 @@ console.log('hellooooo');
 let video = document.querySelector("#movie_player > div.html5-video-container > video");
 let iter = 0;
 
+addDivBeforeDescription().then(container => ReactDOM.render(<AppWrapper />, container,));
+let _setVideoId = undefined;
+let _setVideoYites = undefined;
+
+function setVideoId(id) {
+    new Promise(resolve => {
+        const timerId = setInterval(() => {
+            if (_setVideoId) {
+                _setVideoId(id);
+                clearInterval(timerId);
+                resolve();
+            }
+        });
+    });
+}
+    
+function setVideoYites(yites) {
+    new Promise(resolve => {
+        const timerId = setInterval(() => {
+            if (_setVideoYites) {
+                _setVideoYites(yites);
+                clearInterval(timerId);
+                resolve();
+            }
+        });
+    });
+}
 
 video.addEventListener('canplay', function load() {
     //let videoID = await getID();
 
     //console.log(videoID);
     let responseDataPromise = getID().then(videoID => {
+        setVideoId(videoID);
         getData(videoID)
         .then((resp) => {
             let videoYites = new Map();
@@ -29,21 +57,22 @@ video.addEventListener('canplay', function load() {
                     }
                     videoYites.get(currStart).push(currCitation);
                 }
-                console.log(videoYites);
-            return(videoYites);
-        })
-        .then((videoYites) => {
-                return addDivBeforeDescription().then((container) => {return [videoYites, container]});
-        })
-        .then(([videoYites, container]) => {
-            console.log("just before render. " + videoID, container, videoYites)
-            ReactDOM.render(
-                <App videoCitations={videoYites} videoID={videoID}/>,
-                container,);
+            console.log(videoYites);
+            setVideoYites(videoYites);
         });
     });
 });
 
+
+function AppWrapper() {
+    const [videoId, setVideoId] = useState();
+    const [videoYites, setVideoYites] = useState(null);
+
+    _setVideoId = setVideoId;
+    _setVideoYites = setVideoYites;
+
+    return <App videoCitations={videoYites} videoID={videoId} setVideoYites={setVideoYites} />
+}
 // video.addEventListener('canplay', function load() {
 //     console.log(video.readyState);
 //     let videoID = document.querySelector("#watch7-content > meta:nth-child(6)").content;

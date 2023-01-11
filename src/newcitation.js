@@ -81,6 +81,7 @@ function AddNewCitation (props) {
                         videoCitations.set(newStart, []);
                     }
                     videoCitations.get(newStart).push(newYite);
+                    props.setVideoYites(videoCitations);
                 });
 
                 //reset box values (I think this should also close the box when we get here)

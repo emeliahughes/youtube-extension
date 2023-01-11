@@ -7,6 +7,7 @@ import './my_bootstrap.scss';
 import './content.css';
 
 function App(props){
+    if (props.videoCitations === null) return <p>Loading...</p>;
 
     console.log("in the app thing");
     //const maxLength = document.getElementsByClassName("ytp-bound-time-right").innerHTML;
@@ -26,7 +27,7 @@ function App(props){
     const [showingButton, setShowingButton] = useState(chevronUp);
     const [mainViewClasses, setMainViewClasses] = useState("main-view-box mx-0 row w-100 p-3 border border-top-0 rounded-bottom border-dark bg-light text-body")
 
-    const [currentView, setCurrentView] = useState(<Timeline videoCitations={videoCitations}/>);
+    const [currentView, setCurrentView] = useState('timeline');
     const [addViewClasses, setAddViewClasses] = useState("nav-link border-0 text-white bg-dark rounded-circle font-weight-bolder");
     const [timelineViewClasses, setTimelineViewClasses] = useState("nav-link active font-weight-bolder");
     const [listViewClasses, setListViewClasses] = useState("nav-link text-white bg-dark font-weight-bolder");
@@ -45,7 +46,7 @@ function App(props){
             setAddViewClasses("nav-link border-0 text-white bg-dark rounded-circle font-weight-bolder");
             setTimelineViewClasses("nav-link active font-weight-bolder");
             setListViewClasses("nav-link text-white bg-dark font-weight-bolder");
-            setCurrentView(<Timeline videoCitations={videoCitations}/>);
+            setCurrentView('timeline');
             setShowingButton(chevronUp);
         }
     }
@@ -54,24 +55,24 @@ function App(props){
         setAddViewClasses("nav-link border-0 text-white bg-dark rounded-circle font-weight-bolder");
         setTimelineViewClasses("nav-link text-white bg-dark font-weight-bolder");
         setListViewClasses("nav-link active font-weight-bolder");
-        setCurrentView(<ViewCitations videoCitations={videoCitations}/>);
+        setCurrentView('list');
     }
 
     const handleTimelineView = (event) => {
         setAddViewClasses("nav-link border-0 text-white bg-dark rounded-circle font-weight-bolder");
         setTimelineViewClasses("nav-link active font-weight-bolder");
         setListViewClasses("nav-link text-white bg-dark font-weight-bolder");
-        setCurrentView(<Timeline videoCitations={videoCitations}/>);
+        setCurrentView('timeline');
     }
 
     const handleAddView = (event) => {
-        if(currentView == (<AddNewCitation videoCitations={videoCitations} videoID={videoID} exitAddView={handleTimelineView}/>)) {
+        if(currentView == 'add') {
             handleListView;
         } else {
             setAddViewClasses("nav-link active bg-light text-dark border-0 rounded-circle font-weight-bolder");
             setTimelineViewClasses("nav-link text-white bg-dark font-weight-bolder");
             setListViewClasses("nav-link text-white bg-dark font-weight-bolder");
-            setCurrentView(<AddNewCitation videoCitations={videoCitations} videoID={videoID} exitAddView={handleTimelineView}/>);
+            setCurrentView('add');
         }
     }
 
@@ -104,7 +105,9 @@ function App(props){
             </div>
             <div className={mainViewClasses}>
                 <div className='ml-4 mr-4 w-100 h-100'>
-                    {currentView}
+                    {currentView === 'timeline' && <Timeline videoCitations={videoCitations} />}
+                    {currentView === 'list' && <ViewCitations videoCitations={videoCitations} />}
+                    {currentView === 'add' && <AddNewCitation videoCitations={videoCitations} videoID={videoID} exitAddView={handleTimelineView} setVideoYites={props.setVideoYites} />}
                 </div>
             </div>
         </div>

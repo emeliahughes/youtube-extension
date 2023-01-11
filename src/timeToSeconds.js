@@ -7,7 +7,9 @@ function convertTimeToSeconds(time) {
     }
     
     if (hourMinuteSecond.length >= 2) {
-        timeInSeconds += parseInt(hourMinuteSecond[1]) * 60;
+        if (hourMinuteSecond.length >= 2 && hourMinuteSecond[1].length > 0) {
+            timeInSeconds += parseInt(hourMinuteSecond[1]) * 60;
+        }
     }
 
     let seconds = parseInt(hourMinuteSecond[0]);
