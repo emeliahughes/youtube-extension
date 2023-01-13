@@ -23,7 +23,7 @@
 .citation-box {
   border-color: rgb(65, 65, 65);
   align-items: stretch;
-  max-height: 350px;
+  max-height: 375px;
 }
 
 .main-view-box {
@@ -43,7 +43,16 @@
 
 .list-view-block {
   overflow-y: scroll;
+  height: 275px;
   max-height: 275px;
+}
+
+.timeline-view {
+  height: 275px;
+}
+
+.timeline-visual {
+  height: 50px;
 }
 
 /* .timeline-view {

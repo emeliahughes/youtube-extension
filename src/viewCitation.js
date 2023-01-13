@@ -66,7 +66,7 @@ function ViewCitations(props) {
     }
 
     return (
-        <div className="citation-view row">
+        <div className="citation-view row-12 w-100 h-100 justify-content-center">
             <div className="view-buttons w-100 col-3 m-2">
                 <div className='row'>
                     {listViewButton}

@@ -14,15 +14,19 @@ function Timeline(props) {
     let fill = "black";
     let stroke = "black";
 
+    let noCitations = (<div className="citation-block card rounded-lg m-2 p-3 justify-content-center border-0">
+                            <div className='card-body row w-100'>
+                                <div className='col m-2 mr-4 ml-4 w-100'>
+                                    <h3 className="citation-title card-title text-center">No citations currently active</h3>
+                                </div>
+                            </div>
+                        </div>)
+
     const[currentLineLength, setLineLength] = useState(video.currentTime/videoLength);
 
     const[currentTime, setCurrentTime] = useState(video.currentTime);
     
-    const[currentView, setCurrentView] = useState((
-        <div className="citation-block card rounded-lg m-2 justify-content-center">
-            <h3 className="citation-title card-title text-center m-20">No citations currently active</h3>
-        </div>
-    ));
+    const[currentView, setCurrentView] = useState(noCitations);
 
     //convert each yite into an html citation card and add its placement along the timeline
     videoCitations.forEach((yiteList) => {
@@ -86,14 +90,7 @@ function Timeline(props) {
             }
         }
         if(currentCitations.length == 0) {
-            setCurrentView(
-            <div className="citation-block card rounded-lg m-2">
-                <div className='card-body row'>
-                    <div className='col-auto align-items-center m-2 mr-4 ml-4'>
-                        <h3 className="citation-title card-title">No citations currently active</h3>
-                    </div>
-                </div>
-            </div>);
+            setCurrentView(noCitations);
         } else {
             setCurrentView(currentCitations);
         }
