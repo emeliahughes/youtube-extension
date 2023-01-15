@@ -5,6 +5,7 @@ import ViewCitations from './viewCitation';
 import Timeline from './Timeline';
 import './my_bootstrap.scss';
 import './content.css';
+import { cli } from 'webpack';
 
 function App(props){
     if (props.videoCitations === null) return <p>Loading...</p>;
@@ -34,6 +35,36 @@ function App(props){
     const [addViewClasses, setAddViewClasses] = useState("nav-link border-0 text-white bg-dark rounded-circle font-weight-bolder");
     const [timelineViewClasses, setTimelineViewClasses] = useState("nav-link active font-weight-bolder");
     const [listViewClasses, setListViewClasses] = useState("nav-link text-white bg-dark font-weight-bolder");
+
+    async function getUserID() {
+        return new Promise((resolve, reject) => {
+            try {
+                chrome.storage.sync.get('userID', result => {
+                    if (! (result && result['userID'] && result['userID'] !== "") ) {
+                        resolve("EMPTY USER ID");
+                    } else {
+                        resolve(result['userID']);
+                    }
+                });
+            } catch (ex) {
+                reject(ex);
+            }
+        })
+    }
+
+    handleTrackUserClick = (click_type) => {
+        let userID = getUserID();
+        let userClick = JSON.stringify(`{"userID": "${userID}", "clickType": "${click_type}"}`);
+        const response = fetch(`https://youtubeextdata.azurewebsites.net/userClick/${click_type}`, {
+          body: userClick,
+          headers: {
+              "Content-Type": "application/json"
+          },
+          method: "POST"
+        })
+        console.log(`${click_type} clicked`);
+        response.then(() => console.log(response));
+    }
     
     const handleShowing = (event) => {
         setShowing(!isShowing)
@@ -109,9 +140,9 @@ function App(props){
                 </div>
                 <div className={mainViewClasses}>
                     <div className='w-100 h-100'>
-                        {currentView === 'timeline' && <Timeline videoCitations={videoCitations} />}
-                        {currentView === 'list' && <ViewCitations videoCitations={videoCitations} />}
-                        {currentView === 'add' && <AddNewCitation videoCitations={videoCitations} videoID={videoID} exitAddView={handleTimelineView} setVideoYites={props.setVideoYites} />}
+                        {currentView === 'timeline' && <Timeline videoCitations={videoCitations} handleTrackUserClick={handleTrackUserClick}/>}
+                        {currentView === 'list' && <ViewCitations videoCitations={videoCitations} handleTrackUserClick={handleTrackUserClick}/>}
+                        {currentView === 'add' && <AddNewCitation videoCitations={videoCitations} videoID={videoID} exitAddView={handleTimelineView} setVideoYites={props.setVideoYites}/>}
                     </div>
                 </div>
             </div>

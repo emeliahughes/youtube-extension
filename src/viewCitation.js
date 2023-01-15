@@ -4,6 +4,7 @@ import Citation from './citationBlock';
 import convertTimeToSeconds from './timeToSeconds';
 
 function ViewCitations(props) {
+    let handleTrackUserClick = props.handleTrackUserClick;
     let videoCitations = props.videoCitations;
     let citations = [];
     let citationButtons = [];
@@ -25,7 +26,7 @@ function ViewCitations(props) {
     videoCitations.forEach((yiteList) => {
             for (let i = 0; i < yiteList.length; i++) {
                 let yite = yiteList[i];
-                citations.push(<Citation citation={yite} key={"citation " + (overallIndex - 1)}/>);
+                citations.push(<Citation citation={yite} key={"citation " + (overallIndex - 1)} handleTrackUserClick={handleTrackUserClick}/>);
 
                 const foo = overallIndex;
                 const setClick = () => {
@@ -33,7 +34,7 @@ function ViewCitations(props) {
                 };
 
                 let isActive = (currentButton == overallIndex);
-                citationButtons.push(<CitationButton citation={yite} setClick={setClick} isActive={isActive} key={"citation button " + (overallIndex - 1)}/>);
+                citationButtons.push(<CitationButton citation={yite} setClick={setClick} isActive={isActive} key={"citation button " + (overallIndex - 1)} handleTrackUserClick={handleTrackUserClick}/>);
                 overallIndex++;
             }
     });

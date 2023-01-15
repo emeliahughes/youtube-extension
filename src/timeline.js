@@ -3,6 +3,7 @@ import Citation from './citationBlock';
 import convertTimeToSeconds from './timeToSeconds';
 
 function Timeline(props) {
+    let handleTrackUserClick = props.handleTrackUserClick;
     let videoCitations = props.videoCitations;
     let citations = [];
     let circles = [];
@@ -47,6 +48,7 @@ function Timeline(props) {
             }
 
             const setClick = () => {
+                handleTrackUserClick("circleCitation")
                 video.currentTime = startTime;
                 setCurrentTime(video.currentTime);
             }
