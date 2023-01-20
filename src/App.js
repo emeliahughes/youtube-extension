@@ -34,7 +34,7 @@ function App(props){
     const [addViewClasses, setAddViewClasses] = useState("nav-link border-0 text-white bg-dark rounded-circle font-weight-bolder");
     const [timelineViewClasses, setTimelineViewClasses] = useState("nav-link active font-weight-bolder");
     const [listViewClasses, setListViewClasses] = useState("nav-link text-white bg-dark font-weight-bolder");
-    
+
     const handleShowing = (event) => {
         setShowing(!isShowing)
 

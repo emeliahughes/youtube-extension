@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Citation from './citationBlock';
 import convertTimeToSeconds from './timeToSeconds';
+import trackUserClick from "./trackUserClick";
+import { USER_CLICK } from "./constants/clicks";
 
 function Timeline(props) {
     let videoCitations = props.videoCitations;
@@ -47,6 +49,7 @@ function Timeline(props) {
             }
 
             const setClick = () => {
+                trackUserClick(USER_CLICK.TIMELINE_VIEW_CITATION);
                 video.currentTime = startTime;
                 setCurrentTime(video.currentTime);
             }
