@@ -24,8 +24,6 @@ async function trackUserClick(click_type) {
     },
     method: "POST"
     })
-    console.log(`${click_type} clicked by ${userID}`);
-    response.then(() => console.log(response));
 }
 
 export default trackUserClick;
