@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import CitationButton from './citationButton';
 import Citation from './citationBlock';
-import convertTimeToSeconds from './timeToSeconds';
+import trackUserClick from './trackUserClick';
+import { USER_CLICK } from './constants/clicks';
+
 
 function ViewCitations(props) {
     let videoCitations = props.videoCitations;
@@ -29,6 +31,7 @@ function ViewCitations(props) {
 
                 const foo = overallIndex;
                 const setClick = () => {
+                    trackUserClick(USER_CLICK.LIST_VIEW_CITATION);
                     setButton(foo)
                 };
 
