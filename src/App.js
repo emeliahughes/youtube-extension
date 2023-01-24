@@ -24,7 +24,7 @@ function App(props){
             <path fillRule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
         </svg>);
     
-    let mainClasses = "main-view-box mx-0 row w-100 p-3 mb-1 border border-top-0 rounded-bottom border-light bg-light text-body";
+    let mainClasses = "main-view-box mx-0 row w-100 p-3 mb-1 bg-light text-body";
 
     const [isShowing, setShowing] = useState(false);
     const [showingButton, setShowingButton] = useState(chevronUp);
@@ -81,8 +81,8 @@ function App(props){
 
     return (
         <div className="citation-box bootstrap-inside">
-            <div className='rounded-lg justify-content-center mt-3 mx-0'>
-                <div className="header w-100 row mx-0 pt-3 pb-0 mt-3 px-3 border border-light border-bottom-0 rounded-top bg-secondary">
+            <div className='justify-content-center mt-3 mx-0 citation-box-inner'>
+                <div className="header w-100 row mx-0 pt-3 pb-0 px-3 bg-secondary">
                     <div className="col-6">
                         <div className="row d-flex align-items-center mb-2">
                             <h1 className='text-light'>Citations</h1>

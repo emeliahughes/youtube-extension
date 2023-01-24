@@ -8552,9 +8552,21 @@ a.bootstrap-inside .badge-dark:focus, a.bootstrap-inside .badge-dark.focus {
   max-height: 375px;
 }
 
+.citation-box-inner {
+  border: 0px solid;
+  border-radius: 15px;
+}
+
+.header {
+  border: 0px solid;
+  border-radius: 15px 15px 0px 0px;
+}
+
 .main-view-box {
   padding: 10px;
   max-height: 300px;
+  border: 0px solid;
+  border-radius: 0px 0px 15px 15px;
 }
 
 .citation-button-block {
