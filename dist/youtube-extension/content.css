@@ -4,9 +4,9 @@
 @charset "UTF-8";
 .bootstrap-inside {
   /*!
-   * Bootstrap v4.6.2 (https://getbootstrap.com/)
-   * Copyright 2011-2022 The Bootstrap Authors
-   * Copyright 2011-2022 Twitter, Inc.
+   * Bootstrap v4.6.1 (https://getbootstrap.com/)
+   * Copyright 2011-2021 The Bootstrap Authors
+   * Copyright 2011-2021 Twitter, Inc.
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    */
 }
@@ -356,7 +356,7 @@
 }
 .bootstrap-inside small,
 .bootstrap-inside .small {
-  font-size: 0.875em;
+  font-size: 80%;
   font-weight: 400;
 }
 .bootstrap-inside mark,
@@ -388,7 +388,7 @@
 }
 .bootstrap-inside .blockquote-footer {
   display: block;
-  font-size: 0.875em;
+  font-size: 80%;
   color: #6c757d;
 }
 .bootstrap-inside .blockquote-footer::before {
@@ -1776,7 +1776,7 @@ a > .bootstrap-inside code {
   display: none;
   width: 100%;
   margin-top: 0.25rem;
-  font-size: 0.875em;
+  font-size: 80%;
   color: #adccad;
 }
 .bootstrap-inside .valid-tooltip {
@@ -1866,7 +1866,7 @@ a > .bootstrap-inside code {
   display: none;
   width: 100%;
   margin-top: 0.25rem;
-  font-size: 0.875em;
+  font-size: 80%;
   color: #e6a3a3;
 }
 .bootstrap-inside .invalid-tooltip {
@@ -2535,16 +2535,6 @@ a > .bootstrap-inside code {
     transition: none;
   }
 }
-.bootstrap-inside .collapsing.width {
-  width: 0;
-  height: auto;
-  transition: width 0.35s ease;
-}
-@media (prefers-reduced-motion: reduce) {
-  .bootstrap-inside .collapsing.width {
-    transition: none;
-  }
-}
 .bootstrap-inside .dropup,
 .bootstrap-inside .dropright,
 .bootstrap-inside .dropdown,
@@ -3034,7 +3024,7 @@ a > .bootstrap-inside code {
   display: block;
   min-height: 1.5rem;
   padding-left: 1.5rem;
-  print-color-adjust: exact;
+  color-adjust: exact;
 }
 .bootstrap-inside .custom-control-inline {
   display: inline-flex;
@@ -3085,7 +3075,7 @@ a > .bootstrap-inside code {
   pointer-events: none;
   content: "";
   background-color: #fff;
-  border: 1px solid #adb5bd;
+  border: #adb5bd solid 1px;
 }
 .bootstrap-inside .custom-control-label::after {
   position: absolute;
@@ -3434,13 +3424,11 @@ a > .bootstrap-inside code {
 }
 .bootstrap-inside .nav-tabs .nav-link {
   margin-bottom: -1px;
-  background-color: transparent;
   border: 1px solid transparent;
   border-top-left-radius: 0.25rem;
   border-top-right-radius: 0.25rem;
 }
 .bootstrap-inside .nav-tabs .nav-link:hover, .bootstrap-inside .nav-tabs .nav-link:focus {
-  isolation: isolate;
   border-color: #e9ecef #e9ecef #dee2e6;
 }
 .bootstrap-inside .nav-tabs .nav-link.disabled {
@@ -3460,8 +3448,6 @@ a > .bootstrap-inside code {
   border-top-right-radius: 0;
 }
 .bootstrap-inside .nav-pills .nav-link {
-  background: none;
-  border: 0;
   border-radius: 0.25rem;
 }
 .bootstrap-inside .nav-pills .nav-link.active,
@@ -5020,8 +5006,8 @@ a.bootstrap-inside .badge-dark:focus, a.bootstrap-inside .badge-dark.focus {
   text-transform: none;
   letter-spacing: normal;
   word-break: normal;
-  white-space: normal;
   word-spacing: normal;
+  white-space: normal;
   line-break: auto;
   font-size: 0.875rem;
   word-wrap: break-word;
@@ -5116,8 +5102,8 @@ a.bootstrap-inside .badge-dark:focus, a.bootstrap-inside .badge-dark.focus {
   text-transform: none;
   letter-spacing: normal;
   word-break: normal;
-  white-space: normal;
   word-spacing: normal;
+  white-space: normal;
   line-break: auto;
   font-size: 0.875rem;
   word-wrap: break-word;
@@ -5411,7 +5397,7 @@ a.bootstrap-inside .badge-dark:focus, a.bootstrap-inside .badge-dark.focus {
   width: 2rem;
   height: 2rem;
   vertical-align: -0.125em;
-  border: 0.25em solid currentcolor;
+  border: 0.25em solid currentColor;
   border-right-color: transparent;
   border-radius: 50%;
   animation: 0.75s linear infinite spinner-border;
@@ -5435,7 +5421,7 @@ a.bootstrap-inside .badge-dark:focus, a.bootstrap-inside .badge-dark.focus {
   width: 2rem;
   height: 2rem;
   vertical-align: -0.125em;
-  background-color: currentcolor;
+  background-color: currentColor;
   border-radius: 50%;
   opacity: 0;
   animation: 0.75s linear infinite spinner-grow;
@@ -8605,6 +8591,10 @@ a.bootstrap-inside .badge-dark:focus, a.bootstrap-inside .badge-dark.focus {
 
 .timeline-visual {
   height: 50px;
+}
+
+input[type=text] {
+  font-size: 20px;
 }
 
 /* .timeline-view {

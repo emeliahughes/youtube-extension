@@ -31,9 +31,9 @@ function App(props){
     const [mainViewClasses, setMainViewClasses] = useState(mainClasses)
 
     const [currentView, setCurrentView] = useState('timeline');
-    const [addViewClasses, setAddViewClasses] = useState("nav-link border-0 text-white bg-dark rounded-circle font-weight-bolder");
-    const [timelineViewClasses, setTimelineViewClasses] = useState("nav-link active font-weight-bolder");
-    const [listViewClasses, setListViewClasses] = useState("nav-link text-white bg-dark font-weight-bolder");
+    const [addViewClasses, setAddViewClasses] = useState("nav-link border-0 text-white bg-dark rounded-circle font-weight-normal");
+    const [timelineViewClasses, setTimelineViewClasses] = useState("nav-link active font-weight-normal");
+    const [listViewClasses, setListViewClasses] = useState("nav-link text-white bg-dark font-weight-normal");
 
     const handleShowing = (event) => {
         setShowing(!isShowing)
@@ -46,25 +46,25 @@ function App(props){
             setShowingButton(chevronDown);
         } else {
             setMainViewClasses(mainClasses);
-            setAddViewClasses("nav-link border-0 text-white bg-dark rounded-circle font-weight-bolder");
-            setTimelineViewClasses("nav-link active font-weight-bolder");
-            setListViewClasses("nav-link text-white bg-dark font-weight-bolder");
+            setAddViewClasses("nav-link border-0 text-white bg-dark rounded-circle font-weight-normal");
+            setTimelineViewClasses("nav-link active font-weight-normal");
+            setListViewClasses("nav-link text-white bg-dark font-weight-normal");
             setCurrentView('timeline');
             setShowingButton(chevronUp);
         }
     }
 
     const handleListView = (event) => {
-        setAddViewClasses("nav-link border-0 text-white bg-dark rounded-circle font-weight-bolder");
-        setTimelineViewClasses("nav-link text-white bg-dark font-weight-bolder");
-        setListViewClasses("nav-link active font-weight-bolder");
+        setAddViewClasses("nav-link border-0 text-white bg-dark rounded-circle font-weight-normal");
+        setTimelineViewClasses("nav-link text-white bg-dark font-weight-normal");
+        setListViewClasses("nav-link active font-weight-normal");
         setCurrentView('list');
     }
 
     const handleTimelineView = (event) => {
-        setAddViewClasses("nav-link border-0 text-white bg-dark rounded-circle font-weight-bolder");
-        setTimelineViewClasses("nav-link active font-weight-bolder");
-        setListViewClasses("nav-link text-white bg-dark font-weight-bolder");
+        setAddViewClasses("nav-link border-0 text-white bg-dark rounded-circle font-weight-normal");
+        setTimelineViewClasses("nav-link active font-weight-normal");
+        setListViewClasses("nav-link text-white bg-dark font-weight-normal");
         setCurrentView('timeline');
     }
 
@@ -72,9 +72,9 @@ function App(props){
         if(currentView == 'add') {
             handleListView;
         } else {
-            setAddViewClasses("nav-link active bg-light text-dark border-0 rounded-circle font-weight-bolder");
-            setTimelineViewClasses("nav-link text-white bg-dark font-weight-bolder");
-            setListViewClasses("nav-link text-white bg-dark font-weight-bolder");
+            setAddViewClasses("nav-link active bg-light text-dark border-0 rounded-circle font-weight-normal");
+            setTimelineViewClasses("nav-link text-white bg-dark font-weight-normal");
+            setListViewClasses("nav-link text-white bg-dark font-weight-normal");
             setCurrentView('add');
         }
     }
@@ -85,10 +85,10 @@ function App(props){
                 <div className="header w-100 row mx-0 pt-3 pb-0 px-3 bg-secondary">
                     <div className="col-6">
                         <div className="row d-flex align-items-center mb-2">
-                            <h1 className='text-light'>Citations</h1>
+                            <h1 className='text-light px-3'>Citations</h1>
                             <ul className="nav nav-pills rounded-circle ml-2">
-                                <li className='nav-item m-1' onClick={handleAddView}>
-                                    <button className={addViewClasses}><h2 className="p-0 m-0">+</h2></button>
+                                <li className='nav-item m-1 mb-2' onClick={handleAddView}>
+                                    <button className={addViewClasses}><h2 className="p-0 px-1 m-0">+</h2></button>
                                 </li>
                             </ul>
                         </div>

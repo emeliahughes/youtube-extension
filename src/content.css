@@ -67,6 +67,10 @@
   height: 50px;
 }
 
+input[type='text'] {
+  font-size: 20px; 
+}
+
 /* .timeline-view {
   display:flex;
   flex-direction: column;
