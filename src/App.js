@@ -70,7 +70,7 @@ function App(props){
 
     const handleAddView = (event) => {
         if(currentView == 'add') {
-            handleListView;
+            handleListView();
         } else {
             setAddViewClasses("nav-link active bg-light text-dark border-0 rounded-circle font-weight-normal");
             setTimelineViewClasses("nav-link text-white bg-dark font-weight-normal");
@@ -78,8 +78,6 @@ function App(props){
             setCurrentView('add');
         }
     }
-
-    console.log("# of citations: " + videoCitations.size)
 
     if (videoCitations.size == 0 && currentView != 'add') {
         return (
