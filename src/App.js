@@ -79,6 +79,39 @@ function App(props){
         }
     }
 
+    console.log("# of citations: " + videoCitations.size)
+
+    if (videoCitations.size == 0 && currentView != 'add') {
+        return (
+        <div className="citation-box bootstrap-inside">
+            <div className='justify-content-center mt-3 mx-0 citation-box-inner'>
+                <div className="header w-100 row mx-0 pt-3 pb-0 px-3 bg-secondary">
+                    <div className="col-6">
+                        <div className="row d-flex align-items-center mb-2">
+                            <h1 className='text-light px-3'>Citations</h1>
+                            <ul className="nav nav-pills rounded-circle ml-2">
+                                <li className='nav-item m-1 mb-2' onClick={handleAddView}>
+                                    <button className={addViewClasses}><h2 className="p-0 px-1 m-0">+</h2></button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div className='col pl-2 pr-2 mb-2 d-flex align-items-end justify-content-end'>
+                        <button className="btn btn-light rounded-circle p-2" onClick={handleShowing}><h2 className="p-0 m-0 d-flex align-items-center">{showingButton}</h2></button>
+                    </div>
+                </div>
+                <div className={mainViewClasses}>
+                    <div className='w-100 h-100'>
+                        <div className="col m-2 mr-4 ml-4 w-100">
+                            <h3 className="citation-title card-title text-center">No citations added - click the (+) to add a citation!</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        )
+    }
+
     return (
         <div className="citation-box bootstrap-inside">
             <div className='justify-content-center mt-3 mx-0 citation-box-inner'>
