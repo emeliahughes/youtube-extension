@@ -30,6 +30,8 @@ function Timeline(props) {
     
     const[currentView, setCurrentView] = useState(noCitations);
 
+    const[priorityCitationID, setPriorityCitationID] = useState(null);
+
     //convert each yite into an html citation card and add its placement along the timeline
     videoCitations.forEach((yiteList) => {
         for (let i = 0; i < yiteList.length; i++) {
@@ -51,6 +53,8 @@ function Timeline(props) {
             const setClick = () => {
                 trackUserClick(USER_CLICK.TIMELINE_VIEW_CITATION);
                 video.currentTime = startTime;
+                
+                setPriorityCitationID(yite.id);
                 setCurrentTime(video.currentTime);
             }
 
@@ -76,6 +80,7 @@ function Timeline(props) {
     video.ontimeupdate = () => {
         setCurrentTime(video.currentTime);
         let currentCitations = [];
+        let priorityCitation = null;
 
         for (let i = 0; i < citations.length; i++) {
             let startTime = citations[i].props.citation.startTime;
@@ -89,9 +94,22 @@ function Timeline(props) {
             }
 
             if ((startTime <= currentTime) && (currentTime <= endTime)) {
-                currentCitations.push(citations[i]);
+                if (citations[i].props.citation.id == priorityCitationID) {
+                    priorityCitation = citations[i];
+                } else {
+                    currentCitations.push(citations[i]);
+                }
             }
         }
+
+        if (priorityCitation != null
+                && convertTimeToSeconds(priorityCitation.props.citation.startTime) <= currentTime
+                && currentTime <= convertTimeToSeconds(priorityCitation.props.citation.endTime)) {
+            currentCitations.unshift(priorityCitation);
+        } else {
+            setPriorityCitationID(null);
+        }
+
         if(currentCitations.length == 0) {
             setCurrentView(noCitations);
         } else {
