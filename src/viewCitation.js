@@ -54,7 +54,7 @@ function ViewCitations(props) {
         </button>);
 
     let listViewContents = (
-        <div className="list-view-block overflow-auto w-100 h-250">
+        <div className="list-view-block w-100 h-250">
             <ul>
                 {citations}
             </ul>
@@ -69,17 +69,19 @@ function ViewCitations(props) {
     }
 
     return (
-        <div className="citation-view row-12 w-100 h-100 justify-content-center">
-            <div className="view-buttons w-100 col-3 m-2">
-                <div className='row'>
-                    {listViewButton}
+        <div className="citation-view row w-100 h-100 mx-0">
+            <div className='d-flex justify-content-center'>
+                <div className="view-buttons w-100 h-100 col-3">
+                    <div className='row'>
+                        {listViewButton}
+                    </div>
+                    <div className='citation-button-block row'>
+                        {citationButtons}
+                    </div>
                 </div>
-                <div className='citation-button-block row'>
-                    {citationButtons}
+                <div className="citation-viewer col h-100 mx-0 pl-3 pr-0">
+                    {currentView}
                 </div>
-            </div>
-            <div className="citation-viewer col w-100 h-100 m-2">
-                {currentView}
             </div>
         </div>
     );

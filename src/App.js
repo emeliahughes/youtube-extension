@@ -26,14 +26,19 @@ function App(props){
     
     let mainClasses = "main-view-box mx-0 row w-100 p-3 mb-1 bg-light text-body";
 
+    let addViewActive = "nav-link active bg-light text-dark border-0 rounded-circle font-weight-normal";
+    let addViewDisabled = "nav-link border-0 text-white bg-dark rounded-circle font-weight-normal";
+    let tabActive = "nav-link active font-weight-normal border-0";
+    let tabDisabled = "nav-link text-white bg-dark font-weight-normal mb-0 border-0";
+
     const [isShowing, setShowing] = useState(false);
     const [showingButton, setShowingButton] = useState(chevronUp);
     const [mainViewClasses, setMainViewClasses] = useState(mainClasses)
 
     const [currentView, setCurrentView] = useState('timeline');
-    const [addViewClasses, setAddViewClasses] = useState("nav-link border-0 text-white bg-dark rounded-circle font-weight-normal");
-    const [timelineViewClasses, setTimelineViewClasses] = useState("nav-link active font-weight-normal");
-    const [listViewClasses, setListViewClasses] = useState("nav-link text-white bg-dark font-weight-normal");
+    const [addViewClasses, setAddViewClasses] = useState(addViewDisabled);
+    const [timelineViewClasses, setTimelineViewClasses] = useState(tabActive);
+    const [listViewClasses, setListViewClasses] = useState(tabDisabled);
 
     const handleShowing = (event) => {
         setShowing(!isShowing)
@@ -46,35 +51,35 @@ function App(props){
             setShowingButton(chevronDown);
         } else {
             setMainViewClasses(mainClasses);
-            setAddViewClasses("nav-link border-0 text-white bg-dark rounded-circle font-weight-normal");
-            setTimelineViewClasses("nav-link active font-weight-normal");
-            setListViewClasses("nav-link text-white bg-dark font-weight-normal");
+            setAddViewClasses(addViewDisabled);
+            setTimelineViewClasses(tabActive);
+            setListViewClasses(tabDisabled);
             setCurrentView('timeline');
             setShowingButton(chevronUp);
         }
     }
 
     const handleListView = (event) => {
-        setAddViewClasses("nav-link border-0 text-white bg-dark rounded-circle font-weight-normal");
-        setTimelineViewClasses("nav-link text-white bg-dark font-weight-normal");
-        setListViewClasses("nav-link active font-weight-normal");
+        setAddViewClasses(addViewDisabled);
+        setTimelineViewClasses(tabDisabled);
+        setListViewClasses(tabActive);
         setCurrentView('list');
     }
 
     const handleTimelineView = (event) => {
-        setAddViewClasses("nav-link border-0 text-white bg-dark rounded-circle font-weight-normal");
-        setTimelineViewClasses("nav-link active font-weight-normal");
-        setListViewClasses("nav-link text-white bg-dark font-weight-normal");
+        setAddViewClasses(addViewDisabled);
+        setTimelineViewClasses(tabActive);
+        setListViewClasses(tabDisabled);
         setCurrentView('timeline');
     }
 
     const handleAddView = (event) => {
         if(currentView == 'add') {
-            handleListView();
+            handleListView;
         } else {
-            setAddViewClasses("nav-link active bg-light text-dark border-0 rounded-circle font-weight-normal");
-            setTimelineViewClasses("nav-link text-white bg-dark font-weight-normal");
-            setListViewClasses("nav-link text-white bg-dark font-weight-normal");
+            setAddViewClasses(addViewActive);
+            setTimelineViewClasses(tabDisabled);
+            setListViewClasses(tabDisabled);
             setCurrentView('add');
         }
     }
@@ -100,8 +105,12 @@ function App(props){
                 </div>
                 <div className={mainViewClasses}>
                     <div className='w-100 h-100'>
-                        <div className="col m-2 mr-4 ml-4 w-100">
-                            <h3 className="citation-title card-title text-center">No citations added - click the (+) to add a citation!</h3>
+                        <div className="citation-block card rounded-lg m-2 p-3 justify-content-center border-0">
+                            <div className='card-body row w-100'>
+                                <div className='col m-2 mr-4 ml-4 w-100'>
+                                    <h3 className="citation-title card-title text-center">No citations added - click the (+) to add a citation!</h3>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -125,7 +134,7 @@ function App(props){
                         </div>
                     </div>
                     <div className='col mb-0 pb-0  d-flex align-items-end  justify-content-end'>
-                        <ul className="nav nav-tabs border-0">
+                        <ul className="nav nav-tabs border-0 mb-0">
                             <li className='nav-item border-0 mb-0 pb-0' onClick={handleTimelineView}>
                                 <button className={timelineViewClasses}><h3>Timeline View</h3></button>
                             </li>
