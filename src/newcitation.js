@@ -81,6 +81,7 @@ function AddNewCitation (props) {
                                             result.title, 
                                             result.siteName, 
                                             result.siteType, 
+                                            result.image,
                                             result.description, 
                                             inputLinkValue, 
                                             inputCiteTypeValue

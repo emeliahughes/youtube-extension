@@ -8,6 +8,7 @@ function Citation(props) {
     let title = citation.title;
     let source = citation.source;
     let sourceType = citation.sourceType;
+    let image = citation.image;
     let startTime = convertTimeToSeconds(citation.startTime);
     let endTime = convertTimeToSeconds(citation.endTime);
     let description = citation.description;
@@ -39,12 +40,14 @@ function Citation(props) {
 
     return(
         <div className="citation-block card rounded-lg m-2">
-            <h3 className="citation-header card-title text-body p-4 mb-n2 bg-secondary">{icon} {title}</h3>
+            <h3 className="citation-header card-title text-body p-4 mb-n2 bg-secondary">{icon}
+                <a href={link} onClick={trackUserClick.bind(this, USER_CLICK.ARTICLE_LINK)} target="_blank"> {title}</a>
+            </h3>
             <div className='card-body row ml-1 text-body'>
                 <div className='col p-2 mr-auto ml-4'>
                     <h4 className="citation-source card-title font-weight-bold pb-1">{source}</h4>
                     <h4 className="card-text pb-1">{description}</h4>
-                    <a href={link} onClick={trackUserClick.bind(this, USER_CLICK.ARTICLE_LINK)} className="citation-source card-link pb-1" target="_blank"><h4>Visit {sourceType}</h4></a>
+                    <img className="card-img-bottom" src={image}/>
                 </div>
                 <div className='col-auto m-2 mr-auto'>
                     <div className='row justify-content-end m-3'>
