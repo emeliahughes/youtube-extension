@@ -67,6 +67,15 @@ function AddNewCitation (props) {
 
     //submit event handler 
 
+    let submitBtnClass = (
+        <button type="submit" className="btn btn-secondary text-white rounded-lg p-15" id="submit-button"><h3 className='m-2'><strong aria-label="save entry">Add</strong></h3></button>
+    );
+    let successBtnClass = (
+        <button type="submit" className="btn btn-success disabled rounded-lg p-15" id="submit-button"><h3 className='m-2'><strong aria-label="save entry">Citation Added!</strong></h3></button>
+    );
+
+    const [addButton, setAddButton] = useState(submitBtnClass);
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         if (await validateUserID()) {
@@ -96,16 +105,30 @@ function AddNewCitation (props) {
                     props.setVideoYites(videoCitations);
                 });
 
+                // Success confirmation
+                setAddButton(successBtnClass);
+                await sleep(2000);
                 //reset box values (I think this should also close the box when we get here)
                 setLinkValue("");
+                setAddButton(submitBtnClass);        
                 //setStartTimeValue("");
                 //setEndTimeValue("");
+
                 exitAddView();
             } else {
-                setTimeout(resetValidity, 3500);
+                await sleep(3500);
+                resetValidity();
             }
         } else {
             alert("Please enter your userID");
+        }
+
+        function timeout(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms)); 
+        }
+        async function sleep(ms) {
+            await timeout(ms);
+            return;
         }
     }
 
@@ -137,7 +160,7 @@ function AddNewCitation (props) {
 
                         <div className='col-1'></div>
                     </div>
-                    <div className='form-group row w-100 p-3 pb-0'>
+                    <div className='form-group row w-100 p-3 pb-0' style={{marginBottom: -15 + 'px'}}>
                         <div className='col-1'></div>
                         <label htmlFor="type_field" className="main-labels col-2 col-form-label p-2"><h3>Citation Type:</h3></label>
                         <div className='col'>
@@ -178,9 +201,7 @@ function AddNewCitation (props) {
                         </div>
                     <div className='col-1'></div>
                     </div>
-                    <div className="flex-container justify-content-center row w-100 my-0">
-                        <button type="submit" className="btn btn-secondary text-white rounded-lg p-15" id="submit-button"><h3 className='m-2'><strong aria-label="save entry">Add</strong></h3></button>
-                    </div>
+                    <div className="flex-container justify-content-center row w-100 my-0">{addButton}</div>
                 </div>
             </form>
         </span>
