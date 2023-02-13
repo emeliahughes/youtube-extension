@@ -43,14 +43,14 @@ function ViewCitations(props) {
 
     //if the current button is the list view button, set as active
     if(currentButton == 0) {
-        listClasses = "mt-2 mb-2 w-100 btn btn-dark text-light rounded-lg"
+        listClasses = "mt-2 mb-2 w-100 btn btn-dark text-light rounded-lg d-flex align-items-center justify-content-center"
     } else {
-        listClasses = "mt-2 mb-2 w-100 btn btn-secondary text-body rounded-lg"
+        listClasses = "mt-2 mb-2 w-100 btn btn-secondary text-body rounded-lg d-flex align-items-center justify-content-center"
     }
 
     let listViewButton = (
         <button onClick={() => setButton(0)} className= {listClasses}>
-            <h3 className="list-view-button-text align-self-center text-center">View All</h3>
+            <h3 className="list-view-button-text text-center mb-0">View All</h3>
         </button>);
 
     let listViewContents = (
