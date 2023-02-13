@@ -18,6 +18,7 @@ class Yite {
         this.link = link;
         this.id = "";
         this.citeType = citeType;
+        this.comment = comment;
     }
 
     /**
