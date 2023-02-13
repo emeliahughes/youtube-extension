@@ -116,8 +116,7 @@ function AddNewCitation (props) {
 
                 exitAddView();
             } else {
-                await sleep(3500);
-                resetValidity();
+                setTimeout(resetValidity, 3500);
             }
         } else {
             alert("Please enter your userID");
