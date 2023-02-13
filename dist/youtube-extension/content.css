@@ -8612,11 +8612,28 @@ a.bootstrap-inside .badge-dark:focus, a.bootstrap-inside .badge-dark.focus {
   height: 50px;
 }
 
-input[type=text] {
-  font-size: 20px;
+#form_comments {
+  font-size: 1.5rem;
 }
 
-/* .timeline-view {
+#end_time_field {
+  font-size: 1.5rem;
+}
+
+#start_time_field {
+  font-size: 1.5rem;
+}
+
+#link_field {
+  font-size: 1.5rem;
+}
+
+/*
+input[type='text'] {
+  font-size: 20px; 
+}
+
+ .timeline-view {
   display:flex;
   flex-direction: column;
   height: 100%;
