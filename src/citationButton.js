@@ -14,15 +14,15 @@ function CitationButton(props) {
     }
 
     if(isActive){
-        classes = "mt-2 mb-2 btn btn-dark text-light w-100 rounded-lg text-center";
+        classes = "mt-2 mb-2 btn btn-dark text-light w-100 rounded-lg text-center d-flex align-items-center";
     } else {
-        classes = "mt-2 mb-2 btn btn-secondary text-body w-100 rounded-lg text-center";
+        classes = "mt-2 mb-2 btn btn-secondary text-body w-100 rounded-lg text-center d-flex align-items-center";
     }
 
     return (
         <div className='row-3 w-100'>
             <button onClick={setClick} className={classes}>
-                <h3 className="citation-button-title w-100">{title}</h3>
+                <h3 className="citation-button-title w-100 mb-0">{title}</h3>
             </button>
         </div>
     )
