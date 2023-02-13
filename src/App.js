@@ -31,6 +31,7 @@ function App(props){
     let tabActive = "nav-link active font-weight-normal border-0";
     let tabDisabled = "nav-link text-white bg-dark font-weight-normal mb-0 border-0";
 
+    const [lastView, setLastView] = useState('timeline');
     const [isShowing, setShowing] = useState(false);
     const [showingButton, setShowingButton] = useState(chevronUp);
     const [mainViewClasses, setMainViewClasses] = useState(mainClasses)
@@ -74,12 +75,28 @@ function App(props){
     }
 
     const handleAddView = (event) => {
-        if(currentView == 'add') {
-            handleListView;
+        if(currentView === 'add') {
+            if(lastView === 'list'){
+                setAddViewClasses(addViewDisabled);
+                setTimelineViewClasses(tabDisabled);
+                setListViewClasses(tabActive);
+                setCurrentView('list');
+            } else {
+                setAddViewClasses(addViewDisabled);
+                setTimelineViewClasses(tabActive);
+                setListViewClasses(tabDisabled);
+                setCurrentView('timeline');
+            }
         } else {
+            setLastView(currentView);
             setAddViewClasses(addViewActive);
-            setTimelineViewClasses(tabDisabled);
-            setListViewClasses(tabDisabled);
+            if (videoCitations.size == 0) {
+                setTimelineViewClasses("d-none");
+                setListViewClasses("d-none");
+            } else {
+                setTimelineViewClasses(tabDisabled);
+                setListViewClasses(tabDisabled);
+            }
             setCurrentView('add');
         }
     }
@@ -99,7 +116,7 @@ function App(props){
                             </ul>
                         </div>
                     </div>
-                    <div className='col pl-2 pr-2 mb-2 d-flex align-items-end justify-content-end'>
+                    <div className='col pl-2 pr-2 mb-2 d-flex align-items-center justify-content-end'>
                         <button className="btn btn-light rounded-circle p-2" onClick={handleShowing}><h2 className="p-0 m-0 d-flex align-items-center">{showingButton}</h2></button>
                     </div>
                 </div>
