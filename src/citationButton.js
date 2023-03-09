@@ -22,7 +22,7 @@ function CitationButton(props) {
     return (
         <div className='row-3 w-100'>
             <button onClick={setClick} className={classes}>
-                <h3 className="citation-button-title w-100 mb-0">{title}</h3>
+                <h3 className="citation-button-title w-100 mb-0 py-2">{title}</h3>
             </button>
         </div>
     )

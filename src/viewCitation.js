@@ -50,7 +50,7 @@ function ViewCitations(props) {
 
     let listViewButton = (
         <button onClick={() => setButton(0)} className= {listClasses}>
-            <h3 className="list-view-button-text text-center mb-0">View All</h3>
+            <h3 className="list-view-button-text text-center mb-0 py-2">View All</h3>
         </button>);
 
     let listViewContents = (
