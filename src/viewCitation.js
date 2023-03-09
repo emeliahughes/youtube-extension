@@ -79,7 +79,7 @@ function ViewCitations(props) {
                         {citationButtons}
                     </div>
                 </div>
-                <div className="citation-viewer col h-100 mx-0 pl-3 pr-0">
+                <div className="citation-viewer col h-100 mx-0 pl-3 pr-0 list-view-block">
                     {currentView}
                 </div>
             </div>

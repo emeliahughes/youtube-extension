@@ -26,8 +26,8 @@ function App(props){
     
     let mainClasses = "main-view-box mx-0 row w-100 p-3 mb-1 bg-light text-body";
 
-    let addViewActive = "nav-link active bg-light text-dark border-0 rounded-circle font-weight-normal";
-    let addViewDisabled = "nav-link border-0 text-white bg-dark rounded-circle font-weight-normal";
+    let addViewActive = "nav-link active bg-light text-dark border-0 rounded-circle font-weight-normal forced-circle";
+    let addViewDisabled = "nav-link border-0 text-white bg-dark rounded-circle font-weight-normal forced-circle";
     let tabActive = "nav-link active font-weight-normal border-0";
     let tabDisabled = "nav-link text-white bg-dark font-weight-normal mb-0 border-0";
 

@@ -91,6 +91,15 @@ function AddNewCitation (props) {
 
     //submit event handler 
 
+    let submitBtnClass = (
+        <button type="submit" className="btn btn-secondary text-white rounded-lg p-15" id="submit-button"><h3 className='m-2'><strong aria-label="save entry">Add</strong></h3></button>
+    );
+    let successBtnClass = (
+        <button type="submit" className="btn btn-success disabled rounded-lg p-15" id="submit-button"><h3 className='m-2'><strong aria-label="save entry">Citation Added!</strong></h3></button>
+    );
+
+    const [addButton, setAddButton] = useState(submitBtnClass);
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         if (await validateUserID()) {
@@ -121,16 +130,30 @@ function AddNewCitation (props) {
                     props.setVideoYites(videoCitations);
                 });
 
+                // Success confirmation
+                setAddButton(successBtnClass);
+                await sleep(2000);
                 //reset box values (I think this should also close the box when we get here)
                 setLinkValue("");
+                setAddButton(submitBtnClass);        
                 //setStartTimeValue("");
                 //setEndTimeValue("");
+
                 exitAddView();
             } else {
-                setTimeout(resetValidity, 3500);
+                await sleep(3500);
+                resetValidity();
             }
         } else {
             alert("Please enter your userID");
+        }
+
+        function timeout(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms)); 
+        }
+        async function sleep(ms) {
+            await timeout(ms);
+            return;
         }
     }
 
@@ -243,13 +266,7 @@ function AddNewCitation (props) {
                             </div>
                         </div>
                     </div>
-                    <div className="submit-row row d-flex justify-content-center">
-                        <button type="submit" 
-                            className="btn btn-secondary text-white rounded-lg p-15" 
-                            id="submit-button">
-                                <h3 className='m-2'><strong aria-label="submit citation">Submit Citation</strong></h3>
-                        </button>
-                    </div>
+                    <div className="submit-row row d-flex justify-content-center">{addButton}</div>
                 </div>
             </form>
         </span>

@@ -56,6 +56,7 @@
 
 .list-view-block {
   overflow-y: scroll;
+  overflow-x: hidden;
   height: 275px;
   max-height: 275px;
 }
@@ -70,6 +71,14 @@
 
 .timeline-visual {
   height: 50px;
+}
+
+.forced-circle {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  padding: 3px 7px !important;
+  border-radius: 50% !important;
 }
 
 #form_comments {
