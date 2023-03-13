@@ -4,9 +4,9 @@
 @charset "UTF-8";
 .bootstrap-inside {
   /*!
-   * Bootstrap v4.6.2 (https://getbootstrap.com/)
-   * Copyright 2011-2022 The Bootstrap Authors
-   * Copyright 2011-2022 Twitter, Inc.
+   * Bootstrap v4.6.1 (https://getbootstrap.com/)
+   * Copyright 2011-2021 The Bootstrap Authors
+   * Copyright 2011-2021 Twitter, Inc.
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    */
 }
@@ -24,7 +24,7 @@
   --white: #fff;
   --gray: #6c757d;
   --gray-dark: #343a40;
-  --primary: #007bff;
+  --primary: black;
   --secondary: #ababab;
   --success: #adccad;
   --info: #17a2b8;
@@ -136,12 +136,12 @@
   top: -0.5em;
 }
 .bootstrap-inside a {
-  color: #007bff;
+  color: black;
   text-decoration: none;
   background-color: transparent;
 }
 .bootstrap-inside a:hover {
-  color: #0056b3;
+  color: black;
   text-decoration: underline;
 }
 .bootstrap-inside a:not([href]):not([class]) {
@@ -356,7 +356,7 @@
 }
 .bootstrap-inside small,
 .bootstrap-inside .small {
-  font-size: 0.875em;
+  font-size: 80%;
   font-weight: 400;
 }
 .bootstrap-inside mark,
@@ -388,7 +388,7 @@
 }
 .bootstrap-inside .blockquote-footer {
   display: block;
-  font-size: 0.875em;
+  font-size: 80%;
   color: #6c757d;
 }
 .bootstrap-inside .blockquote-footer::before {
@@ -1378,20 +1378,20 @@ a > .bootstrap-inside code {
 .bootstrap-inside .table-primary,
 .bootstrap-inside .table-primary > th,
 .bootstrap-inside .table-primary > td {
-  background-color: #b8daff;
+  background-color: #b8b8b8;
 }
 .bootstrap-inside .table-primary th,
 .bootstrap-inside .table-primary td,
 .bootstrap-inside .table-primary thead th,
 .bootstrap-inside .table-primary tbody + tbody {
-  border-color: #7abaff;
+  border-color: #7a7a7a;
 }
 .bootstrap-inside .table-hover .table-primary:hover {
-  background-color: #9fcdff;
+  background-color: #ababab;
 }
 .bootstrap-inside .table-hover .table-primary:hover > td,
 .bootstrap-inside .table-hover .table-primary:hover > th {
-  background-color: #9fcdff;
+  background-color: #ababab;
 }
 .bootstrap-inside .table-secondary,
 .bootstrap-inside .table-secondary > th,
@@ -1640,9 +1640,9 @@ a > .bootstrap-inside code {
 .bootstrap-inside .form-control:focus {
   color: #495057;
   background-color: #fff;
-  border-color: #80bdff;
+  border-color: #404040;
   outline: 0;
-  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.25);
 }
 .bootstrap-inside .form-control::placeholder {
   color: #6c757d;
@@ -1776,7 +1776,7 @@ a > .bootstrap-inside code {
   display: none;
   width: 100%;
   margin-top: 0.25rem;
-  font-size: 0.875em;
+  font-size: 80%;
   color: #adccad;
 }
 .bootstrap-inside .valid-tooltip {
@@ -1866,7 +1866,7 @@ a > .bootstrap-inside code {
   display: none;
   width: 100%;
   margin-top: 0.25rem;
-  font-size: 0.875em;
+  font-size: 80%;
   color: #e6a3a3;
 }
 .bootstrap-inside .invalid-tooltip {
@@ -2034,7 +2034,7 @@ a > .bootstrap-inside code {
 }
 .bootstrap-inside .btn:focus, .bootstrap-inside .btn.focus {
   outline: 0;
-  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.25);
 }
 .bootstrap-inside .btn.disabled, .bootstrap-inside .btn:disabled {
   opacity: 0.65;
@@ -2048,32 +2048,32 @@ a > .bootstrap-inside code {
 }
 .bootstrap-inside .btn-primary {
   color: #fff;
-  background-color: #007bff;
-  border-color: #007bff;
+  background-color: black;
+  border-color: black;
 }
 .bootstrap-inside .btn-primary:hover {
   color: #fff;
-  background-color: #0069d9;
-  border-color: #0062cc;
+  background-color: black;
+  border-color: black;
 }
 .bootstrap-inside .btn-primary:focus, .bootstrap-inside .btn-primary.focus {
   color: #fff;
-  background-color: #0069d9;
-  border-color: #0062cc;
-  box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
+  background-color: black;
+  border-color: black;
+  box-shadow: 0 0 0 0.2rem rgba(38, 38, 38, 0.5);
 }
 .bootstrap-inside .btn-primary.disabled, .bootstrap-inside .btn-primary:disabled {
   color: #fff;
-  background-color: #007bff;
-  border-color: #007bff;
+  background-color: black;
+  border-color: black;
 }
 .bootstrap-inside .btn-primary:not(:disabled):not(.disabled):active, .bootstrap-inside .btn-primary:not(:disabled):not(.disabled).active, .show > .bootstrap-inside .btn-primary.dropdown-toggle {
   color: #fff;
-  background-color: #0062cc;
-  border-color: #005cbf;
+  background-color: black;
+  border-color: black;
 }
 .bootstrap-inside .btn-primary:not(:disabled):not(.disabled):active:focus, .bootstrap-inside .btn-primary:not(:disabled):not(.disabled).active:focus, .show > .bootstrap-inside .btn-primary.dropdown-toggle:focus {
-  box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(38, 38, 38, 0.5);
 }
 .bootstrap-inside .btn-secondary {
   color: #212529;
@@ -2279,28 +2279,28 @@ a > .bootstrap-inside code {
   box-shadow: 0 0 0 0.2rem rgba(147, 147, 147, 0.5);
 }
 .bootstrap-inside .btn-outline-primary {
-  color: #007bff;
-  border-color: #007bff;
+  color: black;
+  border-color: black;
 }
 .bootstrap-inside .btn-outline-primary:hover {
   color: #fff;
-  background-color: #007bff;
-  border-color: #007bff;
+  background-color: black;
+  border-color: black;
 }
 .bootstrap-inside .btn-outline-primary:focus, .bootstrap-inside .btn-outline-primary.focus {
-  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.5);
 }
 .bootstrap-inside .btn-outline-primary.disabled, .bootstrap-inside .btn-outline-primary:disabled {
-  color: #007bff;
+  color: black;
   background-color: transparent;
 }
 .bootstrap-inside .btn-outline-primary:not(:disabled):not(.disabled):active, .bootstrap-inside .btn-outline-primary:not(:disabled):not(.disabled).active, .show > .bootstrap-inside .btn-outline-primary.dropdown-toggle {
   color: #fff;
-  background-color: #007bff;
-  border-color: #007bff;
+  background-color: black;
+  border-color: black;
 }
 .bootstrap-inside .btn-outline-primary:not(:disabled):not(.disabled):active:focus, .bootstrap-inside .btn-outline-primary:not(:disabled):not(.disabled).active:focus, .show > .bootstrap-inside .btn-outline-primary.dropdown-toggle:focus {
-  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.5);
 }
 .bootstrap-inside .btn-outline-secondary {
   color: #ababab;
@@ -2472,11 +2472,11 @@ a > .bootstrap-inside code {
 }
 .bootstrap-inside .btn-link {
   font-weight: 400;
-  color: #007bff;
+  color: black;
   text-decoration: none;
 }
 .bootstrap-inside .btn-link:hover {
-  color: #0056b3;
+  color: black;
   text-decoration: underline;
 }
 .bootstrap-inside .btn-link:focus, .bootstrap-inside .btn-link.focus {
@@ -2532,16 +2532,6 @@ a > .bootstrap-inside code {
 }
 @media (prefers-reduced-motion: reduce) {
   .bootstrap-inside .collapsing {
-    transition: none;
-  }
-}
-.bootstrap-inside .collapsing.width {
-  width: 0;
-  height: auto;
-  transition: width 0.35s ease;
-}
-@media (prefers-reduced-motion: reduce) {
-  .bootstrap-inside .collapsing.width {
     transition: none;
   }
 }
@@ -2737,7 +2727,7 @@ a > .bootstrap-inside code {
 .bootstrap-inside .dropdown-item.active, .bootstrap-inside .dropdown-item:active {
   color: #fff;
   text-decoration: none;
-  background-color: #007bff;
+  background-color: black;
 }
 .bootstrap-inside .dropdown-item.disabled, .bootstrap-inside .dropdown-item:disabled {
   color: #adb5bd;
@@ -3034,7 +3024,7 @@ a > .bootstrap-inside code {
   display: block;
   min-height: 1.5rem;
   padding-left: 1.5rem;
-  print-color-adjust: exact;
+  color-adjust: exact;
 }
 .bootstrap-inside .custom-control-inline {
   display: inline-flex;
@@ -3050,19 +3040,19 @@ a > .bootstrap-inside code {
 }
 .bootstrap-inside .custom-control-input:checked ~ .custom-control-label::before {
   color: #fff;
-  border-color: #007bff;
-  background-color: #007bff;
+  border-color: black;
+  background-color: black;
 }
 .bootstrap-inside .custom-control-input:focus ~ .custom-control-label::before {
-  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.25);
 }
 .bootstrap-inside .custom-control-input:focus:not(:checked) ~ .custom-control-label::before {
-  border-color: #80bdff;
+  border-color: #404040;
 }
 .bootstrap-inside .custom-control-input:not(:disabled):active ~ .custom-control-label::before {
   color: #fff;
-  background-color: #b3d7ff;
-  border-color: #b3d7ff;
+  background-color: #595959;
+  border-color: #595959;
 }
 .bootstrap-inside .custom-control-input[disabled] ~ .custom-control-label, .bootstrap-inside .custom-control-input:disabled ~ .custom-control-label {
   color: #6c757d;
@@ -3085,7 +3075,7 @@ a > .bootstrap-inside code {
   pointer-events: none;
   content: "";
   background-color: #fff;
-  border: 1px solid #adb5bd;
+  border: #adb5bd solid 1px;
 }
 .bootstrap-inside .custom-control-label::after {
   position: absolute;
@@ -3104,17 +3094,17 @@ a > .bootstrap-inside code {
   background-image: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%278%27 height=%278%27 viewBox=%270 0 8 8%27%3e%3cpath fill=%27%23fff%27 d=%27M6.564.75l-3.59 3.612-1.538-1.55L0 4.26l2.974 2.99L8 2.193z%27/%3e%3c/svg%3e");
 }
 .bootstrap-inside .custom-checkbox .custom-control-input:indeterminate ~ .custom-control-label::before {
-  border-color: #007bff;
-  background-color: #007bff;
+  border-color: black;
+  background-color: black;
 }
 .bootstrap-inside .custom-checkbox .custom-control-input:indeterminate ~ .custom-control-label::after {
   background-image: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%274%27 height=%274%27 viewBox=%270 0 4 4%27%3e%3cpath stroke=%27%23fff%27 d=%27M0 2h4%27/%3e%3c/svg%3e");
 }
 .bootstrap-inside .custom-checkbox .custom-control-input:disabled:checked ~ .custom-control-label::before {
-  background-color: rgba(0, 123, 255, 0.5);
+  background-color: rgba(0, 0, 0, 0.5);
 }
 .bootstrap-inside .custom-checkbox .custom-control-input:disabled:indeterminate ~ .custom-control-label::before {
-  background-color: rgba(0, 123, 255, 0.5);
+  background-color: rgba(0, 0, 0, 0.5);
 }
 .bootstrap-inside .custom-radio .custom-control-label::before {
   border-radius: 50%;
@@ -3123,7 +3113,7 @@ a > .bootstrap-inside code {
   background-image: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%2712%27 height=%2712%27 viewBox=%27-4 -4 8 8%27%3e%3ccircle r=%273%27 fill=%27%23fff%27/%3e%3c/svg%3e");
 }
 .bootstrap-inside .custom-radio .custom-control-input:disabled:checked ~ .custom-control-label::before {
-  background-color: rgba(0, 123, 255, 0.5);
+  background-color: rgba(0, 0, 0, 0.5);
 }
 .bootstrap-inside .custom-switch {
   padding-left: 2.25rem;
@@ -3153,7 +3143,7 @@ a > .bootstrap-inside code {
   transform: translateX(0.75rem);
 }
 .bootstrap-inside .custom-switch .custom-control-input:disabled:checked ~ .custom-control-label::before {
-  background-color: rgba(0, 123, 255, 0.5);
+  background-color: rgba(0, 0, 0, 0.5);
 }
 .bootstrap-inside .custom-select {
   display: inline-block;
@@ -3171,9 +3161,9 @@ a > .bootstrap-inside code {
   appearance: none;
 }
 .bootstrap-inside .custom-select:focus {
-  border-color: #80bdff;
+  border-color: #404040;
   outline: 0;
-  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.25);
 }
 .bootstrap-inside .custom-select:focus::-ms-value {
   color: #495057;
@@ -3226,8 +3216,8 @@ a > .bootstrap-inside code {
   opacity: 0;
 }
 .bootstrap-inside .custom-file-input:focus ~ .custom-file-label {
-  border-color: #80bdff;
-  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  border-color: #404040;
+  box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.25);
 }
 .bootstrap-inside .custom-file-input[disabled] ~ .custom-file-label, .bootstrap-inside .custom-file-input:disabled ~ .custom-file-label {
   background-color: #e9ecef;
@@ -3281,13 +3271,13 @@ a > .bootstrap-inside code {
   outline: 0;
 }
 .bootstrap-inside .custom-range:focus::-webkit-slider-thumb {
-  box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgba(0, 0, 0, 0.25);
 }
 .bootstrap-inside .custom-range:focus::-moz-range-thumb {
-  box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgba(0, 0, 0, 0.25);
 }
 .bootstrap-inside .custom-range:focus::-ms-thumb {
-  box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgba(0, 0, 0, 0.25);
 }
 .bootstrap-inside .custom-range::-moz-focus-outer {
   border: 0;
@@ -3296,7 +3286,7 @@ a > .bootstrap-inside code {
   width: 1rem;
   height: 1rem;
   margin-top: -0.25rem;
-  background-color: #007bff;
+  background-color: black;
   border: 0;
   border-radius: 1rem;
   transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
@@ -3308,7 +3298,7 @@ a > .bootstrap-inside code {
   }
 }
 .bootstrap-inside .custom-range::-webkit-slider-thumb:active {
-  background-color: #b3d7ff;
+  background-color: #595959;
 }
 .bootstrap-inside .custom-range::-webkit-slider-runnable-track {
   width: 100%;
@@ -3322,7 +3312,7 @@ a > .bootstrap-inside code {
 .bootstrap-inside .custom-range::-moz-range-thumb {
   width: 1rem;
   height: 1rem;
-  background-color: #007bff;
+  background-color: black;
   border: 0;
   border-radius: 1rem;
   transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
@@ -3334,7 +3324,7 @@ a > .bootstrap-inside code {
   }
 }
 .bootstrap-inside .custom-range::-moz-range-thumb:active {
-  background-color: #b3d7ff;
+  background-color: #595959;
 }
 .bootstrap-inside .custom-range::-moz-range-track {
   width: 100%;
@@ -3351,7 +3341,7 @@ a > .bootstrap-inside code {
   margin-top: 0;
   margin-right: 0.2rem;
   margin-left: 0.2rem;
-  background-color: #007bff;
+  background-color: black;
   border: 0;
   border-radius: 1rem;
   transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
@@ -3363,7 +3353,7 @@ a > .bootstrap-inside code {
   }
 }
 .bootstrap-inside .custom-range::-ms-thumb:active {
-  background-color: #b3d7ff;
+  background-color: #595959;
 }
 .bootstrap-inside .custom-range::-ms-track {
   width: 100%;
@@ -3434,13 +3424,11 @@ a > .bootstrap-inside code {
 }
 .bootstrap-inside .nav-tabs .nav-link {
   margin-bottom: -1px;
-  background-color: transparent;
   border: 1px solid transparent;
   border-top-left-radius: 0.25rem;
   border-top-right-radius: 0.25rem;
 }
 .bootstrap-inside .nav-tabs .nav-link:hover, .bootstrap-inside .nav-tabs .nav-link:focus {
-  isolation: isolate;
   border-color: #e9ecef #e9ecef #dee2e6;
 }
 .bootstrap-inside .nav-tabs .nav-link.disabled {
@@ -3460,14 +3448,12 @@ a > .bootstrap-inside code {
   border-top-right-radius: 0;
 }
 .bootstrap-inside .nav-pills .nav-link {
-  background: none;
-  border: 0;
   border-radius: 0.25rem;
 }
 .bootstrap-inside .nav-pills .nav-link.active,
 .bootstrap-inside .nav-pills .show > .nav-link {
   color: #fff;
-  background-color: #007bff;
+  background-color: black;
 }
 .bootstrap-inside .nav-fill > .nav-link,
 .bootstrap-inside .nav-fill .nav-item {
@@ -4097,13 +4083,13 @@ a > .bootstrap-inside code {
   padding: 0.5rem 0.75rem;
   margin-left: -1px;
   line-height: 1.25;
-  color: #007bff;
+  color: black;
   background-color: #fff;
   border: 1px solid #dee2e6;
 }
 .bootstrap-inside .page-link:hover {
   z-index: 2;
-  color: #0056b3;
+  color: black;
   text-decoration: none;
   background-color: #e9ecef;
   border-color: #dee2e6;
@@ -4111,7 +4097,7 @@ a > .bootstrap-inside code {
 .bootstrap-inside .page-link:focus {
   z-index: 3;
   outline: 0;
-  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.25);
 }
 .bootstrap-inside .page-item:first-child .page-link {
   margin-left: 0;
@@ -4125,8 +4111,8 @@ a > .bootstrap-inside code {
 .bootstrap-inside .page-item.active .page-link {
   z-index: 3;
   color: #fff;
-  background-color: #007bff;
-  border-color: #007bff;
+  background-color: black;
+  border-color: black;
 }
 .bootstrap-inside .page-item.disabled .page-link {
   color: #6c757d;
@@ -4196,15 +4182,15 @@ a.bootstrap-inside .badge:hover, a.bootstrap-inside .badge:focus {
 }
 .bootstrap-inside .badge-primary {
   color: #fff;
-  background-color: #007bff;
+  background-color: black;
 }
 a.bootstrap-inside .badge-primary:hover, a.bootstrap-inside .badge-primary:focus {
   color: #fff;
-  background-color: #0062cc;
+  background-color: black;
 }
 a.bootstrap-inside .badge-primary:focus, a.bootstrap-inside .badge-primary.focus {
   outline: 0;
-  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.5);
 }
 
 .bootstrap-inside .badge-secondary {
@@ -4339,15 +4325,15 @@ a.bootstrap-inside .badge-dark:focus, a.bootstrap-inside .badge-dark.focus {
   color: inherit;
 }
 .bootstrap-inside .alert-primary {
-  color: #004085;
-  background-color: #cce5ff;
-  border-color: #b8daff;
+  color: black;
+  background-color: #cccccc;
+  border-color: #b8b8b8;
 }
 .bootstrap-inside .alert-primary hr {
-  border-top-color: #9fcdff;
+  border-top-color: #ababab;
 }
 .bootstrap-inside .alert-primary .alert-link {
-  color: #002752;
+  color: black;
 }
 .bootstrap-inside .alert-secondary {
   color: #595959;
@@ -4451,7 +4437,7 @@ a.bootstrap-inside .badge-dark:focus, a.bootstrap-inside .badge-dark.focus {
   color: #fff;
   text-align: center;
   white-space: nowrap;
-  background-color: #007bff;
+  background-color: black;
   transition: width 0.6s ease;
 }
 @media (prefers-reduced-motion: reduce) {
@@ -4523,8 +4509,8 @@ a.bootstrap-inside .badge-dark:focus, a.bootstrap-inside .badge-dark.focus {
 .bootstrap-inside .list-group-item.active {
   z-index: 2;
   color: #fff;
-  background-color: #007bff;
-  border-color: #007bff;
+  background-color: black;
+  border-color: black;
 }
 .bootstrap-inside .list-group-item + .bootstrap-inside .list-group-item {
   border-top-width: 0;
@@ -4661,17 +4647,17 @@ a.bootstrap-inside .badge-dark:focus, a.bootstrap-inside .badge-dark.focus {
   border-bottom-width: 0;
 }
 .bootstrap-inside .list-group-item-primary {
-  color: #004085;
-  background-color: #b8daff;
+  color: black;
+  background-color: #b8b8b8;
 }
 .bootstrap-inside .list-group-item-primary.list-group-item-action:hover, .bootstrap-inside .list-group-item-primary.list-group-item-action:focus {
-  color: #004085;
-  background-color: #9fcdff;
+  color: black;
+  background-color: #ababab;
 }
 .bootstrap-inside .list-group-item-primary.list-group-item-action.active {
   color: #fff;
-  background-color: #004085;
-  border-color: #004085;
+  background-color: black;
+  border-color: black;
 }
 .bootstrap-inside .list-group-item-secondary {
   color: #595959;
@@ -5020,8 +5006,8 @@ a.bootstrap-inside .badge-dark:focus, a.bootstrap-inside .badge-dark.focus {
   text-transform: none;
   letter-spacing: normal;
   word-break: normal;
-  white-space: normal;
   word-spacing: normal;
+  white-space: normal;
   line-break: auto;
   font-size: 0.875rem;
   word-wrap: break-word;
@@ -5116,8 +5102,8 @@ a.bootstrap-inside .badge-dark:focus, a.bootstrap-inside .badge-dark.focus {
   text-transform: none;
   letter-spacing: normal;
   word-break: normal;
-  white-space: normal;
   word-spacing: normal;
+  white-space: normal;
   line-break: auto;
   font-size: 0.875rem;
   word-wrap: break-word;
@@ -5411,7 +5397,7 @@ a.bootstrap-inside .badge-dark:focus, a.bootstrap-inside .badge-dark.focus {
   width: 2rem;
   height: 2rem;
   vertical-align: -0.125em;
-  border: 0.25em solid currentcolor;
+  border: 0.25em solid currentColor;
   border-right-color: transparent;
   border-radius: 50%;
   animation: 0.75s linear infinite spinner-border;
@@ -5435,7 +5421,7 @@ a.bootstrap-inside .badge-dark:focus, a.bootstrap-inside .badge-dark.focus {
   width: 2rem;
   height: 2rem;
   vertical-align: -0.125em;
-  background-color: currentcolor;
+  background-color: currentColor;
   border-radius: 50%;
   opacity: 0;
   animation: 0.75s linear infinite spinner-grow;
@@ -5469,12 +5455,12 @@ a.bootstrap-inside .badge-dark:focus, a.bootstrap-inside .badge-dark.focus {
   vertical-align: text-top !important;
 }
 .bootstrap-inside .bg-primary {
-  background-color: #007bff !important;
+  background-color: black !important;
 }
 .bootstrap-inside a.bg-primary:hover, .bootstrap-inside a.bg-primary:focus,
 .bootstrap-inside button.bg-primary:hover,
 .bootstrap-inside button.bg-primary:focus {
-  background-color: #0062cc !important;
+  background-color: black !important;
 }
 .bootstrap-inside .bg-secondary {
   background-color: #ababab !important;
@@ -5569,7 +5555,7 @@ a.bootstrap-inside .badge-dark:focus, a.bootstrap-inside .badge-dark.focus {
   border-left: 0 !important;
 }
 .bootstrap-inside .border-primary {
-  border-color: #007bff !important;
+  border-color: black !important;
 }
 .bootstrap-inside .border-secondary {
   border-color: #ababab !important;
@@ -8373,10 +8359,10 @@ a.bootstrap-inside .badge-dark:focus, a.bootstrap-inside .badge-dark.focus {
   color: #fff !important;
 }
 .bootstrap-inside .text-primary {
-  color: #007bff !important;
+  color: black !important;
 }
 .bootstrap-inside a.text-primary:hover, .bootstrap-inside a.text-primary:focus {
-  color: #0056b3 !important;
+  color: black !important;
 }
 .bootstrap-inside .text-secondary {
   color: #ababab !important;
@@ -8619,6 +8605,10 @@ a.bootstrap-inside .badge-dark:focus, a.bootstrap-inside .badge-dark.focus {
   text-align: center;
   padding: 3px 7px !important;
   border-radius: 50% !important;
+}
+
+.block-title {
+  color: rgb(33, 33, 33);
 }
 
 #form_comments {

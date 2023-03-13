@@ -78,7 +78,7 @@ function AddNewCitation (props) {
     const [inputCiteTypeValue, setCiteTypeValue] = useState('');
 
     const handleCiteType = (event) => {
-        let newValue = event.target.value
+        let newValue = {body: event.target.value};
         setCiteTypeValue(newValue);
     }
 
@@ -102,11 +102,13 @@ function AddNewCitation (props) {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+
+        console.log("submit comment value: " + inputComment);
+
         if (await validateUserID()) {
             if (validateTimeFormat(inputStartTimeValue, inputEndTimeValue) && validateTimes(inputStartTimeValue, inputEndTimeValue, videoLength)) {
 
                 let urlData = getPageMetadata(inputLinkValue).then((result) => {
-                    console.log(result);
                     let newYite = new Yite(
                                             videoID,
                                             formatTime(inputStartTimeValue), 
@@ -120,7 +122,7 @@ function AddNewCitation (props) {
                                             inputCiteTypeValue,
                                             inputComment
                                         );
-                
+
                     pushData(newYite);
                     let newStart = newYite.start;
                     if(!videoCitations.has(newStart)) {
@@ -223,7 +225,7 @@ function AddNewCitation (props) {
                                             onChange={handleCiteType}/>
 
                                         <label htmlFor="affirm" className='p-2 mb-0'>
-                                            <h4 className='p-0 m-0'>{book} Supports the claim</h4>
+                                            <h4 className='p-0 m-0'>{book} Supports the video clip's claim</h4>
                                         </label>
                                     </div>
                                     <div className="row form-check mx-0">
@@ -234,7 +236,7 @@ function AddNewCitation (props) {
                                             onChange={handleCiteType}/>
                                         
                                         <label htmlFor="refute" className='p-2 mb-0'>
-                                            <h4 className='p-0 m-0'>{flag} Refutes the claim</h4>
+                                            <h4 className='p-0 m-0'>{flag} Refutes the video clip's claim</h4>
                                         </label>
                                     </div>
                                     <div className="row form-check mx-0">
@@ -245,7 +247,7 @@ function AddNewCitation (props) {
                                             onChange={handleCiteType}/>
                                         
                                         <label htmlFor="other" className='p-2 mb-0'>
-                                            <h4 className='p-0 m-0'>{iCircle} Other</h4>
+                                            <h4 className='p-0 m-0'>{iCircle} Provides further explanation</h4>
                                         </label>
                                     </div>
                                 </div>
@@ -260,6 +262,7 @@ function AddNewCitation (props) {
                                     <textarea className="form-control p-2" 
                                         id="form_comments" 
                                         rows="5"
+                                        value={inputComment}
                                         onChange={handleComment}>
                                     </textarea>
                                 </div>

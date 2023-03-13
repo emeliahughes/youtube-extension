@@ -8,8 +8,8 @@ function CitationButton(props) {
     let titleLength = title.length;
     let classes;
 
-    if(titleLength > 20) {
-        title = title.substring(0, 17);
+    if(titleLength > 30) {
+        title = title.substring(0, 27);
         title += "...";
     }
 
