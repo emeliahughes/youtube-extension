@@ -8607,10 +8607,6 @@ a.bootstrap-inside .badge-dark:focus, a.bootstrap-inside .badge-dark.focus {
   border-radius: 50% !important;
 }
 
-.block-title {
-  color: rgb(33, 33, 33);
-}
-
 #form_comments {
   font-size: 1.5rem;
 }
