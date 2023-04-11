@@ -31,7 +31,7 @@ function ViewCitations(props) {
 
                 const foo = overallIndex;
                 const setClick = () => {
-                    trackUserClick(USER_CLICK.LIST_VIEW_CITATION);
+                    trackUserClick(USER_CLICK.LIST_VIEW_CITATION, yite.title, yite.id);
                     setButton(foo)
                 };
 

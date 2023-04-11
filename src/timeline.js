@@ -51,7 +51,7 @@ function Timeline(props) {
             }
 
             const setClick = () => {
-                trackUserClick(USER_CLICK.TIMELINE_VIEW_CITATION);
+                trackUserClick(USER_CLICK.TIMELINE_VIEW_CITATION, yite.title, yite.id);
                 video.currentTime = startTime;
                 
                 setPriorityCitationID(yite.id);

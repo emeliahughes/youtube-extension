@@ -115,7 +115,7 @@ function Citation(props) {
                         </div>
                         <div className='col-auto m-2 mr-auto'>
                             <div className='row justify-content-end m-3'>
-                                <button onClick={jumpTime.bind(this, startTime, true)} className='btn btn-secondary rounded-lg card-link align-items-center p-2 mx-2 mr-0 ml-2'>
+                                <button onClick={jumpTime.bind(this, startTime, citation.title, citation.id, true)} className='btn btn-secondary rounded-lg card-link align-items-center p-2 mx-2 mr-0 ml-2'>
                                     <h4 className='mb-0 p-1'>{citation.startTime}</h4>
                                 </button>
                                 <h4 className='card-text text-italic align-self-center mb-0 m-2'>to</h4>
@@ -134,9 +134,9 @@ function Citation(props) {
     )
 }
 
-function jumpTime(time, isStartTime=false) {
+function jumpTime(time, title, citation_id, isStartTime=false) {
     if (isStartTime)
-        trackUserClick(USER_CLICK.START_TIME);
+        trackUserClick(USER_CLICK.START_TIME, title, citation_id);
 
     let video = document.getElementsByTagName("video")[0];
     video.currentTime = time;

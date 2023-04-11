@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import timeToSeconds from './timeToSeconds';
 import { start } from '@popperjs/core';
 import { setCommentRange } from 'typescript';
+import getUserID from './getUserId';
 
 const baseUrl = "https://youtubeextdata.azurewebsites.net/";
 const postUrl = baseUrl + "createCitation";
@@ -104,10 +105,11 @@ function AddNewCitation (props) {
         event.preventDefault();
 
         console.log("submit comment value: " + inputComment);
-
+        let userID = await getUserID();
+        console.log(userID);
         if (await validateUserID()) {
             if (validateTimeFormat(inputStartTimeValue, inputEndTimeValue) && validateTimes(inputStartTimeValue, inputEndTimeValue, videoLength)) {
-
+                
                 let urlData = getPageMetadata(inputLinkValue).then((result) => {
                     let newYite = new Yite(
                                             videoID,
@@ -120,7 +122,8 @@ function AddNewCitation (props) {
                                             result.description, 
                                             inputLinkValue, 
                                             inputCiteTypeValue,
-                                            inputComment
+                                            inputComment,
+                                            userID
                                         );
 
                     pushData(newYite);
