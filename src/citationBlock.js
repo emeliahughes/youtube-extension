@@ -101,7 +101,7 @@ function Citation(props) {
                 <div className={cardColOneClasses}>
                     <h3 className="citation-header card-title text-body p-2 mb-n2 bg-secondary container">
                         <div className='row align-items-center p-2 container mx-0'>
-                            <a href={link} onClick={trackUserClick.bind(this, USER_CLICK.ARTICLE_LINK)} target="_blank" className={headerColOneClasses}>
+                            <a href={link} onClick={trackUserClick.bind(this, USER_CLICK.ARTICLE_LINK, citation.title, citation.id)} target="_blank" className={headerColOneClasses}>
                                 <span className="font-weight-bold">{source}</span>
                                 <span className="font-weight-normal">{title}</span>
                             </a>
