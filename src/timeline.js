@@ -41,6 +41,7 @@ function Timeline(props) {
             let startTime = convertTimeToSeconds(yite.startTime);
             let endTime = convertTimeToSeconds(yite.endTime);
             let startPoint = (startTime / video.duration);
+            let citeType = yite.citeType;
 
             if((startPoint*100) >= 95) {
                 startPoint = ((startPoint - 5)/100);
@@ -58,15 +59,22 @@ function Timeline(props) {
                 setCurrentTime(video.currentTime);
             }
 
+            if (citeType == "flag") {
+                fill = "#D66A6A";
+            } else if (citeType == "info") {
+                fill = "#54B4D3";
+            } else if (citeType == "source") {
+                fill = "#87C387";
+            } else {
+                fill = "Black";
+            }
+
             if ((startTime <= currentTime) && (currentTime < endTime)) {
-                fill = "White";
                 stroke = "Red";
             } else if (currentTime >= endTime){
-                fill = "Black";
                 stroke = "Red";
 
             } else {
-                fill = "Black";
                 stroke = "Black";
             }
             
